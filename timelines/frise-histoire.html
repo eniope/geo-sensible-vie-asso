@@ -1,1 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Frise temporelle Nucleus</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
+  <link href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1>Frise temporelle Nucleus</h1>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Accueil</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div id="timeline-embed" style="width: 100%; height: 600px;"></div>
+  </main>
+
+  <script type="text/javascript">
+    var options = {
+      language: 'fr'
+    };
+
+    var spreadsheet_url = "https://docs.google.com/spreadsheets/d/TON_ID_GOOGLE_SHEET/pubhtml";
+
+    window.timeline = new TL.Timeline('timeline-embed', spreadsheet_url, options);
+  </script>
+</body>
+</html>
 
