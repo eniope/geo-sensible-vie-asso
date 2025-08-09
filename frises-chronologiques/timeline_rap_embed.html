@@ -5,7 +5,21 @@
   <title>RAP — Trajectoire située (TimelineJS)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link title="timeline-styles" rel="stylesheet" href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
-  <style>html,body,#timeline-embed{height:100%;margin:0;padding:0}</style>
+  <style>
+  html, body, #timeline-embed { height:100%; margin:0; padding:0; }
+  /* Texte en noir sur tous les blocs */
+  .tl-timemarker-content, 
+  .tl-slide-content,
+  .tl-text-content,
+  .tl-media-content {
+    color: #111 !important;
+  }
+  /* Titre d'événement plus contrasté */
+  .tl-headline {
+    color: #000 !important;
+  }
+</style>
+
 </head>
 <body>
   <div id="timeline-embed"></div>
