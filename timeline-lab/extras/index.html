@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Timeline Lab — extras</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- CSS de TimelineJS -->
+  <link rel="stylesheet" href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
+  <style>
+    :root { --maxw: 1200px; }
+    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif; }
+    header { background:#333; color:#fff; padding:12px 16px; }
+    header a { color:#fff; text-decoration:none; opacity:.8; }
+    header a:hover { opacity:1; }
+    main { max-width: var(--maxw); margin: 0 auto; }
+    #timeline-embed { width:100%; height:650px; }
+    #extra { max-width: 900px; margin: 24px auto; padding: 16px; border-top:1px solid #ddd; background:#f9f9f9 }
+  </style>
+</head>
+<body>
+
+<header>
+  <div style="display:flex;gap:12px;align-items:center">
+    <strong>Timeline Lab — extras</strong>
+    <a href="../">← retour au lab</a>
+  </div>
+</header>
+
+<main>
+  <!-- Frise KnightLab (INLINE, sans iframe) -->
+  <div id="timeline-embed"></div>
+
+  <!-- Contenu additionnel sous la frise -->
+  <div id="extra">
+    <em>Choisissez un événement pour afficher le contenu détaillé ici.</em>
+  </div>
+</main>
+
+<!-- JS de TimelineJS -->
+<script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
+<script>
+  // === 1) URL de ta Google Sheet publiée (pubhtml) ===
+  // Remplace par l’URL "Publier sur le web" de ta sheet de test:
+  // ex: const sheet = "https://docs.google.com/spreadsheets/d/TON_KEY/pubhtml";
+  const sheet = "COLLE_ICI_TON_URL_PUBHTML";
+
+  // === 2) Options KnightLab ===
+  const options = { language: "fr", hash_bookmark: true };
+
+  // === 3) Instancie la timeline ===
+  const timeline = new TL.Timeline("timeline-embed", sheet, options);
+
+  // === 4) Mapping des contenus additionnels par Unique ID ===
+  // Clé = valeur de la colonne "Unique ID" dans ta sheet
+  // Ici on pointe vers des fichiers du même dossier (extras/)
+  const EXTRA = {
+    "event-rencontre-publique": { mode: "url", value: "16_octobre_2025.html" }
+    // Ajouter d’autres lignes selon les IDs : "journal-2025-09-12": { mode:"url", value:"2025-09-12.html" }
+  };
+
+  const extraDiv = document.getElementById("extra");
+
+  // === 5) Rendu du contenu additionnel en fonction du hash ===
+  function renderExtraFromHash() {
+    const raw = (window.location.hash || "").replace(/^#/, ""); // ex: event-rencontre-publique ou slide-3
+    if (!raw || raw.startsWith("slide-")) {
+      extraDiv.innerHTML = `<em>Choisissez un événement pour afficher le contenu détaillé ici.</em>`;
+      return;
+    }
+    const item = EXTRA[raw];
+    if (!item) {
+      extraDiv.innerHTML = `<em>Aucun contenu additionnel prévu pour <code>${raw}</code>.</em>`;
+      return;
+    }
+    if (item.mode === "url") {
+      fetch(item.value, { cache: "no-store" })
+        .then(r => r.ok ? r.text() : Promise.reject(r.status))
+        .then(html => extraDiv.innerHTML = html)
+        .catch(() => extraDiv.innerHTML = `<em>Contenu indisponible.</em>`);
+    } else {
+      // mode "html" (si un jour tu veux injecter du HTML inline)
+      extraDiv.innerHTML = item.value;
+    }
+  }
+
+  // === 6) Initialiser + écouter les changements de slide ===
+  timeline.on("loaded", renderExtraFromHash);
+  window.addEventListener("hashchange", renderExtraFromHash);
+</script>
+
+</body>
+</html>
