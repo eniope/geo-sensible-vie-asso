@@ -59,7 +59,17 @@
 
 <main>
   <!-- Frise en haut -->
-  <div id="timeline-embed"></div>
+  <main>
+  <!-- Frise en haut -->
+  <iframe 
+    src="https://cdn.knightlab.com/libs/timeline3/latest/embed/index.html?source=v2%3A2PACX-1vR3ktPHvt5MNVaLzlcySg1OHNJY_MS5TiuIrCXXEOarMSSJic7frYmisForJnAL6vi8BXFaeHqdss-0&font=Default&lang=fr&initial_zoom=2&width=100%25&height=650" 
+    width="100%" 
+    height="650" 
+    webkitallowfullscreen 
+    mozallowfullscreen 
+    allowfullscreen 
+    frameborder="0">
+  </iframe>
 
   <!-- Texte long en bas -->
   <div id="contenu-detaille">
@@ -67,37 +77,6 @@
   </div>
 </main>
 
-<script>
-  const options = {
-    language: 'fr',
-    hash_bookmark: true
-  };
-
-  const spreadsheet_url ="https://docs.google.com/spreadsheets/d/15n35RbCT2ITuPtrelFt1nZhjsVwyjIrZ2PoAIyjFMxw/pubhtml";
-
-  window.timeline = new TL.Timeline('timeline-embed', spreadsheet_url, options);
-
-  // Fonction de chargement du texte long depuis un fichier externe
-  function chargerContenu(url) {
-    const bloc = document.getElementById("contenu-detaille");
-    fetch(url)
-      .then(response => response.text())
-      .then(html => { bloc.innerHTML = html; })
-      .catch(error => { bloc.innerHTML = "<em>Contenu indisponible.</em>"; });
-  }
-
-  // Récupère le contenu depuis les métadonnées internes (besoin de l’adapter à ta structure)
-  timeline.on("change", function(event) {
-    // Cette fonction ne fournit que l'index → il faut ensuite interroger l'iframe
-    // Voici un workaround basé sur les URLs si tu utilises une colonne TexteLongURL
-    const currentSlide = timeline.currentSlide;
-    if (currentSlide && currentSlide._data && currentSlide._data.texte_url) {
-      chargerContenu(currentSlide._data.texte_url);
-    } else {
-      document.getElementById("contenu-detaille").innerHTML = "<em>Pas de contenu détaillé pour cet événement.</em>";
-    }
-  });
-</script>
 
 </body>
 </html>
