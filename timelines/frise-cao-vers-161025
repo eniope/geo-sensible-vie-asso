@@ -1,1 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Frise temporelle</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
+  <link rel="stylesheet" href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #333;
+      color: white;
+      padding: 10px 20px;
+    }
+    header h1 {
+      margin: 0;
+    }
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+    nav li {
+      display: inline;
+      margin-right: 10px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+    }
+    #timeline-embed {
+      width: 100%;
+      height: 600px;
+    }
+    #contenu-detaille {
+      padding: 20px;
+      background: #f9f9f9;
+      max-width: 900px;
+      margin: 0 auto;
+      border-top: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
 
+<header>
+  <h1>Frise temporelle</h1>
+  <nav>
+    <ul>
+      <li><a href="../index.html">Accueil</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <!-- Frise en haut -->
+  <div id="timeline-embed"></div>
+
+  <!-- Texte long en bas -->
+  <div id="contenu-detaille">
+    <em>Choisissez un événement pour voir les détails ici.</em>
+  </div>
+</main>
+
+<script>
+  const options = {
+    language: 'fr',
+    hash_bookmark: true
+  };
+
+  const spreadsheet_url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR3ktPHvt5MNVaLzlcySg1OHNJY_MS5TiuIrCXXEOarMSSJic7frYmisForJnAL6vi8BXFaeHqdss-0/pubhtml";
+
+  window.timeline = new TL.Timeline('timeline-embed', spreadsheet_url, options);
+
+  // Fonction de chargement du texte long depuis un fichier externe
+  function chargerContenu(url) {
+    const bloc = document.getElementById("contenu-detaille");
+    fetch(url)
+      .then(response => response.text())
+      .then(html => { bloc.innerHTML = html; })
+      .catch(error => { bloc.innerHTML = "<em>Contenu indisponible.</em>"; });
+  }
+
+  // Récupère le contenu depuis les métadonnées internes (besoin de l’adapter à ta structure)
+  timeline.on("change", function(event) {
+    // Cette fonction ne fournit que l'index → il faut ensuite interroger l'iframe
+    // Voici un workaround basé sur les URLs si tu utilises une colonne TexteLongURL
+    const currentSlide = timeline.currentSlide;
+    if (currentSlide && currentSlide._data && currentSlide._data.texte_url) {
+      chargerContenu(currentSlide._data.texte_url);
+    } else {
+      document.getElementById("contenu-detaille").innerHTML = "<em>Pas de contenu détaillé pour cet événement.</em>";
+    }
+  });
+</script>
+
+</body>
+</html>
