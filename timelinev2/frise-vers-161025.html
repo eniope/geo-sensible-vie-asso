@@ -76,12 +76,13 @@
 </main>
 
 <script>
-  const base = "https://cdn.knightlab.com/libs/timeline3/latest/embed/index.html?source=…&lang=fr&initial_zoom=2&width=100%25&height=650&hash_bookmark=true";
-  const hash = window.location.hash || ""; // ex: #slide-6
+  // URL de base de l’embed KnightLab avec TON 'source' (v2:2PACX encodé)
+  const base = "https://cdn.knightlab.com/libs/timeline3/latest/embed/index.html?source=v2%3A2PACX-1vR3ktPHvt5MNVaLzlcySg1OHNJY_MS5TiuIrCXXEOarMSSJic7frYmisForJnAL6vi8BXFaeHqdss-0&lang=fr&initial_zoom=2&width=100%25&height=650&hash_bookmark=true";
+
+  // ex. URL de ta page: .../frise-vers-161025.html#slide-6
+  const hash = window.location.hash || ""; 
   document.getElementById("timeline-frame").src = base + hash;
 </script>
-
-
 
 </body>
 </html>
