@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Constellation — Exploration située & évaluation développementale</title>
+  <!-- Cytoscape.js core -->
+  <script src="https://unpkg.com/cytoscape@3.28.1/dist/cytoscape.min.js"></script>
+  <!-- cose-bilkent layout -->
+  <script src="https://unpkg.com/cytoscape-cose-bilkent@4.1.0/cytoscape-cose-bilkent.js"></script>
+  <style>
+    html, body { height: 100%; margin: 0; font-family: system-ui, sans-serif; }
+    header { padding: 12px 16px; border-bottom: 1px solid #e5e7eb; display: flex; align-items: center; justify-content: space-between; }
+    header h1 { margin: 0; font-size: 18px; }
+    #cy { width: 100%; height: calc(100% - 58px); display: block; }
+    .legend { font-size: 12px; color: #374151; }
+    .legend span { display: inline-block; padding: 2px 8px; border-radius: 999px; border: 1px solid #d1d5db; margin-right: 6px; }
+    button { padding: 6px 10px; font-size: 12px; border: 1px solid #d1d5db; border-radius: 6px; background: #f9fafb; cursor: pointer; }
+    button:hover { background: #f3f4f6; }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Constellation — Exploration située &amp; évaluation développementale</h1>
+      <div class="legend">
+        <span style="background:#eef2ff;">Centre</span>
+        <span style="background:#ecfeff;">Pilier</span>
+        <span style="background:#f0fdf4;">Idée</span>
+      </div>
+    </div>
+    <button onclick="resetView()">🔄 Recentrer</button>
+  </header>
+  <div id="cy"></div>
+  <script>
+    cytoscape.use(cytoscapeCoseBilkent);
+
+    const cy = cytoscape({
+      container: document.getElementById('cy'),
+      wheelSensitivity: 0.15,
+      style: [
+        {
+          selector: 'node',
+          style: {
+            'label': 'data(label)',
+            'text-wrap': 'wrap',
+            'text-max-width': 180,
+            'font-size': 12,
+            'text-valign': 'center',
+            'text-halign': 'center',
+            'background-opacity': 0.12,
+            'border-color': '#94a3b8',
+            'border-width': 1.2,
+            'padding': '10px',
+            'shape': 'round-rectangle'
+          }
+        },
+        { selector: 'edge', style: {
+            'width': 1.2,
+            'line-color': '#9ca3af',
+            'curve-style': 'straight'
+        }},
+        { selector: 'node[group = "centre"]', style: {
+            'background-color': '#6366f1',
+            'background-opacity': 0.20,
+            'border-width': 2.4,
+            'font-size': 14
+        }},
+        { selector: 'node[group = "pilier"]', style: {
+            'background-color': '#06b6d4',
+            'background-opacity': 0.18
+        }},
+        { selector: 'node[group = "idee"]', style: {
+            'background-color': '#10b981',
+            'background-opacity': 0.14
+        }}
+      ],
+      elements: {
+        nodes: [
+          { data: { id: 'centre', label: 'Exploration située', group: 'centre' } },
+
+          { data: { id: 'ghph', label: 'Grande histoire / Petite histoire', group: 'pilier' } },
+          { data: { id: 'relier', label: 'Relier récits intimes et collectifs', group: 'idee' } },
+          { data: { id: 'educpop', label: 'Éducation populaire', group: 'idee' } },
+
+          { data: { id: 'cynefin', label: 'Cynefin (Snowden)', group: 'pilier' } },
+          { data: { id: 'complexite', label: 'Complexité', group: 'idee' } },
+          { data: { id: 'micros', label: 'Micro-récits > indicateurs', group: 'idee' } },
+
+          { data: { id: 'souchon', label: 'Foule sentimentale (Souchon)', group: 'pilier' } },
+          { data: { id: 'besoins', label: 'Besoins créés vs aspirations réelles', group: 'idee' } },
+          { data: { id: 'desir', label: 'Question du désir et du manque', group: 'idee' } },
+
+          { data: { id: 'stengers', label: 'Stengers', group: 'pilier' } },
+          { data: { id: 'capacites_detruites', label: 'Capacités à faire ensemble détruites', group: 'idee' } },
+          { data: { id: 'recits_tech', label: 'Récits techniques du faire-ensemble', group: 'idee' } },
+
+          { data: { id: 'evaldev', label: 'Évaluation développementale', group: 'pilier' } },
+          { data: { id: 'epreuve', label: 'Espace de mise à l’épreuve', group: 'idee' } },
+          { data: { id: 'accompagner', label: 'Accompagner le changement', group: 'idee' } },
+          { data: { id: 'apprent', label: 'Apprentissage collectif', group: 'idee' } },
+
+          { data: { id: 'tension', label: 'Tension créatrice', group: 'pilier' } },
+          { data: { id: 'depossession', label: 'Systèmes dominants dépossèdent', group: 'idee' } },
+          { data: { id: 'reouvertures', label: 'Pratiques ré-ouvrantes ressaisissent', group: 'idee' } }
+        ],
+        edges: [
+          { data: { source: 'centre', target: 'ghph' } },
+          { data: { source: 'centre', target: 'cynefin' } },
+          { data: { source: 'centre', target: 'souchon' } },
+          { data: { source: 'centre', target: 'stengers' } },
+          { data: { source: 'centre', target: 'evaldev' } },
+          { data: { source: 'centre', target: 'tension' } },
+
+          { data: { source: 'ghph', target: 'relier' } },
+          { data: { source: 'ghph', target: 'educpop' } },
+
+          { data: { source: 'cynefin', target: 'complexite' } },
+          { data: { source: 'cynefin', target: 'micros' } },
+
+          { data: { source: 'souchon', target: 'besoins' } },
+          { data: { source: 'souchon', target: 'desir' } },
+
+          { data: { source: 'stengers', target: 'capacites_detruites' } },
+          { data: { source: 'stengers', target: 'recits_tech' } },
+
+          { data: { source: 'evaldev', target: 'epreuve' } },
+          { data: { source: 'evaldev', target: 'accompagner' } },
+          { data: { source: 'evaldev', target: 'apprent' } },
+
+          { data: { source: 'tension', target: 'depossession' } },
+          { data: { source: 'tension', target: 'reouvertures' } },
+
+          { data: { source: 'micros', target: 'recits_tech' } },
+          { data: { source: 'besoins', target: 'depossession' } },
+          { data: { source: 'apprent', target: 'reouvertures' } },
+          { data: { source: 'educpop', target: 'recits_tech' } }
+        ]
+      },
+      layout: {
+        name: 'cose-bilkent',
+        animate: 'end',
+        idealEdgeLength: 140,
+        nodeRepulsion: 4000,
+        gravity: 0.25,
+        nodeDimensionsIncludeLabels: true
+      }
+    });
+
+    function resetView() {
+      cy.fit();
+    }
+
+    window.addEventListener('load', resetView);
+    window.addEventListener('resize', resetView);
+  </script>
+</body>
+</html>
