@@ -5,10 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Constellation — Exploration située & évaluation développementale</title>
 
-  <!-- Cytoscape.js core -->
-  <script defer src="https://cdn.jsdelivr.net/npm/cytoscape@3.28.1/dist/cytoscape.min.js"></script>
-  <!-- cose-bilkent layout -->
-  <script defer src="https://cdn.jsdelivr.net/npm/cytoscape-cose-bilkent@4.1.0/cytoscape-cose-bilkent.min.js"></script>
+  <!-- 🔹 Ici, dans le head : les scripts de base -->
+  <!-- Cytoscape core -->
+  <script defer src="https://unpkg.com/cytoscape@3.28.1/dist/cytoscape.min.js"></script>
+  <!-- Plugin cose-bilkent -->
+  <script defer src="https://unpkg.com/cytoscape-cose-bilkent@4.1.0/cytoscape-cose-bilkent.js"></script>
 
   <style>
     html, body { height: 100%; margin: 0; font-family: system-ui, sans-serif; }
@@ -19,7 +20,6 @@
     .legend span { display: inline-block; padding: 2px 8px; border-radius: 999px; border: 1px solid #d1d5db; margin-right: 6px; }
     button { padding: 6px 10px; font-size: 12px; border: 1px solid #d1d5db; border-radius: 6px; background: #f9fafb; cursor: pointer; }
     button:hover { background: #f3f4f6; }
-    #err { position: fixed; bottom: 8px; left: 8px; right: 8px; background: #fff; border: 1px solid #fecaca; color: #991b1b; padding: 8px; font-size: 12px; display: none; }
   </style>
 </head>
 <body>
@@ -34,117 +34,47 @@
     </div>
     <button onclick="resetView()">🔄 Recentrer</button>
   </header>
+
   <div id="cy"></div>
-  <div id="err"></div>
 
+  <!-- 🔹 Ici, tout à la fin du body : ton code -->
   <script>
-    // petit panneau d’erreurs in-page
-    window.addEventListener('error', (e) => {
-      const box = document.getElementById('err');
-      box.style.display = 'block';
-      box.textContent = 'Erreur JS: ' + (e.message || e.error);
-    });
-
     window.addEventListener('DOMContentLoaded', () => {
-      try {
-        if (typeof cytoscape === 'undefined') throw new Error('Cytoscape non chargé');
-        if (typeof cytoscapeCoseBilkent === 'undefined') throw new Error('Plugin cose-bilkent non chargé');
-
-        cytoscape.use(cytoscapeCoseBilkent);
-
-        const cy = cytoscape({
-          container: document.getElementById('cy'),
-          wheelSensitivity: 0.15,
-          style: [
-            {
-              selector: 'node',
-              style: {
-                'label': 'data(label)',
-                'text-wrap': 'wrap',
-                'text-max-width': 180,
-                'font-size': 12,
-                'text-valign': 'center',
-                'text-halign': 'center',
-                'background-opacity': 0.12,
-                'border-color': '#94a3b8',
-                'border-width': 1.2,
-                'padding': '10px',
-                'shape': 'round-rectangle'
-              }
-            },
-            { selector: 'edge', style: { 'width': 1.2, 'line-color': '#9ca3af', 'curve-style': 'straight' } },
-            { selector: 'node[group = "centre"]', style: { 'background-color': '#6366f1', 'background-opacity': 0.20, 'border-width': 2.4, 'font-size': 14 } },
-            { selector: 'node[group = "pilier"]', style: { 'background-color': '#06b6d4', 'background-opacity': 0.18 } },
-            { selector: 'node[group = "idee"]', style: { 'background-color': '#10b981', 'background-opacity': 0.14 } }
-          ],
-          elements: {
-            nodes: [
-              { data: { id: 'centre', label: 'Exploration située', group: 'centre' } },
-              { data: { id: 'ghph', label: 'Grande histoire / Petite histoire', group: 'pilier' } },
-              { data: { id: 'relier', label: 'Relier récits intimes et collectifs', group: 'idee' } },
-              { data: { id: 'educpop', label: 'Éducation populaire', group: 'idee' } },
-              { data: { id: 'cynefin', label: 'Cynefin (Snowden)', group: 'pilier' } },
-              { data: { id: 'complexite', label: 'Complexité', group: 'idee' } },
-              { data: { id: 'micros', label: 'Micro-récits > indicateurs', group: 'idee' } },
-              { data: { id: 'souchon', label: 'Foule sentimentale (Souchon)', group: 'pilier' } },
-              { data: { id: 'besoins', label: 'Besoins créés vs aspirations réelles', group: 'idee' } },
-              { data: { id: 'desir', label: 'Question du désir et du manque', group: 'idee' } },
-              { data: { id: 'stengers', label: 'Stengers', group: 'pilier' } },
-              { data: { id: 'capacites_detruites', label: 'Capacités à faire ensemble détruites', group: 'idee' } },
-              { data: { id: 'recits_tech', label: 'Récits techniques du faire-ensemble', group: 'idee' } },
-              { data: { id: 'evaldev', label: 'Évaluation développementale', group: 'pilier' } },
-              { data: { id: 'epreuve', label: 'Espace de mise à l’épreuve', group: 'idee' } },
-              { data: { id: 'accompagner', label: 'Accompagner le changement', group: 'idee' } },
-              { data: { id: 'apprent', label: 'Apprentissage collectif', group: 'idee' } },
-              { data: { id: 'tension', label: 'Tension créatrice', group: 'pilier' } },
-              { data: { id: 'depossession', label: 'Systèmes dominants dépossèdent', group: 'idee' } },
-              { data: { id: 'reouvertures', label: 'Pratiques ré-ouvrantes ressaisissent', group: 'idee' } }
-            ],
-            edges: [
-              { data: { source: 'centre', target: 'ghph' } },
-              { data: { source: 'centre', target: 'cynefin' } },
-              { data: { source: 'centre', target: 'souchon' } },
-              { data: { source: 'centre', target: 'stengers' } },
-              { data: { source: 'centre', target: 'evaldev' } },
-              { data: { source: 'centre', target: 'tension' } },
-              { data: { source: 'ghph', target: 'relier' } },
-              { data: { source: 'ghph', target: 'educpop' } },
-              { data: { source: 'cynefin', target: 'complexite' } },
-              { data: { source: 'cynefin', target: 'micros' } },
-              { data: { source: 'souchon', target: 'besoins' } },
-              { data: { source: 'souchon', target: 'desir' } },
-              { data: { source: 'stengers', target: 'capacites_detruites' } },
-              { data: { source: 'stengers', target: 'recits_tech' } },
-              { data: { source: 'evaldev', target: 'epreuve' } },
-              { data: { source: 'evaldev', target: 'accompagner' } },
-              { data: { source: 'evaldev', target: 'apprent' } },
-              { data: { source: 'tension', target: 'depossession' } },
-              { data: { source: 'tension', target: 'reouvertures' } },
-              { data: { source: 'micros', target: 'recits_tech' } },
-              { data: { source: 'besoins', target: 'depossession' } },
-              { data: { source: 'apprent', target: 'reouvertures' } },
-              { data: { source: 'educpop', target: 'recits_tech' } }
-            ]
-          },
-          layout: {
-            name: 'cose-bilkent',
-            animate: 'end',
-            idealEdgeLength: 140,
-            nodeRepulsion: 4000,
-            gravity: 0.25,
-            nodeDimensionsIncludeLabels: true
-          }
-        });
-
-        window.resetView = () => cy.fit();
-        window.addEventListener('resize', () => cy.fit());
-        cy.ready(() => cy.fit());
-
-      } catch (err) {
-        const box = document.getElementById('err');
-        box.style.display = 'block';
-        box.textContent = 'Init échouée: ' + (err.message || err);
+      // Vérif que tout est chargé
+      if (typeof cytoscape === 'undefined') {
+        alert('Cytoscape non chargé');
+        return;
       }
+      if (typeof cytoscapeCoseBilkent === 'undefined') {
+        alert('Plugin cose-bilkent non chargé, fallback sur layout "cose"');
+      } else {
+        cytoscape.use(cytoscapeCoseBilkent);
+      }
+
+      const layoutName = (typeof cytoscapeCoseBilkent === 'undefined') ? 'cose' : 'cose-bilkent';
+
+      const cy = cytoscape({
+        container: document.getElementById('cy'),
+        style: [
+          { selector: 'node', style: { 'label': 'data(label)', 'text-wrap': 'wrap', 'text-max-width': 180 } },
+          { selector: 'edge', style: { 'width': 1, 'line-color': '#999' } }
+        ],
+        elements: {
+          nodes: [
+            { data: { id: 'centre', label: 'Exploration située', group: 'centre' } },
+            { data: { id: 'ghph', label: 'Grande histoire / Petite histoire', group: 'pilier' } },
+            { data: { id: 'relier', label: 'Relier récits intimes et collectifs', group: 'idee' } }
+          ],
+          edges: [
+            { data: { source: 'centre', target: 'ghph' } },
+            { data: { source: 'ghph', target: 'relier' } }
+          ]
+        },
+        layout: { name: layoutName, animate: 'end' }
+      });
+
+      window.resetView = () => cy.fit();
+      window.addEventListener('resize', () => cy.fit());
     });
   </script>
 </body>
