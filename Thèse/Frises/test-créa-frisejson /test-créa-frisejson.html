@@ -12,11 +12,44 @@
   <!-- Librairie Knight Lab Timeline -->
   <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
 
-  <style>
-    html, body { height: 100%; margin: 0; }
-    /* Hauteur explicite du conteneur */
-    #timeline-embed { height: 90vh; }
-  </style>
+<style>
+  html, body { height: 100%; margin: 0; }
+  #timeline-embed { height: 90vh; }
+
+  /* Pastilles de groupe */
+  .grp-idee::before,
+  .grp-terrain::before,
+  .grp-encadrement::before,
+  .grp-ecriture::before,
+  .grp-outils::before,
+  .grp-publics::before {
+    content:"";
+    display:inline-block;
+    width:10px; height:10px;
+    margin-right:6px;
+    border-radius:50%;
+    vertical-align: middle;
+  }
+
+  /* Couleurs sobres (bon contraste) */
+  .grp-idee::before        { background:#1E88E5; }
+  .grp-terrain::before     { background:#2E7D32; }
+  .grp-encadrement::before { background:#EF6C00; }
+  .grp-ecriture::before    { background:#6A1B9A; }
+  .grp-outils::before      { background:#5E35B1; }
+  .grp-publics::before     { background:#D84315; }
+
+  /* (Optionnel) Améliorer lisibilité du panneau texte */
+  .tl-storyslider .tl-slide .tl-text .tl-text-content {
+    background: rgba(255,255,255,0.94);
+    color: #111;
+    padding: 1rem 1.25rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,.08);
+  }
+  .tl-text-content h2.tl-headline { color: #0f0f0f; }
+</style>
+
 </head>
 <body>
   <!-- L'id doit correspondre à celui utilisé dans TL.Timeline(...) -->
