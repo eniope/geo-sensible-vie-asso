@@ -1,1 +1,53 @@
+{
+  "title": {
+    "media": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Moon.jpg",
+      "caption": "Image d’exemple",
+      "credit": "CC Wikimedia"
+    },
+    "text": {
+      "headline": "Exemple de Timeline",
+      "text": "<p>Une frise réalisée avec <b>Knight Lab TimelineJS</b></p>"
+    }
+  },
+  "events": [
+    {
+      "unique_id": "event-1",
+      "start_date": {
+        "year": "2020",
+        "month": "03",
+        "day": "01"
+      },
+      "text": {
+        "headline": "Premier jalon",
+        "text": "<p>Ceci est le premier événement de la timeline.</p>"
+      },
+      "media": {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/9d/Earth_from_Space.jpg",
+        "caption": "La Terre vue de l’espace"
+      }
+    },
+    {
+      "unique_id": "event-2",
+      "start_date": {
+        "year": "2021",
+        "month": "07"
+      },
+      "text": {
+        "headline": "Deuxième jalon",
+        "text": "<p>Un autre moment important.</p>"
+      }
+    },
+    {
+      "unique_id": "event-3",
+      "start_date": {
+        "year": "2023"
+      },
+      "text": {
+        "headline": "Troisième jalon",
+        "text": "<p>Dernier événement de l’exemple.</p>"
+      }
+    }
+  ]
+}
 
