@@ -1,1 +1,48 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>Timeline – Une slide</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Styles Knight Lab (facultatif mais recommandé) -->
+  <link rel="stylesheet"
+        href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css" />
+
+  <!-- Librairie Knight Lab Timeline -->
+  <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
+
+  <style>
+    html, body { height: 100%; margin: 0; }
+    /* Hauteur explicite du conteneur */
+    #timeline-embed { height: 90vh; }
+  </style>
+</head>
+<body>
+  <!-- L'id doit correspondre à celui utilisé dans TL.Timeline(...) -->
+  <div id="timeline-embed"></div>
+
+  <script>
+    // URL vers votre fichier JSON (ici, au même niveau que cette page)
+    const timelineDataUrl = "data.json";
+
+    // Options utiles : langue FR, ancre dans l’URL, et ouverture sur une diapo donnée
+    const options = {
+      language: "fr",
+      hash_bookmark: true,      // permet #event-... dans l’URL
+      start_at_slide: 0,        // index de la slide (0 = première). Modifiez selon besoin.
+      // start_at_end: true,    // alternative : démarrer à la fin
+      // timenav_position: "bottom", // options possibles: top | bottom
+    };
+
+    // Initialisation
+    const timeline = new TL.Timeline("timeline-embed", timelineDataUrl, options);
+
+    // (Optionnel) Aller à une slide par ID après chargement
+    // timeline.on('loaded', () => {
+    //   timeline.goToId('mon-id-de-slide'); // si vos items ont un "unique_id" dans data.json
+    // });
+  </script>
+</body>
+</html>
 
