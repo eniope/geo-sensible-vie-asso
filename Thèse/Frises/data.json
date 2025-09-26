@@ -1,1 +1,97 @@
+{
+  "title": {
+    "text": {
+      "headline": "Incubation d'une thèse",
+      "text": "Prototype de frise transactionnelle — version starter kit"
+    }
+  },
+  "eras": [
+    {
+      "unique_id": "era-germination",
+      "start_date": { "year": "2025", "month": "01" },
+      "end_date":   { "year": "2025", "month": "03" },
+      "text": { "headline": "Germination" }
+    },
+    {
+      "unique_id": "era-divergence",
+      "start_date": { "year": "2025", "month": "04" },
+      "end_date":   { "year": "2025", "month": "06" },
+      "text": { "headline": "Divergence" }
+    },
+    {
+      "unique_id": "era-convergence",
+      "start_date": { "year": "2025", "month": "07" },
+      "end_date":   { "year": "2025", "month": "09" },
+      "text": { "headline": "Convergence" }
+    },
+    {
+      "unique_id": "era-stabilisation",
+      "start_date": { "year": "2025", "month": "10" },
+      "end_date":   { "year": "2025", "month": "12" },
+      "text": { "headline": "Stabilisation" }
+    }
+  ],
+  "events": [
+    {
+      "unique_id": "idee-etincelle",
+      "start_date": { "year": "2025", "month": "01", "day": "10" },
+      "group": "Idée",
+      "text": {
+        "headline": "Étincelle initiale",
+        "text": "<ul><li>Transaction : Exploration</li><li>Artefact : note manuscrite</li><li>Effet : ouverture de piste</li></ul>"
+      },
+      "background": { "color": "#e3f2fd" }
+    },
+    {
+      "unique_id": "terrain-rencontre1",
+      "start_date": { "year": "2025", "month": "02", "day": "05" },
+      "group": "Terrain",
+      "text": {
+        "headline": "Première rencontre de terrain",
+        "text": "<ul><li>Transaction : Conflit/Épreuve & Résolution</li><li>Artefact : verbatim collecté</li><li>Effet : repositionnement</li></ul>"
+      },
+      "background": { "color": "#e8f5e9" }
+    },
+    {
+      "unique_id": "encadrement-rdv1",
+      "start_date": { "year": "2025", "month": "03", "day": "15" },
+      "group": "Encadrement",
+      "text": {
+        "headline": "RDV avec l’encadrant",
+        "text": "<ul><li>Transaction : Négociation de cadre</li><li>Décision : axe ED priorisé</li></ul>"
+      },
+      "background": { "color": "#fff3e0" }
+    },
+    {
+      "unique_id": "ecriture-plan1",
+      "start_date": { "year": "2025", "month": "04", "day": "20" },
+      "group": "Écriture",
+      "text": {
+        "headline": "Premier plan de thèse",
+        "text": "<ul><li>Transaction : Validation intermédiaire</li><li>Effet : structure v1</li></ul>"
+      },
+      "background": { "color": "#f3e5f5" }
+    },
+    {
+      "unique_id": "outils-obsidian",
+      "start_date": { "year": "2025", "month": "05", "day": "02" },
+      "group": "Outils/Infra",
+      "text": {
+        "headline": "Mise en place d’Obsidian + Aeon",
+        "text": "<ul><li>Transaction : Décision / Gel d’option</li><li>Effet : workflow établi</li></ul>"
+      },
+      "background": { "color": "#ede7f6" }
+    },
+    {
+      "unique_id": "publics-feedback1",
+      "start_date": { "year": "2025", "month": "06", "day": "12" },
+      "group": "Publics/Événements",
+      "text": {
+        "headline": "Première présentation publique",
+        "text": "<ul><li>Transaction : Validation intermédiaire</li><li>Effet : feedback reçu</li></ul>"
+      },
+      "background": { "color": "#fbe9e7" }
+    }
+  ]
+}
 
