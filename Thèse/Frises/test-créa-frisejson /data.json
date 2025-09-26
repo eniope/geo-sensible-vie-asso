@@ -46,10 +46,9 @@
       "display_date": "10 jan. 2025",
       "group": "Idée",
       "text": {
-        "headline": "Étincelle initiale",
+        "headline": "<span class='grp-idee'>Étincelle initiale</span>",
         "text": "<ul><li><b>Transaction :</b> Exploration / piste ouverte</li><li><b>Artefact :</b> note manuscrite (Obsidian)</li><li><b>Effet :</b> hypothèse de travail esquissée</li></ul>"
       },
-      "background": { "color": "#E3F2FD" },
       "media": {
         "url": "https://upload.wikimedia.org/wikipedia/commons/9/9d/Earth_from_Space.jpg",
         "caption": "Carnet scanné (exemple)",
@@ -63,10 +62,9 @@
       "display_date": "5 fév. 2025",
       "group": "Terrain",
       "text": {
-        "headline": "Première rencontre de terrain",
+        "headline": "<span class='grp-terrain'>Première rencontre de terrain</span>",
         "text": "<ul><li><b>Transaction :</b> Épreuve & résolution</li><li><b>Donnée :</b> verbatim collecté</li><li><b>Effet :</b> recadrage des thèmes d’observation</li></ul>"
-      },
-      "background": { "color": "#E8F5E9" }
+      }
     },
     {
       "unique_id": "encadrement-rdv-01",
@@ -74,10 +72,9 @@
       "display_date": "15 mars 2025",
       "group": "Encadrement",
       "text": {
-        "headline": "RDV encadrant — négociation de cadre",
+        "headline": "<span class='grp-encadrement'>RDV encadrant — négociation de cadre</span>",
         "text": "<ul><li><b>Transaction :</b> Négociation de cadre / ré-encadrement</li><li><b>Décision :</b> prioriser l’évaluation développementale</li><li><b>Effet :</b> objectifs intermédiaires clarifiés</li></ul>"
-      },
-      "background": { "color": "#FFF3E0" }
+      }
     },
     {
       "unique_id": "ecriture-plan-v1",
@@ -85,10 +82,9 @@
       "display_date": "20 avr. 2025",
       "group": "Écriture",
       "text": {
-        "headline": "Plan de thèse — version 1",
+        "headline": "<span class='grp-ecriture'>Plan de thèse — version 1</span>",
         "text": "<ul><li><b>Transaction :</b> Validation intermédiaire / indicateur</li><li><b>Livrable :</b> plan v1 partagé</li><li><b>Effet :</b> structure argumentaire testée</li></ul>"
-      },
-      "background": { "color": "#F3E5F5" }
+      }
     },
     {
       "unique_id": "outils-setup-workflow",
@@ -96,10 +92,9 @@
       "display_date": "2 mai 2025",
       "group": "Outils/Infra",
       "text": {
-        "headline": "Mise en place du workflow (Obsidian + Aeon + Pages)",
+        "headline": "<span class='grp-outils'>Mise en place du workflow (Obsidian + Aeon + Pages)</span>",
         "text": "<ul><li><b>Transaction :</b> Décision / gel d’option</li><li><b>Effet :</b> chaîne de production stable</li><li><b>Note :</b> JSON/Timeline comme vitrine narrative</li></ul>"
-      },
-      "background": { "color": "#EDE7F6" }
+      }
     },
     {
       "unique_id": "publics-feedback-01",
@@ -107,10 +102,10 @@
       "display_date": "12 juin 2025",
       "group": "Publics/Événements",
       "text": {
-        "headline": "Présentation publique #1 — retours croisés",
+        "headline": "<span class='grp-publics'>Présentation publique #1 — retours croisés</span>",
         "text": "<ul><li><b>Transaction :</b> Validation intermédiaire</li><li><b>Effet :</b> critères/indicateurs ajustés</li><li><b>Suite :</b> préparer v2 du plan</li></ul>"
-      },
-      "background": { "color": "#FBE9E7" }
+      }
     }
   ]
 }
+
