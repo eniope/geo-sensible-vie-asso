@@ -1,53 +1,116 @@
 {
   "title": {
+    "text": {
+      "headline": "Incubation d'une thèse — Journal transactionnel",
+      "text": "Frise de <b>cheminement</b> structurée par <b>groupes</b>, <b>transactions</b> et <b>ères</b>."
+    },
     "media": {
       "url": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Moon.jpg",
-      "caption": "Image d’exemple",
-      "credit": "CC Wikimedia"
-    },
-    "text": {
-      "headline": "Exemple de Timeline",
-      "text": "<p>Une frise réalisée avec <b>Knight Lab TimelineJS</b></p>"
+      "caption": "Image de couverture",
+      "credit": "CC BY-SA Wikimedia",
+      "alt": "Photo de la Lune"
     }
   },
+
+  "eras": [
+    {
+      "unique_id": "era-germination",
+      "start_date": { "year": 2025, "month": 1 },
+      "end_date":   { "year": 2025, "month": 3 },
+      "text": { "headline": "Germination" }
+    },
+    {
+      "unique_id": "era-divergence",
+      "start_date": { "year": 2025, "month": 4 },
+      "end_date":   { "year": 2025, "month": 6 },
+      "text": { "headline": "Divergence" }
+    },
+    {
+      "unique_id": "era-convergence",
+      "start_date": { "year": 2025, "month": 7 },
+      "end_date":   { "year": 2025, "month": 9 },
+      "text": { "headline": "Convergence" }
+    },
+    {
+      "unique_id": "era-stabilisation",
+      "start_date": { "year": 2025, "month": 10 },
+      "end_date":   { "year": 2025, "month": 12 },
+      "text": { "headline": "Stabilisation" }
+    }
+  ],
+
   "events": [
     {
-      "unique_id": "event-1",
-      "start_date": {
-        "year": "2020",
-        "month": "03",
-        "day": "01"
-      },
+      "unique_id": "idee-etincelle",
+      "start_date": { "year": 2025, "month": 1, "day": 10 },
+      "display_date": "10 jan. 2025",
+      "group": "Idée",
       "text": {
-        "headline": "Premier jalon",
-        "text": "<p>Ceci est le premier événement de la timeline.</p>"
+        "headline": "Étincelle initiale",
+        "text": "<ul><li><b>Transaction :</b> Exploration / piste ouverte</li><li><b>Artefact :</b> note manuscrite (Obsidian)</li><li><b>Effet :</b> hypothèse de travail esquissée</li></ul>"
       },
+      "background": { "color": "#E3F2FD" },
       "media": {
         "url": "https://upload.wikimedia.org/wikipedia/commons/9/9d/Earth_from_Space.jpg",
-        "caption": "La Terre vue de l’espace"
+        "caption": "Carnet scanné (exemple)",
+        "credit": "Auteur",
+        "alt": "Scan d’une page de carnet"
       }
     },
     {
-      "unique_id": "event-2",
-      "start_date": {
-        "year": "2021",
-        "month": "07"
-      },
+      "unique_id": "terrain-rencontre-01",
+      "start_date": { "year": 2025, "month": 2, "day": 5 },
+      "display_date": "5 fév. 2025",
+      "group": "Terrain",
       "text": {
-        "headline": "Deuxième jalon",
-        "text": "<p>Un autre moment important.</p>"
-      }
+        "headline": "Première rencontre de terrain",
+        "text": "<ul><li><b>Transaction :</b> Épreuve & résolution</li><li><b>Donnée :</b> verbatim collecté</li><li><b>Effet :</b> recadrage des thèmes d’observation</li></ul>"
+      },
+      "background": { "color": "#E8F5E9" }
     },
     {
-      "unique_id": "event-3",
-      "start_date": {
-        "year": "2023"
-      },
+      "unique_id": "encadrement-rdv-01",
+      "start_date": { "year": 2025, "month": 3, "day": 15 },
+      "display_date": "15 mars 2025",
+      "group": "Encadrement",
       "text": {
-        "headline": "Troisième jalon",
-        "text": "<p>Dernier événement de l’exemple.</p>"
-      }
+        "headline": "RDV encadrant — négociation de cadre",
+        "text": "<ul><li><b>Transaction :</b> Négociation de cadre / ré-encadrement</li><li><b>Décision :</b> prioriser l’évaluation développementale</li><li><b>Effet :</b> objectifs intermédiaires clarifiés</li></ul>"
+      },
+      "background": { "color": "#FFF3E0" }
+    },
+    {
+      "unique_id": "ecriture-plan-v1",
+      "start_date": { "year": 2025, "month": 4, "day": 20 },
+      "display_date": "20 avr. 2025",
+      "group": "Écriture",
+      "text": {
+        "headline": "Plan de thèse — version 1",
+        "text": "<ul><li><b>Transaction :</b> Validation intermédiaire / indicateur</li><li><b>Livrable :</b> plan v1 partagé</li><li><b>Effet :</b> structure argumentaire testée</li></ul>"
+      },
+      "background": { "color": "#F3E5F5" }
+    },
+    {
+      "unique_id": "outils-setup-workflow",
+      "start_date": { "year": 2025, "month": 5, "day": 2 },
+      "display_date": "2 mai 2025",
+      "group": "Outils/Infra",
+      "text": {
+        "headline": "Mise en place du workflow (Obsidian + Aeon + Pages)",
+        "text": "<ul><li><b>Transaction :</b> Décision / gel d’option</li><li><b>Effet :</b> chaîne de production stable</li><li><b>Note :</b> JSON/Timeline comme vitrine narrative</li></ul>"
+      },
+      "background": { "color": "#EDE7F6" }
+    },
+    {
+      "unique_id": "publics-feedback-01",
+      "start_date": { "year": 2025, "month": 6, "day": 12 },
+      "display_date": "12 juin 2025",
+      "group": "Publics/Événements",
+      "text": {
+        "headline": "Présentation publique #1 — retours croisés",
+        "text": "<ul><li><b>Transaction :</b> Validation intermédiaire</li><li><b>Effet :</b> critères/indicateurs ajustés</li><li><b>Suite :</b> préparer v2 du plan</li></ul>"
+      },
+      "background": { "color": "#FBE9E7" }
     }
   ]
 }
-
