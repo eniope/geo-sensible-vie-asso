@@ -2,7 +2,7 @@
   "title": {
     "text": {
       "headline": "Incubation d'une thèse — Journal transactionnel",
-      "text": "Frise de <b>cheminement</b> structurée par <b>groupes</b>, <b>transactions</b> et <b>ères</b>."
+      "text": "Frise structurée avec <b>groupes</b>, <b>transactions</b>, <b>ères</b> et <b>codes couleurs HEX</b>."
     },
     "media": {
       "url": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Moon.jpg",
@@ -46,15 +46,10 @@
       "display_date": "10 jan. 2025",
       "group": "Idée",
       "text": {
-        "headline": "<span class='grp-idee'>Étincelle initiale</span>",
+        "headline": "Étincelle initiale",
         "text": "<ul><li><b>Transaction :</b> Exploration / piste ouverte</li><li><b>Artefact :</b> note manuscrite (Obsidian)</li><li><b>Effet :</b> hypothèse de travail esquissée</li></ul>"
       },
-      "media": {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/9/9d/Earth_from_Space.jpg",
-        "caption": "Carnet scanné (exemple)",
-        "credit": "Auteur",
-        "alt": "Scan d’une page de carnet"
-      }
+      "background": { "color": "#0B3C5D" }
     },
     {
       "unique_id": "terrain-rencontre-01",
@@ -62,9 +57,10 @@
       "display_date": "5 fév. 2025",
       "group": "Terrain",
       "text": {
-        "headline": "<span class='grp-terrain'>Première rencontre de terrain</span>",
+        "headline": "Première rencontre de terrain",
         "text": "<ul><li><b>Transaction :</b> Épreuve & résolution</li><li><b>Donnée :</b> verbatim collecté</li><li><b>Effet :</b> recadrage des thèmes d’observation</li></ul>"
-      }
+      },
+      "background": { "color": "#6B2C91" }
     },
     {
       "unique_id": "encadrement-rdv-01",
@@ -72,9 +68,10 @@
       "display_date": "15 mars 2025",
       "group": "Encadrement",
       "text": {
-        "headline": "<span class='grp-encadrement'>RDV encadrant — négociation de cadre</span>",
-        "text": "<ul><li><b>Transaction :</b> Négociation de cadre / ré-encadrement</li><li><b>Décision :</b> prioriser l’évaluation développementale</li><li><b>Effet :</b> objectifs intermédiaires clarifiés</li></ul>"
-      }
+        "headline": "RDV encadrant — négociation de cadre",
+        "text": "<ul><li><b>Transaction :</b> Négociation de cadre</li><li><b>Décision :</b> prioriser l’évaluation développementale</li></ul>"
+      },
+      "background": { "color": "#9A3412" }
     },
     {
       "unique_id": "ecriture-plan-v1",
@@ -82,9 +79,10 @@
       "display_date": "20 avr. 2025",
       "group": "Écriture",
       "text": {
-        "headline": "<span class='grp-ecriture'>Plan de thèse — version 1</span>",
-        "text": "<ul><li><b>Transaction :</b> Validation intermédiaire / indicateur</li><li><b>Livrable :</b> plan v1 partagé</li><li><b>Effet :</b> structure argumentaire testée</li></ul>"
-      }
+        "headline": "Plan de thèse — version 1",
+        "text": "<ul><li><b>Transaction :</b> Validation intermédiaire</li><li><b>Livrable :</b> plan v1 partagé</li></ul>"
+      },
+      "background": { "color": "#1F6F50" }
     },
     {
       "unique_id": "outils-setup-workflow",
@@ -92,9 +90,10 @@
       "display_date": "2 mai 2025",
       "group": "Outils/Infra",
       "text": {
-        "headline": "<span class='grp-outils'>Mise en place du workflow (Obsidian + Aeon + Pages)</span>",
-        "text": "<ul><li><b>Transaction :</b> Décision / gel d’option</li><li><b>Effet :</b> chaîne de production stable</li><li><b>Note :</b> JSON/Timeline comme vitrine narrative</li></ul>"
-      }
+        "headline": "Mise en place du workflow",
+        "text": "<ul><li><b>Transaction :</b> Décision / gel d’option</li><li><b>Effet :</b> chaîne de production stable</li></ul>"
+      },
+      "background": { "color": "#14532D" }
     },
     {
       "unique_id": "publics-feedback-01",
@@ -102,10 +101,10 @@
       "display_date": "12 juin 2025",
       "group": "Publics/Événements",
       "text": {
-        "headline": "<span class='grp-publics'>Présentation publique #1 — retours croisés</span>",
-        "text": "<ul><li><b>Transaction :</b> Validation intermédiaire</li><li><b>Effet :</b> critères/indicateurs ajustés</li><li><b>Suite :</b> préparer v2 du plan</li></ul>"
-      }
+        "headline": "Présentation publique #1 — retours croisés",
+        "text": "<ul><li><b>Transaction :</b> Validation intermédiaire</li><li><b>Effet :</b> critères/indicateurs ajustés</li></ul>"
+      },
+      "background": { "color": "#6B2C91" }
     }
   ]
 }
-
