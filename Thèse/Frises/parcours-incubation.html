@@ -1,20 +1,30 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
   <meta charset="utf-8">
   <title>Timeline incubation thèse</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Librairie Knight Lab -->
   <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
   <style>
-    html, body { height:100%; margin:0; padding:0; }
-    #timeline-embed { height:100%; }
+    html, body { height:100%; margin:0; }
+    /* 🔑 Hauteur explicite du conteneur */
+    #timeline-embed { height: 90vh; }
   </style>
 </head>
 <body>
+  <!-- 🔑 l'id doit être exactement le même que dans TL.Timeline(...) -->
   <div id="timeline-embed"></div>
+
   <script>
-    var options = { language: "fr", hash_bookmark: true, timenav_position: "top", initial_zoom: 4 };
-    var timeline = new TL.Timeline("timeline-embed", "data.json", options);
+    // 🔑 Si le JSON est à côté de ce fichier, garde simplement "data.json"
+    const options = {
+      language: "fr",
+      hash_bookmark: true,
+      timenav_position: "top",
+      initial_zoom: 4
+    };
+    new TL.Timeline("timeline-embed", "data.json", options);
   </script>
 </body>
 </html>
-
