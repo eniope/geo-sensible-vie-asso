@@ -1,0 +1,10 @@
+{
+  "title": { "text": { "headline": "Incubation d'une thèse" } },
+  "events": [
+    {
+      "unique_id": "event-incubation-dune-these",
+      "start_date": { "year": "2025", "month": "09", "day": "01" },
+      "text": { "headline": "Slide test", "text": "Ça fonctionne 🎉" }
+    }
+  ]
+}
