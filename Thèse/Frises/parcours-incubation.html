@@ -1,1 +1,20 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Timeline incubation thèse</title>
+  <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
+  <style>
+    html, body { height:100%; margin:0; padding:0; }
+    #timeline-embed { height:100%; }
+  </style>
+</head>
+<body>
+  <div id="timeline-embed"></div>
+  <script>
+    var options = { language: "fr", hash_bookmark: true, timenav_position: "top", initial_zoom: 4 };
+    var timeline = new TL.Timeline("timeline-embed", "data.json", options);
+  </script>
+</body>
+</html>
 
