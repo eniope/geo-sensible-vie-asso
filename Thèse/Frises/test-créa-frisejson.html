@@ -13,34 +13,31 @@
   <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
 
 <style>
-  html, body { height: 100%; margin: 0; }
-  #timeline-embed { height: 90vh; }
-  
-  
-  /* 1) nécessaire pour voir la timeline */
-html, body { height: 100%; margin: 0; }
-#timeline-embed { height: 90vh; }
+  /* indispensable pour l'affichage */
+html, body { height:100%; margin:0; }
+#timeline-embed { height:90vh; }
 
-/* 1) neutralise toute atténuation dans la timenav */
-.tl-timenav,
-.tl-timenav * {
+/* ── Forcer les libellés de groupes en noir ─────────────────────────── */
+
+/* 1) annule toute atténuation dans la nav temporelle */
+#timeline-embed .tl-timenav,
+#timeline-embed .tl-timenav * {
   opacity: 1 !important;
 }
 
-/* 2) cible explicitement le texte SVG des libellés de groupes */
-.tl-timenav svg text {
-  fill: #111111 !important;   /* NOIR pour les libellés */
-  stroke: none !important;
-  opacity: 1 !important;
+/* 2) CAS le plus courant: libellé rendu en SVG <text>/<tspan> */
+#timeline-embed .tl-timenav svg text,
+#timeline-embed .tl-timenav svg tspan {
+  fill: #111111 !important;
 }
 
-/* 3) au cas où un style "color" s'applique via <foreignObject> ou HTML */
-.tl-timenav .tl-timenav-group-label {
+/* 3) CAS alternatif: libellé rendu en HTML (foreignObject/DOM) */
+#timeline-embed .tl-timenav .tl-timenav-group-label,
+#timeline-embed .tl-timenav .tl-timenav-group-label * {
   color: #111111 !important;
   font-weight: 600;
 }
 
-  
 </style>
 
 </head>
@@ -69,8 +66,6 @@ html, body { height: 100%; margin: 0; }
     //   timeline.goToId('mon-id-de-slide'); // si vos items ont un "unique_id" dans data.json
     // });
 
-   
- 
 
   </script>
 </body>
