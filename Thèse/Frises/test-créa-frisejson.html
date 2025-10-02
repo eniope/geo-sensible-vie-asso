@@ -68,6 +68,16 @@
     box-shadow: 0 4px 16px rgba(0,0,0,.08);
   }
   .tl-text-content h2.tl-headline { color: #0f0f0f; }
+
+  /* Rendre les labels 100% opaques pour bien voir les couleurs */
+.tl-timenav .tl-timenav-group-label { opacity: 1 !important; }
+
+/* Optionnel : un peu plus de lisibilité */
+.tl-timenav .tl-timenav-group-label {
+  font-weight: 700;
+  letter-spacing: .2px;
+}
+
 </style>
 
 </head>
@@ -95,6 +105,47 @@
     // timeline.on('loaded', () => {
     //   timeline.goToId('mon-id-de-slide'); // si vos items ont un "unique_id" dans data.json
     // });
+
+   
+  // mapping nom de groupe → couleur
+  const GROUP_COLORS = {
+    "idée": "#0B3C5D",
+    "idee": "#0B3C5D",           // fallback sans accent
+    "terrain": "#6B2C91",
+    "encadrement": "#9A3412",
+    "écriture": "#1F6F50",
+    "ecriture": "#1F6F50",
+    "outils/infra": "#14532D",
+    "publics/événements": "#FF6600",
+    "publics/evenements": "#FF6600"
+  };
+
+  function colorGroupLabels() {
+    // On cible tous les éléments "label de groupe" possibles
+    const candidates = document.querySelectorAll(
+      '.tl-timenav [class*="group-label"], .tl-timenav [class*="group"] [class*="label"]'
+    );
+    candidates.forEach(el => {
+      const key = el.textContent.trim().toLowerCase();
+      if (GROUP_COLORS[key]) {
+        el.style.color = GROUP_COLORS[key];
+        el.style.fontWeight = "700";
+        el.style.opacity = "1";           // remonte l’opacité
+      }
+    });
+  }
+
+  // Coloration initiale quand la timeline est chargée
+  timeline.on('loaded', () => {
+    colorGroupLabels();
+
+    // Recolorer si la timenav se re-rend (navigation, resize…)
+    const nav = document.querySelector('.tl-timenav') || document.body;
+    const obs = new MutationObserver(() => colorGroupLabels());
+    obs.observe(nav, { childList: true, subtree: true });
+  });
+
+
   </script>
 </body>
 </html>
