@@ -16,26 +16,6 @@
   html, body { height: 100%; margin: 0; }
   #timeline-embed { height: 90vh; }
   
-/* Couleur pour les libellés des groupes (gauche) */
-.tl-timenav-group:nth-child(1) .tl-timenav-group-label {
-  color: #0B3C5D; /* Idée */
-}
-.tl-timenav-group:nth-child(2) .tl-timenav-group-label {
-  color: #6B2C91; /* Terrain */
-}
-.tl-timenav-group:nth-child(3) .tl-timenav-group-label {
-  color: #9A3412; /* Encadrement */
-}
-.tl-timenav-group:nth-child(4) .tl-timenav-group-label {
-  color: #1F6F50; /* Écriture */
-}
-.tl-timenav-group:nth-child(5) .tl-timenav-group-label {
-  color: #14532D; /* Outils/Infra */
-}
-.tl-timenav-group:nth-child(6) .tl-timenav-group-label {
-  color: #FF6600; /* Publics/Événements */
-}
-
   /* Pastilles de groupe */
   .grp-idee::before,
   .grp-terrain::before,
@@ -69,15 +49,6 @@
   }
   .tl-text-content h2.tl-headline { color: #0f0f0f; }
 
-  /* Rendre les labels 100% opaques pour bien voir les couleurs */
-.tl-timenav .tl-timenav-group-label { opacity: 1 !important; }
-
-/* Optionnel : un peu plus de lisibilité */
-.tl-timenav .tl-timenav-group-label {
-  font-weight: 700;
-  letter-spacing: .2px;
-}
-
 </style>
 
 </head>
@@ -107,44 +78,7 @@
     // });
 
    
-  // mapping nom de groupe → couleur
-  const GROUP_COLORS = {
-    "idée": "#0B3C5D",
-    "idee": "#0B3C5D",           // fallback sans accent
-    "terrain": "#6B2C91",
-    "encadrement": "#9A3412",
-    "écriture": "#1F6F50",
-    "ecriture": "#1F6F50",
-    "outils/infra": "#14532D",
-    "publics/événements": "#FF6600",
-    "publics/evenements": "#FF6600"
-  };
-
-  function colorGroupLabels() {
-    // On cible tous les éléments "label de groupe" possibles
-    const candidates = document.querySelectorAll(
-      '.tl-timenav [class*="group-label"], .tl-timenav [class*="group"] [class*="label"]'
-    );
-    candidates.forEach(el => {
-      const key = el.textContent.trim().toLowerCase();
-      if (GROUP_COLORS[key]) {
-        el.style.color = GROUP_COLORS[key];
-        el.style.fontWeight = "700";
-        el.style.opacity = "1";           // remonte l’opacité
-      }
-    });
-  }
-
-  // Coloration initiale quand la timeline est chargée
-  timeline.on('loaded', () => {
-    colorGroupLabels();
-
-    // Recolorer si la timenav se re-rend (navigation, resize…)
-    const nav = document.querySelector('.tl-timenav') || document.body;
-    const obs = new MutationObserver(() => colorGroupLabels());
-    obs.observe(nav, { childList: true, subtree: true });
-  });
-
+ 
 
   </script>
 </body>
