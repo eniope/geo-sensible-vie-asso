@@ -15,24 +15,32 @@
 <style>
   html, body { height: 100%; margin: 0; }
   #timeline-embed { height: 90vh; }
+  
+  
   /* 1) nécessaire pour voir la timeline */
 html, body { height: 100%; margin: 0; }
 #timeline-embed { height: 90vh; }
 
-/* 2) rendre les libellés de groupes bien visibles et noirs */
-.tl-timenav .tl-timenav-group,
-.tl-timenav .tl-timenav-group * {
-  opacity: 1 !important;            /* enlève l’atténuation grisée */
+/* 1) neutralise toute atténuation dans la timenav */
+.tl-timenav,
+.tl-timenav * {
+  opacity: 1 !important;
 }
 
-.tl-timenav .tl-timenav-group-label,
-.tl-timenav .tl-timenav-group-label * {
-  color: #111111 !important;         /* ta couleur “plus noire” */
-  fill:  #111111 !important;         /* utile si rendu en SVG */
+/* 2) cible explicitement le texte SVG des libellés de groupes */
+.tl-timenav svg text {
+  fill: #111111 !important;   /* NOIR pour les libellés */
+  stroke: none !important;
+  opacity: 1 !important;
+}
+
+/* 3) au cas où un style "color" s'applique via <foreignObject> ou HTML */
+.tl-timenav .tl-timenav-group-label {
+  color: #111111 !important;
   font-weight: 600;
 }
 
-
+  
 </style>
 
 </head>
