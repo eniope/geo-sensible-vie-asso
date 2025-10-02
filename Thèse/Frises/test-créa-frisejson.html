@@ -17,27 +17,19 @@
 html, body { height:100%; margin:0; }
 #timeline-embed { height:90vh; }
 
-/* ── Forcer les libellés de groupes en noir ─────────────────────────── */
-
-/* 1) annule toute atténuation dans la nav temporelle */
-#timeline-embed .tl-timenav,
-#timeline-embed .tl-timenav * {
+  /* 1) neutralise l’opacité appliquée par défaut */
+.tl-timegroup-message {
   opacity: 1 !important;
 }
 
-/* 2) CAS le plus courant: libellé rendu en SVG <text>/<tspan> */
-#timeline-embed .tl-timenav svg text,
-#timeline-embed .tl-timenav svg tspan {
-  fill: #111111 !important;
-}
-
-/* 3) CAS alternatif: libellé rendu en HTML (foreignObject/DOM) */
-#timeline-embed .tl-timenav .tl-timenav-group-label,
-#timeline-embed .tl-timenav .tl-timenav-group-label * {
+/* 2) couleur noire pour tous les libellés de groupes */
+.tl-timegroup-message {
   color: #111111 !important;
   font-weight: 600;
 }
 
+
+  
 </style>
 
 </head>
