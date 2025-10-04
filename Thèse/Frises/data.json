@@ -1,3 +1,5 @@
+Qu'analyses tu et que comprends tu de la structure de cette timeline ? Laisse tomber les slides > 
+
 {
   "title": {
     "text": {
@@ -13,28 +15,37 @@
   },
 
   "eras": [
-    { "unique_id": "era-germination",   "start_date": { "year": 2025, "month": 1 },  "end_date": { "year": 2025, "month": 3 },  "text": { "headline": "Germination" } },
-    { "unique_id": "era-divergence",    "start_date": { "year": 2025, "month": 4 },  "end_date": { "year": 2025, "month": 6 },  "text": { "headline": "Divergence" } },
-    { "unique_id": "era-convergence",   "start_date": { "year": 2025, "month": 7 },  "end_date": { "year": 2025, "month": 9 },  "text": { "headline": "Convergence" } },
-    { "unique_id": "era-stabilisation", "start_date": { "year": 2025, "month": 10 }, "end_date": { "year": 2025, "month": 12 }, "text": { "headline": "Stabilisation" } }
+    {
+      "unique_id": "era-germination",
+      "start_date": { "year": 2025, "month": 1 },
+      "end_date":   { "year": 2025, "month": 3 },
+      "text": { "headline": "Germination" }
+    },
+    {
+      "unique_id": "era-divergence",
+      "start_date": { "year": 2025, "month": 4 },
+      "end_date":   { "year": 2025, "month": 6 },
+      "text": { "headline": "Divergence" }
+    },
+    {
+      "unique_id": "era-convergence",
+      "start_date": { "year": 2025, "month": 7 },
+      "end_date":   { "year": 2025, "month": 9 },
+      "text": { "headline": "Convergence" }
+    },
+    {
+      "unique_id": "era-stabilisation",
+      "start_date": { "year": 2025, "month": 10 },
+      "end_date":   { "year": 2025, "month": 12 },
+      "text": { "headline": "Stabilisation" }
+    }
   ],
 
   "events": [
     {
-      "unique_id": "mode-emploi-epreuve-reelle",
-      "start_date": { "year": 2025, "month": 10, "day": 4 },
-      "display_date": "4 oct. 2025",
-      "group": "Métadonnées",
-      "text": {
-        "headline": "Lire la frise — <i>Épreuve du réel</i>",
-        "text": "<p>Cette frise est la <b>surface visible</b> d’un dispositif multi-outils (Obsidian, Kumu, Aeon, KnightLab). Elle sert à <b>évaluer</b> et <b>apprendre en cours d’action</b>.</p><h4>Comment lire ?</h4><ul><li><b>Éras</b> : Germination → Divergence → Convergence → Stabilisation.</li><li><b>Groupes</b> : Idée, Terrain, Encadrement, Écriture, Outils/Infra, Publics/Événements.</li><li><b>Couleurs</b> : repères constants par type d’activité.</li></ul><h4>Ce que vous pouvez faire</h4><ul><li>Cliquer un événement → ouvrir sa <b>transaction</b> (type, artefact, effet).</li><li>Signaler un <b>ajout/correctif</b> si quelque chose manque.</li></ul><h4>À quoi ça sert ?</h4><ul><li><b>Œuvre</b> : suivre ce qui se construit.</li><li><b>Expérience vécue</b> : expliciter apprentissages/tensions.</li><li><b>Investissement consenti</b> : ajuster l’allocation d’énergie.</li></ul>"
-      },
-      "background": { "color": "#0F172A" }
-    },
-    {
       "unique_id": "idee-etincelle",
-      "start_date": { "year": 2025, "month": 10, "day": 5 },
-      "display_date": "5 oct. 2025",
+      "start_date": { "year": 2025, "month": 1, "day": 10 },
+      "display_date": "10 jan. 2025",
       "group": "Idée",
       "text": {
         "headline": "Étincelle initiale",
@@ -44,8 +55,8 @@
     },
     {
       "unique_id": "terrain-rencontre-01",
-      "start_date": { "year": 2025, "month": 10, "day": 6 },
-      "display_date": "6 oct. 2025",
+      "start_date": { "year": 2025, "month": 2, "day": 5 },
+      "display_date": "5 fév. 2025",
       "group": "Terrain",
       "text": {
         "headline": "Première rencontre de terrain",
@@ -55,8 +66,8 @@
     },
     {
       "unique_id": "encadrement-rdv-01",
-      "start_date": { "year": 2025, "month": 10, "day": 7 },
-      "display_date": "7 oct. 2025",
+      "start_date": { "year": 2025, "month": 3, "day": 15 },
+      "display_date": "15 mars 2025",
       "group": "Encadrement",
       "text": {
         "headline": "RDV encadrant — négociation de cadre",
@@ -66,8 +77,8 @@
     },
     {
       "unique_id": "ecriture-plan-v1",
-      "start_date": { "year": 2025, "month": 10, "day": 8 },
-      "display_date": "8 oct. 2025",
+      "start_date": { "year": 2025, "month": 4, "day": 20 },
+      "display_date": "20 avr. 2025",
       "group": "Écriture",
       "text": {
         "headline": "Plan de thèse — version 1",
@@ -77,4 +88,25 @@
     },
     {
       "unique_id": "outils-setup-workflow",
-      "start_date": { "year": 2025, "month": 10, "day": 9_
+      "start_date": { "year": 2025, "month": 5, "day": 2 },
+      "display_date": "2 mai 2025",
+      "group": "Outils/Infra",
+      "text": {
+        "headline": "Mise en place du workflow",
+        "text": "<ul><li><b>Transaction :</b> Décision / gel d’option</li><li><b>Effet :</b> chaîne de production stable</li></ul>"
+      },
+      "background": { "color": "#14532D" }
+    },
+    {
+      "unique_id": "publics-feedback-01",
+      "start_date": { "year": 2025, "month": 6, "day": 12 },
+      "display_date": "12 juin 2025",
+      "group": "Publics/Événements",
+      "text": {
+        "headline": "Présentation publique #1 — retours croisés",
+        "text": "<ul><li><b>Transaction :</b> Validation intermédiaire</li><li><b>Effet :</b> critères/indicateurs ajustés</li></ul>"
+      },
+      "background": { "color": "#6B2C91" }
+    }
+  ]
+}
