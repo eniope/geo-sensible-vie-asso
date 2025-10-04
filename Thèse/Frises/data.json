@@ -20,33 +20,169 @@
   ],
 
   "events": [
-    {
-      "unique_id": "idee-etincelle",
-      "start_date": { "year": 2025, "month": 1, "day": 10 },
-      "display_date": "10 jan. 2025",
-      "group": "Idée",
-      "text": {
-        "headline": "Étincelle initiale",
-        "text": "<ul><li><b>Transaction :</b> Exploration / piste ouverte</li><li><b>Artefact :</b> note manuscrite (Obsidian)</li><li><b>Effet :</b> hypothèse de travail esquissée</li></ul>"
-      },
-      "background": { "color": "#0B3C5D" }
+  {
+    "unique_id": "mode-emploi-epreuve-reelle",
+    "start_date": { "year": 2025, "month": 10, "day": 4 },
+    "display_date": "4 oct. 2025",
+    "group": "Métadonnées",
+    "text": {
+      "headline": "Lire la frise — <i>Épreuve du réel</i>",
+      "text": "<p>Cette frise est la <b>surface visible</b> d’un dispositif multi-outils (Obsidian, Kumu, Aeon, KnightLab). Elle sert à <b>évaluer</b> et <b>apprendre en cours d’action</b>.</p><h4>Comment lire ?</h4><ul><li><b>Éras</b> : Germination → Divergence → Convergence → Stabilisation.</li><li><b>Groupes</b> : Idée, Terrain, Encadrement, Écriture, Outils/Infra, Publics/Événements.</li><li><b>Couleurs</b> : repères constants par type d’activité.</li></ul><h4>Ce que vous pouvez faire</h4><ul><li>Cliquer un événement → ouvrir sa <b>transaction</b> (type, artefact, effet).</li><li>Signaler un <b>ajout/correctif</b> si quelque chose manque.</li></ul><h4>À quoi ça sert ?</h4><ul><li><b>Œuvre</b> : suivre ce qui se construit.</li><li><b>Expérience vécue</b> : expliciter apprentissages/tensions.</li><li><b>Investissement consenti</b> : ajuster l’allocation d’énergie.</li></ul>"
     },
-    {
-      "unique_id": "terrain-rencontre-01",
-      "start_date": { "year": 2025, "month": 2, "day": 5 },
-      "display_date": "5 fév. 2025",
-      "group": "Terrain",
-      "text": {
-        "headline": "Première rencontre de terrain",
-        "text": "<ul><li><b>Transaction :</b> Épreuve & résolution</li><li><b>Donnée :</b> verbatim collecté</li><li><b>Effet :</b> recadrage des thèmes d’observation</li></ul>"
-      },
-      "background": { "color": "#6B2C91" }
+    "background": { "color": "#0F172A" }
+  },
+  {
+    "unique_id": "idee-etincelle",
+    "start_date": { "year": 2025, "month": 10, "day": 5 },
+    "display_date": "5 oct. 2025",
+    "group": "Idée",
+    "text": {
+      "headline": "Étincelle initiale",
+      "text": "<ul><li><b>Transaction :</b> Exploration / piste ouverte</li><li><b>Artefact :</b> note manuscrite (Obsidian)</li><li><b>Effet :</b> hypothèse de travail esquissée</li></ul>"
     },
-    {
-      "unique_id": "encadrement-rdv-01",
-      "start_date": { "year": 2025, "month": 3, "day": 15 },
-      "display_date": "15 mars 2025",
-      "group": "Encadrement",
-      "text": {
-        "headline": "RDV encadrant — négociation de cadre",
-        "text": "<ul><li><b>Transac
+    "background": { "color": "#0B3C5D" }
+  },
+  {
+    "unique_id": "terrain-rencontre-01",
+    "start_date": { "year": 2025, "month": 10, "day": 6 },
+    "display_date": "6 oct. 2025",
+    "group": "Terrain",
+    "text": {
+      "headline": "Première rencontre de terrain",
+      "text": "<ul><li><b>Transaction :</b> Épreuve & résolution</li><li><b>Donnée :</b> verbatim collecté</li><li><b>Effet :</b> recadrage des thèmes d’observation</li></ul>"
+    },
+    "background": { "color": "#6B2C91" }
+  },
+  {
+    "unique_id": "encadrement-rdv-01",
+    "start_date": { "year": 2025, "month": 10, "day": 7 },
+    "display_date": "7 oct. 2025",
+    "group": "Encadrement",
+    "text": {
+      "headline": "RDV encadrant — négociation de cadre",
+      "text": "<ul><li><b>Transaction :</b> Négociation de cadre</li><li><b>Décision :</b> prioriser l’évaluation développementale</li></ul>"
+    },
+    "background": { "color": "#9A3412" }
+  },
+  {
+    "unique_id": "ecriture-plan-v1",
+    "start_date": { "year": 2025, "month": 10, "day": 8 },
+    "display_date": "8 oct. 2025",
+    "group": "Écriture",
+    "text": {
+      "headline": "Plan de thèse — version 1",
+      "text": "<ul><li><b>Transaction :</b> Validation intermédiaire</li><li><b>Livrable :</b> plan v1 partagé</li></ul>"
+    },
+    "background": { "color": "#1F6F50" }
+  },
+  {
+    "unique_id": "outils-setup-workflow",
+    "start_date": { "year": 2025, "month": 10, "day": 9 },
+    "display_date": "9 oct. 2025",
+    "group": "Outils/Infra",
+    "text": {
+      "headline": "Mise en place du workflow",
+      "text": "<ul><li><b>Transaction :</b> Décision / gel d’option</li><li><b>Effet :</b> chaîne de production stable</li></ul>"
+    },
+    "background": { "color": "#14532D" }
+  },
+  {
+    "unique_id": "publics-feedback-01",
+    "start_date": { "year": 2025, "month": 10, "day": 10 },
+    "display_date": "10 oct. 2025",
+    "group": "Publics/Événements",
+    "text": {
+      "headline": "Présentation publique #1 — retours croisés",
+      "text": "<ul><li><b>Transaction :</b> Validation intermédiaire</li><li><b>Effet :</b> critères/indicateurs ajustés</li></ul>"
+    },
+    "background": { "color": "#6B2C91" }
+  },
+  {
+    "unique_id": "atelier-teaser-annonce",
+    "start_date": { "year": 2025, "month": 10, "day": 11 },
+    "display_date": "11 oct. 2025",
+    "group": "Publics/Événements",
+    "text": {
+      "headline": "Annonce de l’atelier du 16 oct. — Épreuve du réel",
+      "text": "<ul><li><b>Transaction :</b> Communication / mobilisation</li><li><b>Artefact :</b> invitation + billet d’annonce</li><li><b>Effet :</b> engagements de participation</li></ul>"
+    },
+    "background": { "color": "#6B2C91" }
+  },
+  {
+    "unique_id": "collecte-questions-participants",
+    "start_date": { "year": 2025, "month": 10, "day": 12 },
+    "display_date": "12 oct. 2025",
+    "group": "Publics/Événements",
+    "text": {
+      "headline": "Collecte des questions et attentes",
+      "text": "<ul><li><b>Transaction :</b> Appel à contributions</li><li><b>Donnée :</b> liste de questions/attentes des participants</li><li><b>Effet :</b> cadrage des priorités de l’atelier</li></ul>"
+    },
+    "background": { "color": "#6B2C91" }
+  },
+  {
+    "unique_id": "preparation-grilles-stc",
+    "start_date": { "year": 2025, "month": 10, "day": 13 },
+    "display_date": "13 oct. 2025",
+    "group": "Outils/Infra",
+    "text": {
+      "headline": "Préparation des grilles STC",
+      "text": "<ul><li><b>Transaction :</b> Conception / outillage</li><li><b>Livrable :</b> grilles « Œuvre / Expérience / Investissement »</li><li><b>Effet :</b> instrumentation prête pour l’atelier</li></ul>"
+    },
+    "background": { "color": "#14532D" }
+  },
+  {
+    "unique_id": "test-a-blanc-atelier",
+    "start_date": { "year": 2025, "month": 10, "day": 14 },
+    "display_date": "14 oct. 2025",
+    "group": "Outils/Infra",
+    "text": {
+      "headline": "Test à blanc de l’atelier",
+      "text": "<ul><li><b>Transaction :</b> Test & itération</li><li><b>Donnée :</b> points de friction recensés</li><li><b>Effet :</b> ajustements de format et consignes</li></ul>"
+    },
+    "background": { "color": "#14532D" }
+  },
+  {
+    "unique_id": "stabilisation-supports",
+    "start_date": { "year": 2025, "month": 10, "day": 15 },
+    "display_date": "15 oct. 2025",
+    "group": "Outils/Infra",
+    "text": {
+      "headline": "Stabilisation des supports",
+      "text": "<ul><li><b>Transaction :</b> Gel d’options</li><li><b>Livrable :</b> kit final (grilles, frise, Kumu)</li><li><b>Effet :</b> prêt pour mise en scène</li></ul>"
+    },
+    "background": { "color": "#14532D" }
+  },
+  {
+    "unique_id": "atelier-epreuve-reelle-16oct",
+    "start_date": { "year": 2025, "month": 10, "day": 16 },
+    "display_date": "16 oct. 2025",
+    "group": "Publics/Événements",
+    "text": {
+      "headline": "Atelier — Épreuve du réel (Jour J)",
+      "text": "<ul><li><b>Transaction :</b> Mise à l’épreuve collective</li><li><b>Donnée :</b> verbatim, prises de notes, photos</li><li><b>Effet :</b> décisions et hypothèses ajustées</li></ul>"
+    },
+    "background": { "color": "#6B2C91" }
+  },
+  {
+    "unique_id": "debrief-post-mortem",
+    "start_date": { "year": 2025, "month": 10, "day": 17 },
+    "display_date": "17 oct. 2025",
+    "group": "Encadrement",
+    "text": {
+      "headline": "Debrief & arbitrages",
+      "text": "<ul><li><b>Transaction :</b> Retour à chaud / arbitrage</li><li><b>Décision :</b> priorités Q4 et responsabilités</li><li><b>Effet :</b> feuille de route actualisée</li></ul>"
+    },
+    "background": { "color": "#9A3412" }
+  },
+  {
+    "unique_id": "mise-a-jour-frise-v02",
+    "start_date": { "year": 2025, "month": 10, "day": 18 },
+    "display_date": "18 oct. 2025",
+    "group": "Outils/Infra",
+    "text": {
+      "headline": "Mise à jour de la frise (v0.2)",
+      "text": "<ul><li><b>Transaction :</b> Intégration des retours</li><li><b>Livrable :</b> JSON v0.2 + synchro Kumu</li><li><b>Effet :</b> vision consolidée post-atelier</li></ul>"
+    },
+    "background": { "color": "#14532D" }
+  }
+]
