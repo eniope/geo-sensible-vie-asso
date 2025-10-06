@@ -41,70 +41,16 @@
 
   "events": [
     {
-      "unique_id": "idee-etincelle",
-      "start_date": { "year": 2025, "month": 1, "day": 10 },
-      "display_date": "10 jan. 2025",
-      "group": "Idée",
-      "text": {
-        "headline": "Étincelle initiale",
-        "text": "<ul><li><b>Transaction :</b> Exploration / piste ouverte</li><li><b>Artefact :</b> note manuscrite (Obsidian)</li><li><b>Effet :</b> hypothèse de travail esquissée</li></ul>"
-      },
-      "background": { "color": "#0B3C5D" }
-    },
-    {
-      "unique_id": "terrain-rencontre-01",
-      "start_date": { "year": 2025, "month": 2, "day": 5 },
-      "display_date": "5 fév. 2025",
-      "group": "Terrain",
-      "text": {
-        "headline": "Première rencontre de terrain",
-        "text": "<ul><li><b>Transaction :</b> Épreuve & résolution</li><li><b>Donnée :</b> verbatim collecté</li><li><b>Effet :</b> recadrage des thèmes d’observation</li></ul>"
-      },
-      "background": { "color": "#6B2C91" }
-    },
-    {
-      "unique_id": "encadrement-rdv-01",
-      "start_date": { "year": 2025, "month": 3, "day": 15 },
-      "display_date": "15 mars 2025",
-      "group": "Encadrement",
-      "text": {
-        "headline": "RDV encadrant — négociation de cadre",
-        "text": "<ul><li><b>Transaction :</b> Négociation de cadre</li><li><b>Décision :</b> prioriser l’évaluation développementale</li></ul>"
-      },
-      "background": { "color": "#9A3412" }
-    },
-    {
-      "unique_id": "ecriture-plan-v1",
-      "start_date": { "year": 2025, "month": 4, "day": 20 },
-      "display_date": "20 avr. 2025",
+      "unique_id": "memo-passage-2025-10-06",
+      "start_date": { "year": 2025, "month": 10, "day": 6 },
+      "display_date": "6 oct. 2025",
       "group": "Écriture",
       "text": {
-        "headline": "Plan de thèse — version 1",
-        "text": "<ul><li><b>Transaction :</b> Validation intermédiaire</li><li><b>Livrable :</b> plan v1 partagé</li></ul>"
+        "headline": "Mémo de passage — Ce qu’il reste à rendre possible",
+        "text": "<p><i>Il y a quelques mois, j’ai failli y passer. Et puis non. Autre chose est advenu.</i><br><br>Ce mémo ouvre une enquête sur la manière d’habiter lucidement et avec sagacité le temps qui reste. <br>Il trace les premiers gestes d’une écriture doctorale attentive au soin, à la vulnérabilité, à la présence au monde.<br><br>Ni commencement, ni conclusion : une respiration entre deux âges, où la pensée se fait plus lente, plus hospitalière.<br><br><b>Ressources associées :</b><ul><li><a href=\"https://[ton-domaine-obsidian-publish]/memo_ce_quil_reste_a_rendre_possible\" target=\"_blank\">Entrée dossier — Obsidian Publish</a></li><li><a href=\"https://passerelles.encommun.io/u/stephane_caillaud/\" target=\"_blank\">Profil Passerelles</a></li><li><a href=\"https://www.linkedin.com/in/st%C3%A9phane-caillaud-26a72648/\" target=\"_blank\">Profil LinkedIn</a></li><li><a href=\"[à venir lien Zotero]\" target=\"_blank\">Bibliothèque Zotero</a></li></ul>"
       },
-      "background": { "color": "#1F6F50" }
-    },
-    {
-      "unique_id": "outils-setup-workflow",
-      "start_date": { "year": 2025, "month": 5, "day": 2 },
-      "display_date": "2 mai 2025",
-      "group": "Outils/Infra",
-      "text": {
-        "headline": "Mise en place du workflow",
-        "text": "<ul><li><b>Transaction :</b> Décision / gel d’option</li><li><b>Effet :</b> chaîne de production stable</li></ul>"
-      },
-      "background": { "color": "#14532D" }
-    },
-    {
-      "unique_id": "publics-feedback-01",
-      "start_date": { "year": 2025, "month": 6, "day": 12 },
-      "display_date": "12 juin 2025",
-      "group": "Publics/Événements",
-      "text": {
-        "headline": "Présentation publique #1 — retours croisés",
-        "text": "<ul><li><b>Transaction :</b> Validation intermédiaire</li><li><b>Effet :</b> critères/indicateurs ajustés</li></ul>"
-      },
-      "background": { "color": "#6B2C91" }
-    }
+    "background": { "color": "#1F6F50" }
+  }
+
   ]
 }
