@@ -1,13 +1,13 @@
 
 {
-  "title": {
+ "title": {
     "text": {
       "headline": "Incubation d'une thèse — Journal transactionnel",
-      "text": "Frise structurée avec <b>groupes</b>, <b>transactions</b>, <b>ères</b> et <b>codes couleurs HEX</b>."
+      "text": "<p><i>Écrire, ici, ce n’est pas produire du texte.<br> C’est rendre perceptible le mouvement du vivant dans la pensée.</i></p><p>Ce journal suit l’émergence d’une <b>thèse-vie</b> : un écosystème d’écriture où la recherche s’éprouve comme <b>art du maintien au monde</b>.<br><br>Chaque entrée témoigne d’un <b>moment de germination</b>, d’une <b>transaction sensible</b> entre l’expérience vécue, la rigueur méthodologique et le soin porté aux alliances.</p><p>Ce travail s’inscrit dans une <b>éthique du design by care</b> : penser, agir et écrire sans arracher, en laissant advenir.</p>"
     },
     "media": {
       "url": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Moon.jpg",
-      "caption": "Image de couverture",
+      "caption": "Photographie de la Lune — symbole de cycles, d’ombre et de résonance.",
       "credit": "CC BY-SA Wikimedia",
       "alt": "Photo de la Lune"
     }
