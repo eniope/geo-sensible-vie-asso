@@ -16,31 +16,31 @@
     {
       "unique_id": "era-pregermination",
       "start_date": { "year": 2025, "month": 10, "day": 6 },
-      "end_date": { "year": 2025, "month": 10, "day": 17 },
+      "end_date":   { "year": 2025, "month": 10, "day": 17 },
       "text": { "headline": "Prégermination / Conception" }
     },
     {
       "unique_id": "era-germination",
       "start_date": { "year": 2025, "month": 10, "day": 18 },
-      "end_date": { "year": 2026, "month": 5, "day": 18 },
+      "end_date":   { "year": 2026, "month": 5,  "day": 18 },
       "text": { "headline": "Germination" }
     },
     {
       "unique_id": "era-divergence",
-      "start_date": { "year": 2026, "month": 5, "day": 19 },
-      "end_date": { "year": 2026, "month": 11, "day": 19 },
+      "start_date": { "year": 2026, "month": 5,  "day": 19 },
+      "end_date":   { "year": 2026, "month": 11, "day": 19 },
       "text": { "headline": "Divergence" }
     },
     {
       "unique_id": "era-convergence",
       "start_date": { "year": 2026, "month": 11, "day": 20 },
-      "end_date": { "year": 2027, "month": 4, "day": 20 },
+      "end_date":   { "year": 2027, "month": 4,  "day": 20 },
       "text": { "headline": "Convergence" }
     },
     {
       "unique_id": "era-stabilisation",
-      "start_date": { "year": 2027, "month": 4, "day": 21 },
-      "end_date": { "year": 2027, "month": 9, "day": 21 },
+      "start_date": { "year": 2027, "month": 4,  "day": 21 },
+      "end_date":   { "year": 2027, "month": 9,  "day": 21 },
       "text": { "headline": "Stabilisation" }
     }
   ],
@@ -53,11 +53,10 @@
       "group": "Outils/Infra",
       "text": {
         "headline": "Pourquoi une frise ?",
-        "text": "<p><i>Avant toute germination, il y a la préparation du sol.</i></p><p>Cette frise n’est pas un journal linéaire : c’est un <b>écosystème narratif</b> qui rend perceptible la genèse d’une thèse-vie.</p><p><a href='#note' data-note-id='showroom-01'>En savoir plus (ouvrir le bloc explicatif)</a></p>"
+        "text": "<p><i>Avant toute germination, il y a la préparation du sol.</i></p><p>Cette frise n’est pas un journal linéaire : c’est un <b>écosystème narratif</b> qui rend perceptible la genèse d’une thèse-vie. Chaque diapositive fait trace d’un moment de transaction entre pensée et pratique.</p>"
       },
       "background": { "color": "#14532D" }
     },
-
     {
       "unique_id": "showroom-02-visibilite",
       "start_date": { "year": 2025, "month": 10, "day": 7 },
