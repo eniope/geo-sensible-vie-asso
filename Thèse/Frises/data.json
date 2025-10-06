@@ -16,26 +16,26 @@
   "eras": [
     {
       "unique_id": "era-germination",
-      "start_date": { "year": 2025, "month": 7 },
-      "end_date":   { "year": 2026, "month": 2 },
+      "start_date": { "year": 2025, "month": 10 },
+      "end_date":   { "year": 2026, "month": 5 },
       "text": { "headline": "Germination" }
     },
     {
       "unique_id": "era-divergence",
-      "start_date": { "year": 2026, "month": 3 },
-      "end_date":   { "year": 2026, "month": 9 },
+      "start_date": { "year": 2026, "month": 6 },
+      "end_date":   { "year": 2026, "month": 12 },
       "text": { "headline": "Divergence" }
     },
     {
       "unique_id": "era-convergence",
-      "start_date": { "year": 2026, "month": 10 },
-      "end_date":   { "year": 2027, "month": 3 },
+      "start_date": { "year": 2027, "month": 1 },
+      "end_date":   { "year": 2027, "month": 6 },
       "text": { "headline": "Convergence" }
     },
     {
       "unique_id": "era-stabilisation",
-      "start_date": { "year": 2027, "month": 4 },
-      "end_date":   { "year": 2027, "month": 9 },
+      "start_date": { "year": 2027, "month": 7 },
+      "end_date":   { "year": 2027, "month": 12 },
       "text": { "headline": "Stabilisation" }
     }
   ],
