@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
-  <title>Timeline – Une slide</title>
+  <title>Timeline – Écosystème narratif</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <!-- Styles Knight Lab -->
@@ -13,11 +13,13 @@
   <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
 
   <style>
-    html, body { height:100%; margin:0; }
-    #timeline-embed { height: 60vh; } /* on réduit un peu pour laisser de la place au contenu long */
+    html, body { height:100%; margin:0; font-family: "Inter", sans-serif; color:#111; }
+    #timeline-embed { height:60vh; } /* 60% pour laisser la place au contenu long */
+
+    /* apparence des groupes */
     .tl-timegroup-message { opacity: 1 !important; color:#111 !important; font-weight:600; }
 
-    /* zone de contenu long */
+    /* bloc de contenu long sous la frise */
     #below-content {
       max-width: 900px;
       margin: 2rem auto;
@@ -34,130 +36,100 @@
     }
     #below-content h2 { margin: 0 0 .5rem 0; font-size: 1.25rem; }
     #below-content .meta { color:#6b7280; font-size:.95rem; margin-bottom:.75rem; }
+
+    /* style des liens interactifs */
+    a[data-note-id] {
+      display:inline-block;
+      background:#1F6F50;
+      color:#fff;
+      padding:.35rem .65rem;
+      border-radius:6px;
+      text-decoration:none;
+      font-size:.9rem;
+      margin-top:.5rem;
+      transition:background .2s;
+    }
+    a[data-note-id]:hover {
+      background:#14532D;
+    }
   </style>
 </head>
+
 <body>
+
+  <!-- Frise -->
   <div id="timeline-embed"></div>
 
+  <!-- Contenu long sous la frise -->
   <div id="below-content" class="hidden">
     <div class="card" id="below-card"></div>
   </div>
 
   <script>
-    const timelineDataUrl = "data.json";
-    const options = { language: "fr", hash_bookmark: true, start_at_slide: 0 };
+    /* ===============================
+       1. Chargement de la Timeline
+       =============================== */
+    const timelineDataUrl = "data.json"; // ton fichier JSON
+    const options = {
+      language: "fr",
+      hash_bookmark: true,
+      start_at_slide: 0
+    };
     const timeline = new TL.Timeline("timeline-embed", timelineDataUrl, options);
 
-    // 1) Contenus longs par unique_id (complète ici si besoin)
-    const longContents = {
-      "showroom-01-pourquoi-frise": `
+    /* ===============================
+       2. Dictionnaire des contenus longs
+       =============================== */
+    const longNotes = {
+      "showroom-01": `
         <h2>Pourquoi une frise ? — La fabrique, par la pratique</h2>
-        <div class="meta">Bloc relié à <code>showroom-01-pourquoi-frise</code></div>
-        <p><i>Avant toute germination, il y a la préparation du sol.</i> Ici, nous rendons visible la logique
-        qui a guidé la construction de l’artefact : une frise comme <b>écosystème narratif</b> pour accompagner
-        l’émergence d’une thèse-vie.</p>
+        <div class="meta">Bloc relié à la slide « Pourquoi une frise ? »</div>
+        <p><i>Avant toute germination, il y a la préparation du sol.</i> Ici, la frise est conçue comme un
+        <b>écosystème narratif</b> : un artefact de recherche qui rend visibles les transitions et la maturation,
+        plutôt que d’aligner des preuves.</p>
+        <p>Ce showroom explique comment sont choisis les groupes, les ères, les couleurs et
+        ce que ces décisions <b>rendent possible</b> pour le lecteur : orientation, soin de l’attention,
+        lisibilité, hospitalité cognitive.</p>
+        <p>Liens associés :<br>
+        <a href="https://passerelles.encommun.io/u/stephane_caillaud/" target="_blank">Profil Passerelles</a> ·
+        <a href="https://www.linkedin.com/in/st%C3%A9phane-caillaud-26a72648/" target="_blank">LinkedIn</a></p>
+      `,
+
+      "memo-passage": `
+        <h2>Mémo de passage — Ce qu’il reste à rendre possible</h2>
+        <div class="meta">Réflexion sur la présence, le soin et la vulnérabilité</div>
+        <p>Ce mémo ouvre une enquête sur la manière d’habiter lucidement et avec sagacité le temps qui reste.
+        Il trace les premiers gestes d’une écriture doctorale attentive au soin, à la vulnérabilité, à la présence au monde.</p>
+        <p><i>Ni commencement, ni conclusion : une respiration entre deux âges,
+        où la pensée se fait plus lente, plus hospitalière.</i></p>
       `
-      // "memo-passage-2025-10-12": `…`
     };
 
-    const container = document.getElementById("below-content");
-    const card = document.getElementById("below-card");
+    /* ===============================
+       3. Fonction d’affichage
+       =============================== */
+    const below = document.getElementById('below-content');
+    const card  = document.getElementById('below-card');
 
-    function setBelowContentById(uniqueId) {
-      const html = longContents[uniqueId];
-      if (html) {
-        card.innerHTML = html;
-        container.classList.remove("hidden");
-      } else {
-        container.classList.add("hidden");
-        card.innerHTML = "";
-      }
+    function showNote(id) {
+      const html = longNotes[id];
+      if (!html) return;
+      card.innerHTML = html;
+      below.classList.remove('hidden');
+      below.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    // A) Hash (si tu navigues avec #event-<unique_id>)
-    function updateFromHash() {
-      const m = (location.hash || "").match(/^#event-(.+)$/);
-      if (m && m[1]) setBelowContentById(m[1]);
-    }
-    window.addEventListener("hashchange", updateFromHash);
-
-    // B) Événement 'change' (si dispo dans ta build)
-    timeline.on?.('change', (e) => {
-      const id =
-        e?.unique_id ||
-        e?.slide?.data?.unique_id ||
-        e?.data?.unique_id ||
-        e?.target?.current_slide?.data?.unique_id ||
-        null;
-      if (id) setBelowContentById(id);
-    });
-
-    // C) Fallback universel : lecture DOM périodique (150 ms, très léger)
-    let lastDomId = null;
-    function scanDomActiveSlide() {
-      // Cherche la slide active
-      const el = document.querySelector('.tl-slide.tl-slide-active');
-      if (!el) return;
-
-      // Essaie d’en déduire un ID exploitable
-      // Plusieurs heuristiques selon les versions de TimelineJS :
-      const candidates = [
-        el.getAttribute('data-id'),
-        el.getAttribute('data-slide-id'),
-        el.id, // parfois "event-<unique_id>"
-      ].filter(Boolean);
-
-      // Regarde aussi les liens internes (headline cliquable) qui portent souvent l’ancre "#event-<unique_id>"
-      if (!candidates.length) {
-        const a = el.querySelector('a[href^="#event-"]');
-        if (a) candidates.push(a.getAttribute('href').replace(/^#event-/, ''));
-      }
-
-      // Nettoie/normalise pour récupérer un unique_id plausible
-      let uid = null;
-      for (const c of candidates) {
-        if (/^event-/.test(c)) { uid = c.replace(/^event-/, ''); break; }
-        uid = c; break;
-      }
-
-      if (uid && uid !== lastDomId) {
-        lastDomId = uid;
-        setBelowContentById(uid);
-      }
-    }
-    const poll = setInterval(scanDomActiveSlide, 150);
-
-    // Initialisation
-    timeline.on?.('loaded', () => {
-      updateFromHash();
-      scanDomActiveSlide();
+    /* ===============================
+       4. Écoute globale : clic sur lien
+       =============================== */
+    document.addEventListener('click', function(e) {
+      const a = e.target.closest('a[data-note-id]');
+      if (!a) return;
+      e.preventDefault();
+      const id = a.getAttribute('data-note-id');
+      showNote(id);
     });
   </script>
 
-  <style>
-    html, body { height:100%; margin:0; }
-    #timeline-embed { height:60vh; }
-
-    .tl-timegroup-message { opacity: 1 !important; color:#111 !important; font-weight:600; }
-
-    #below-content {
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 1rem 1.25rem;
-      line-height: 1.6;
-    }
-    #below-content.hidden { display: none; }
-    #below-content .card {
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      padding: 1.25rem;
-      box-shadow: 0 2px 14px rgba(0,0,0,0.06);
-      background: #fff;
-    }
-    #below-content h2 { margin: 0 0 .5rem 0; font-size: 1.25rem; }
-    #below-content .meta { color:#6b7280; font-size:.95rem; margin-bottom:.75rem; }
-  </style>
 </body>
-
-
 </html>
