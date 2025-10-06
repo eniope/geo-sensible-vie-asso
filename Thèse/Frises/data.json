@@ -2,7 +2,7 @@
   "title": {
     "text": {
       "headline": "Incubation d'une thèse — Journal transactionnel",
-      "text": "Frise structurée avec <b>groupes</b>, <b>transactions</b>, <b>ères</b> et <b>codes couleurs HEX</b>."
+      "text": "Frise test — structure minimale (1 ère, 1 slide)."
     },
     "media": {
       "url": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Moon.jpg",
@@ -18,30 +18,6 @@
       "start_date": { "year": 2025, "month": 10, "day": 6 },
       "end_date":   { "year": 2025, "month": 10, "day": 17 },
       "text": { "headline": "Prégermination / Conception" }
-    },
-    {
-      "unique_id": "era-germination",
-      "start_date": { "year": 2025, "month": 10, "day": 18 },
-      "end_date":   { "year": 2026, "month": 5,  "day": 18 },
-      "text": { "headline": "Germination" }
-    },
-    {
-      "unique_id": "era-divergence",
-      "start_date": { "year": 2026, "month": 5,  "day": 19 },
-      "end_date":   { "year": 2026, "month": 11, "day": 19 },
-      "text": { "headline": "Divergence" }
-    },
-    {
-      "unique_id": "era-convergence",
-      "start_date": { "year": 2026, "month": 11, "day": 20 },
-      "end_date":   { "year": 2027, "month": 4,  "day": 20 },
-      "text": { "headline": "Convergence" }
-    },
-    {
-      "unique_id": "era-stabilisation",
-      "start_date": { "year": 2027, "month": 4,  "day": 21 },
-      "end_date":   { "year": 2027, "month": 9,  "day": 21 },
-      "text": { "headline": "Stabilisation" }
     }
   ],
 
@@ -53,143 +29,9 @@
       "group": "Outils/Infra",
       "text": {
         "headline": "Pourquoi une frise ?",
-        "text": "<p><i>Avant toute germination, il y a la préparation du sol.</i></p><p>Cette frise n’est pas un journal linéaire : c’est un <b>écosystème narratif</b> qui rend perceptible la genèse d’une thèse-vie. Chaque diapositive fait trace d’un moment de transaction entre pensée et pratique.</p>"
+        "text": "<p><i>Avant toute germination, il y a la préparation du sol.</i></p><p>Cette frise n’est pas un journal linéaire : c’est un <b>écosystème narratif</b> qui rend perceptible la genèse d’une thèse-vie.</p><p><a href='#note' data-note-id='showroom-01'>En savoir plus (ouvrir le bloc explicatif)</a></p>"
       },
       "background": { "color": "#14532D" }
-    },
-    {
-      "unique_id": "showroom-02-visibilite",
-      "start_date": { "year": 2025, "month": 10, "day": 7 },
-      "display_date": "7 oct. 2025",
-      "group": "Écriture",
-      "text": {
-        "headline": "Ce que la frise rend visible",
-        "text": "<p>Chaque couleur, chaque groupe, chaque ère raconte une <b>écologie de l’attention</b>. La frise ne conserve pas les faits : elle met en scène les <b>transitions</b>, ces passages où le projet se transforme autant que celui qui l’écrit.</p>"
-      },
-      "background": { "color": "#1F6F50" }
-    },
-    {
-      "unique_id": "showroom-03-design-care",
-      "start_date": { "year": 2025, "month": 10, "day": 8 },
-      "display_date": "8 oct. 2025",
-      "group": "Outils/Infra",
-      "text": {
-        "headline": "Design by care appliqué à la structuration",
-        "text": "<p>Concevoir cette frise, c’était exercer un <b>design by care</b> :</p><ul><li>prendre soin de la cohérence ;</li><li>écouter le rythme du projet ;</li><li>prévenir la confusion entre progrès et précipitation.</li></ul><p>Chaque décision structurelle est un geste d’attention.</p>"
-      },
-      "background": { "color": "#14532D" }
-    },
-    {
-      "unique_id": "showroom-04-groupes-langages",
-      "start_date": { "year": 2025, "month": 10, "day": 9 },
-      "display_date": "9 oct. 2025",
-      "group": "Outils/Infra",
-      "text": {
-        "headline": "Les groupes comme langages de l’action",
-        "text": "<p>Les groupes (<i>Idée</i>, <i>Terrain</i>, <i>Encadrement</i>, <i>Écriture</i>…) ne sont pas des catégories : ce sont des <b>zones d’expérience</b>. Chacun correspond à une modalité d’enquête, une manière d’habiter la relation entre soi, les autres et le monde.</p>"
-      },
-      "background": { "color": "#0B3C5D" }
-    },
-    {
-      "unique_id": "showroom-05-eres-maturation",
-      "start_date": { "year": 2025, "month": 10, "day": 10 },
-      "display_date": "10 oct. 2025",
-      "group": "Écriture",
-      "text": {
-        "headline": "Les ères comme temporalités de maturation",
-        "text": "<p>Les ères ne découpent pas le temps : elles le <b>cultivent</b>.<br>Germination, Divergence, Convergence, Stabilisation : autant de saisons de la recherche, rythmées par des phases d’attention et de repositionnement.</p>"
-      },
-      "background": { "color": "#1F6F50" }
-    },
-    {
-      "unique_id": "showroom-06-invitation",
-      "start_date": { "year": 2025, "month": 10, "day": 11 },
-      "display_date": "11 oct. 2025",
-      "group": "Publics/Événements",
-      "text": {
-        "headline": "Invitation au visiteur",
-        "text": "<p><i>Si vous explorez cette frise, ne cherchez pas la preuve ; cherchez la trace.</i><br>Ce n’est pas un plan mais un <b>paysage d’apprentissages</b>, une invitation à penser la recherche comme une forme de soin partagé.</p><p><b>Ressources associées :</b><ul><li><a href='https://[ton-domaine-obsidian-publish]/showroom_frise' target='_blank'>Documentation Obsidian Publish</a></li><li><a href='https://passerelles.encommun.io/u/stephane-caillaud/' target='_blank'>Profil Passerelles</a></li></ul></p>"
-      },
-      "background": { "color": "#6B2C91" }
-    },
-
-    {
-      "unique_id": "memo-passage-2025-10-12",
-      "start_date": { "year": 2025, "month": 10, "day": 12 },
-      "display_date": "12 oct. 2025",
-      "group": "Écriture",
-      "text": {
-        "headline": "Mémo de passage — Ce qu’il reste à rendre possible",
-        "text": "<p><i>Il y a quelques mois, j’ai failli y passer. Et puis non. Autre chose est advenu.</i><br><br>Ce mémo ouvre une enquête sur la manière d’habiter lucidement et avec sagacité le temps qui reste. <br>Il trace les premiers gestes d’une écriture doctorale attentive au soin, à la vulnérabilité, à la présence au monde.<br><br>Ni commencement, ni conclusion : une respiration entre deux âges, où la pensée se fait plus lente, plus hospitalière.<br><br><b>Ressources associées :</b><ul><li><a href=\"https://[ton-domaine-obsidian-publish]/memo_ce_quil_reste_a_rendre_possible\" target=\"_blank\">Entrée dossier — Obsidian Publish</a></li><li><a href=\"https://passerelles.encommun.io/u/stephane-caillaud/\" target=\"_blank\">Profil Passerelles</a></li><li><a href=\"https://www.linkedin.com/in/st%C3%A9phane-caillaud-26a72648/\" target=\"_blank\">Profil LinkedIn</a></li><li><a href=\"[à venir lien Zotero]\" target=\"_blank\">Bibliothèque Zotero</a></li></ul>"
-      },
-      "background": { "color": "#1F6F50" }
-    },
-
-    {
-      "unique_id": "idee-etincelle",
-      "start_date": { "year": 2025, "month": 10, "day": 13 },
-      "display_date": "13 oct. 2025",
-      "group": "Idée",
-      "text": {
-        "headline": "Étincelle initiale",
-        "text": "<ul><li><b>Transaction :</b> Exploration / piste ouverte</li><li><b>Artefact :</b> note manuscrite (Obsidian)</li><li><b>Effet :</b> hypothèse de travail esquissée</li></ul>"
-      },
-      "background": { "color": "#0B3C5D" }
-    },
-    {
-      "unique_id": "terrain-rencontre-01",
-      "start_date": { "year": 2025, "month": 10, "day": 14 },
-      "display_date": "14 oct. 2025",
-      "group": "Terrain",
-      "text": {
-        "headline": "Première rencontre de terrain",
-        "text": "<ul><li><b>Transaction :</b> Épreuve & résolution</li><li><b>Donnée :</b> verbatim collecté</li><li><b>Effet :</b> recadrage des thèmes d’observation</li></ul>"
-      },
-      "background": { "color": "#6B2C91" }
-    },
-    {
-      "unique_id": "encadrement-rdv-01",
-      "start_date": { "year": 2025, "month": 10, "day": 15 },
-      "display_date": "15 oct. 2025",
-      "group": "Encadrement",
-      "text": {
-        "headline": "RDV encadrant — négociation de cadre",
-        "text": "<ul><li><b>Transaction :</b> Négociation de cadre</li><li><b>Décision :</b> prioriser l’évaluation développementale</li></ul>"
-      },
-      "background": { "color": "#9A3412" }
-    },
-    {
-      "unique_id": "ecriture-plan-v1",
-      "start_date": { "year": 2025, "month": 10, "day": 16 },
-      "display_date": "16 oct. 2025",
-      "group": "Écriture",
-      "text": {
-        "headline": "Plan de thèse — version 1",
-        "text": "<ul><li><b>Transaction :</b> Validation intermédiaire</li><li><b>Livrable :</b> plan v1 partagé</li></ul>"
-      },
-      "background": { "color": "#1F6F50" }
-    },
-    {
-      "unique_id": "outils-setup-workflow",
-      "start_date": { "year": 2025, "month": 10, "day": 17 },
-      "display_date": "17 oct. 2025",
-      "group": "Outils/Infra",
-      "text": {
-        "headline": "Mise en place du workflow",
-        "text": "<ul><li><b>Transaction :</b> Décision / gel d’option</li><li><b>Effet :</b> chaîne de production stable</li></ul>"
-      },
-      "background": { "color": "#14532D" }
-    },
-    {
-      "unique_id": "publics-feedback-01",
-      "start_date": { "year": 2025, "month": 10, "day": 18 },
-      "display_date": "18 oct. 2025",
-      "group": "Publics/Événements",
-      "text": {
-        "headline": "Présentation publique #1 — retours croisés",
-        "text": "<ul><li><b>Transaction :</b> Validation intermédiaire</li><li><b>Effet :</b> critères / indicateurs ajustés</li></ul>"
-      },
-      "background": { "color": "#6B2C91" }
     }
   ]
 }
