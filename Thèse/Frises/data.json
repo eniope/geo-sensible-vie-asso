@@ -106,11 +106,7 @@
       },
       "background": { "color": "#6B2C91" }
     },
-
     {
       "unique_id": "memo-passage-2025-10-06",
       "start_date": { "year": 2025, "month": 10, "day": 6 },
-      "display_date": "6 oct. 2025",
-      "group": "Écriture",
-      "text": {
-        "headline": "Mémo de passage — Ce qu’il reste à rendre possible",
+      "disp
