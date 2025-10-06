@@ -37,29 +37,18 @@
   </style>
 </head>
 <body>
-  <!-- Frise -->
   <div id="timeline-embed"></div>
 
-  <!-- Contenu long sous la frise -->
   <div id="below-content" class="hidden">
     <div class="card" id="below-card"></div>
   </div>
 
   <script>
-    // URL vers le JSON
     const timelineDataUrl = "data.json";
-
-    // Options Timeline
-    const options = {
-      language: "fr",
-      hash_bookmark: true, // garde les #event-... partageables
-      start_at_slide: 0
-    };
-
-    // Initialisation
+    const options = { language: "fr", hash_bookmark: true, start_at_slide: 0 };
     const timeline = new TL.Timeline("timeline-embed", timelineDataUrl, options);
 
-    // 1) contenus longs mappés par unique_id
+    // 1) Contenus longs par unique_id (complète ici si besoin)
     const longContents = {
       "showroom-01-pourquoi-frise": `
         <h2>Pourquoi une frise ? — La fabrique, par la pratique</h2>
@@ -67,14 +56,10 @@
         <p><i>Avant toute germination, il y a la préparation du sol.</i> Ici, nous rendons visible la logique
         qui a guidé la construction de l’artefact : une frise comme <b>écosystème narratif</b> pour accompagner
         l’émergence d’une thèse-vie.</p>
-        <p>Ce « showroom » sert d’espace d’accueil : il explique <b>comment</b> la timeline est structurée
-        (groupes, ères, transactions), et <b>pourquoi</b> ces choix favorisent une lecture située et attentive
-        — conforme à une éthique du <i>design by care</i>.</p>
       `
-      // ajoute ici d'autres entrées : "memo-passage-2025-10-12": `...`, etc.
+      // "memo-passage-2025-10-12": `…`
     };
 
-    // 2) helpers d’affichage
     const container = document.getElementById("below-content");
     const card = document.getElementById("below-card");
 
@@ -89,44 +74,69 @@
       }
     }
 
-    // 3) extraction robuste de l'ID depuis l'événement 'change'
-    function extractUniqueIdFromChangeEvent(e) {
-      // TimelineJS fournit selon les versions : e.unique_id, e.slide.data.unique_id, ou via e.target.current_slide.data.unique_id
-      return (
-        e?.unique_id ||
-        e?.slide?.data?.unique_id ||
-        e?.data?.unique_id ||
-        e?.target?.current_slide?.data?.unique_id ||
-        null
-      );
-    }
-
-    // 4) écoute des changements de slide (méthode principale)
-    timeline.on('change', function (e) {
-      const uid = extractUniqueIdFromChangeEvent(e);
-      setBelowContentById(uid);
-    });
-
-    // 5) fallback : prise en compte du hash (utile pour liens profonds #event-...)
+    // A) Hash (si tu navigues avec #event-<unique_id>)
     function updateFromHash() {
       const m = (location.hash || "").match(/^#event-(.+)$/);
       if (m && m[1]) setBelowContentById(m[1]);
     }
     window.addEventListener("hashchange", updateFromHash);
 
-    // 6) au chargement : tenter d’afficher si hash présent, sinon attendre le premier 'change'
-    timeline.on('loaded', function (e) {
+    // B) Événement 'change' (si dispo dans ta build)
+    timeline.on?.('change', (e) => {
+      const id =
+        e?.unique_id ||
+        e?.slide?.data?.unique_id ||
+        e?.data?.unique_id ||
+        e?.target?.current_slide?.data?.unique_id ||
+        null;
+      if (id) setBelowContentById(id);
+    });
+
+    // C) Fallback universel : lecture DOM périodique (150 ms, très léger)
+    let lastDomId = null;
+    function scanDomActiveSlide() {
+      // Cherche la slide active
+      const el = document.querySelector('.tl-slide.tl-slide-active');
+      if (!el) return;
+
+      // Essaie d’en déduire un ID exploitable
+      // Plusieurs heuristiques selon les versions de TimelineJS :
+      const candidates = [
+        el.getAttribute('data-id'),
+        el.getAttribute('data-slide-id'),
+        el.id, // parfois "event-<unique_id>"
+      ].filter(Boolean);
+
+      // Regarde aussi les liens internes (headline cliquable) qui portent souvent l’ancre "#event-<unique_id>"
+      if (!candidates.length) {
+        const a = el.querySelector('a[href^="#event-"]');
+        if (a) candidates.push(a.getAttribute('href').replace(/^#event-/, ''));
+      }
+
+      // Nettoie/normalise pour récupérer un unique_id plausible
+      let uid = null;
+      for (const c of candidates) {
+        if (/^event-/.test(c)) { uid = c.replace(/^event-/, ''); break; }
+        uid = c; break;
+      }
+
+      if (uid && uid !== lastDomId) {
+        lastDomId = uid;
+        setBelowContentById(uid);
+      }
+    }
+    const poll = setInterval(scanDomActiveSlide, 150);
+
+    // Initialisation
+    timeline.on?.('loaded', () => {
       updateFromHash();
-      // si pas de hash, on force une première mise à jour à partir de la slide courante :
-      const currentId =
-        e?.target?.current_slide?.data?.unique_id || null;
-      if (currentId && !location.hash) setBelowContentById(currentId);
+      scanDomActiveSlide();
     });
   </script>
 
   <style>
     html, body { height:100%; margin:0; }
-    #timeline-embed { height:60vh; } /* laisse de la place pour le contenu long */
+    #timeline-embed { height:60vh; }
 
     .tl-timegroup-message { opacity: 1 !important; color:#111 !important; font-weight:600; }
 
@@ -148,5 +158,6 @@
     #below-content .meta { color:#6b7280; font-size:.95rem; margin-bottom:.75rem; }
   </style>
 </body>
+
 
 </html>
