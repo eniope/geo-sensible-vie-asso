@@ -37,7 +37,6 @@
   </style>
 </head>
 <body>
-
   <!-- Frise -->
   <div id="timeline-embed"></div>
 
@@ -53,50 +52,34 @@
     // Options Timeline
     const options = {
       language: "fr",
-      hash_bookmark: true,
+      hash_bookmark: true, // garde les #event-... partageables
       start_at_slide: 0
     };
 
     // Initialisation
     const timeline = new TL.Timeline("timeline-embed", timelineDataUrl, options);
 
-    // --- Mécanisme d'affichage du contenu long pour certaines slides ---
-
-    // 1) mapping des contenus longs par unique_id (hash = #event-<unique_id>)
+    // 1) contenus longs mappés par unique_id
     const longContents = {
       "showroom-01-pourquoi-frise": `
         <h2>Pourquoi une frise ? — La fabrique, par la pratique</h2>
-        <div class="meta">Bloc explicatif relié à la slide <code>showroom-01-pourquoi-frise</code></div>
+        <div class="meta">Bloc relié à <code>showroom-01-pourquoi-frise</code></div>
         <p><i>Avant toute germination, il y a la préparation du sol.</i> Ici, nous rendons visible la logique
         qui a guidé la construction de l’artefact : une frise comme <b>écosystème narratif</b> pour accompagner
         l’émergence d’une thèse-vie.</p>
         <p>Ce « showroom » sert d’espace d’accueil : il explique <b>comment</b> la timeline est structurée
         (groupes, ères, transactions), et <b>pourquoi</b> ces choix favorisent une lecture située et attentive
         — conforme à une éthique du <i>design by care</i>.</p>
-        <p>Vous trouverez, au fil des slides, des ponts vers les dossiers sources, des espaces publics (Passerelles,
-        LinkedIn) et, bientôt, la bibliothèque Zotero. L’idée n’est pas d’imposer un récit, mais d’ouvrir une
-        <b>capacité de navigation</b> dans un paysage d’apprentissages.</p>
       `
-      // tu peux ajouter d'autres contenus longs pour d'autres slides :
-      // "memo-passage-2025-10-12": "…"
+      // ajoute ici d'autres entrées : "memo-passage-2025-10-12": `...`, etc.
     };
 
-    // 2) fonction qui met à jour la zone sous la frise en fonction du hash
-    function updateBelowContentFromHash() {
-      const hash = (location.hash || "").replace(/^#/, ""); // ex: "event-showroom-01-pourquoi-frise"
-      const match = hash.match(/^event-(.+)$/);
-      const container = document.getElementById("below-content");
-      const card = document.getElementById("below-card");
+    // 2) helpers d’affichage
+    const container = document.getElementById("below-content");
+    const card = document.getElementById("below-card");
 
-      if (!match) {
-        container.classList.add("hidden");
-        card.innerHTML = "";
-        return;
-      }
-
-      const uniqueId = match[1];
+    function setBelowContentById(uniqueId) {
       const html = longContents[uniqueId];
-
       if (html) {
         card.innerHTML = html;
         container.classList.remove("hidden");
@@ -106,11 +89,64 @@
       }
     }
 
-    // 3) on écoute les changements de hash (navigations dans la frise)
-    window.addEventListener("hashchange", updateBelowContentFromHash);
+    // 3) extraction robuste de l'ID depuis l'événement 'change'
+    function extractUniqueIdFromChangeEvent(e) {
+      // TimelineJS fournit selon les versions : e.unique_id, e.slide.data.unique_id, ou via e.target.current_slide.data.unique_id
+      return (
+        e?.unique_id ||
+        e?.slide?.data?.unique_id ||
+        e?.data?.unique_id ||
+        e?.target?.current_slide?.data?.unique_id ||
+        null
+      );
+    }
 
-    // 4) et on déclenche une première fois après chargement
-    timeline.on('loaded', updateBelowContentFromHash);
+    // 4) écoute des changements de slide (méthode principale)
+    timeline.on('change', function (e) {
+      const uid = extractUniqueIdFromChangeEvent(e);
+      setBelowContentById(uid);
+    });
+
+    // 5) fallback : prise en compte du hash (utile pour liens profonds #event-...)
+    function updateFromHash() {
+      const m = (location.hash || "").match(/^#event-(.+)$/);
+      if (m && m[1]) setBelowContentById(m[1]);
+    }
+    window.addEventListener("hashchange", updateFromHash);
+
+    // 6) au chargement : tenter d’afficher si hash présent, sinon attendre le premier 'change'
+    timeline.on('loaded', function (e) {
+      updateFromHash();
+      // si pas de hash, on force une première mise à jour à partir de la slide courante :
+      const currentId =
+        e?.target?.current_slide?.data?.unique_id || null;
+      if (currentId && !location.hash) setBelowContentById(currentId);
+    });
   </script>
+
+  <style>
+    html, body { height:100%; margin:0; }
+    #timeline-embed { height:60vh; } /* laisse de la place pour le contenu long */
+
+    .tl-timegroup-message { opacity: 1 !important; color:#111 !important; font-weight:600; }
+
+    #below-content {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 1rem 1.25rem;
+      line-height: 1.6;
+    }
+    #below-content.hidden { display: none; }
+    #below-content .card {
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 1.25rem;
+      box-shadow: 0 2px 14px rgba(0,0,0,0.06);
+      background: #fff;
+    }
+    #below-content h2 { margin: 0 0 .5rem 0; font-size: 1.25rem; }
+    #below-content .meta { color:#6b7280; font-size:.95rem; margin-bottom:.75rem; }
+  </style>
 </body>
+
 </html>
