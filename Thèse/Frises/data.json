@@ -2,7 +2,7 @@
   "title": {
     "text": {
       "headline": "Incubation d'une thèse — Journal transactionnel",
-      "text": "Frise test — structure minimale (6 slides factices, 4 ères)."
+      "text": "Frise test — 5 ères (dont Prégermination) + 6 slides factices."
     },
     "media": {
       "url": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Moon.jpg",
@@ -14,8 +14,14 @@
 
   "eras": [
     {
-      "unique_id": "era-germination",
+      "unique_id": "era-preincubation",
       "start_date": { "year": 2025, "month": 7 },
+      "end_date":   { "year": 2025, "month": 10, "day": 7 },
+      "text": { "headline": "Prégermination / Préincubation" }
+    },
+    {
+      "unique_id": "era-germination",
+      "start_date": { "year": 2025, "month": 10, "day": 8 },
       "end_date":   { "year": 2026, "month": 2 },
       "text": { "headline": "Germination" }
     },
