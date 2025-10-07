@@ -2,7 +2,7 @@
   "title": {
     "text": {
       "headline": "Incubation d'une thèse — Journal transactionnel",
-      "text": "Frise test — structure minimale (1 ère, 1 slide)."
+      "text": "Frise test — structure minimale (6 slides factices, 4 ères)."
     },
     "media": {
       "url": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Moon.jpg",
@@ -14,35 +14,97 @@
 
   "eras": [
     {
-      "unique_id": "era-pregermination",
-      "start_date": { "year": 2025, "month": 10, "day": 6 },
-      "end_date":   { "year": 2025, "month": 10, "day": 17 },
-      "text": { "headline": "Prégermination / Conception" }
+      "unique_id": "era-germination",
+      "start_date": { "year": 2025, "month": 7 },
+      "end_date":   { "year": 2026, "month": 2 },
+      "text": { "headline": "Germination" }
+    },
+    {
+      "unique_id": "era-divergence",
+      "start_date": { "year": 2026, "month": 3 },
+      "end_date":   { "year": 2026, "month": 9 },
+      "text": { "headline": "Divergence" }
+    },
+    {
+      "unique_id": "era-convergence",
+      "start_date": { "year": 2026, "month": 10 },
+      "end_date":   { "year": 2027, "month": 3 },
+      "text": { "headline": "Convergence" }
+    },
+    {
+      "unique_id": "era-stabilisation",
+      "start_date": { "year": 2027, "month": 4 },
+      "end_date":   { "year": 2027, "month": 9 },
+      "text": { "headline": "Stabilisation" }
     }
   ],
 
   "events": [
     {
-      "unique_id": "showroom-01-pourquoi-frise",
-      "start_date": { "year": 2025, "month": 10, "day": 6 },
-      "display_date": "6 oct. 2025",
-      "group": "Outils/Infra",
+      "unique_id": "evt-idee-20251007",
+      "start_date": { "year": 2025, "month": 10, "day": 7 },
+      "display_date": "7 oct. 2025",
+      "group": "Idée",
       "text": {
-        "headline": "Pourquoi une frise ?",
-        "text": "<p><i>Avant toute germination, il y a la préparation du sol.</i></p><p>Cette frise n’est pas un journal linéaire : c’est un <b>écosystème narratif</b> qui rend perceptible la genèse d’une thèse-vie.</p><p><a href='#note' data-note-id='showroom-01'>En savoir plus (ouvrir le bloc explicatif)</a></p>"
+        "headline": "Idée en germination",
+        "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vitae orci at urna dapibus gravida.</p><p><i>dummy</i></p><p>dummy<b>dummy</b>dummy</p><p><a href='#note' data-note-id='showroom-01' style='color:#DAA520'>En savoir plus (ouvrir le bloc explicatif)</a></p>"
       },
-      "background": { "color": "#14532D" }
+      "background": { "color": "#0F172A" }
     },
     {
-      "unique_id": "showroom-01-comment-frise",
+      "unique_id": "evt-terrain-20251008",
+      "start_date": { "year": 2025, "month": 10, "day": 8 },
+      "display_date": "8 oct. 2025",
+      "group": "Terrain",
+      "text": {
+        "headline": "Terrain exploratoire",
+        "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec lectus et mi luctus posuere.</p><p><i>dummy</i></p><p>dummy<b>dummy</b>dummy</p><p><a href='#note' data-note-id='showroom-01' style='color:#DAA520'>En savoir plus (ouvrir le bloc explicatif)</a></p>"
+      },
+      "background": { "color": "#1F2937" }
+    },
+    {
+      "unique_id": "evt-ecriture-20251009",
+      "start_date": { "year": 2025, "month": 10, "day": 9 },
+      "display_date": "9 oct. 2025",
+      "group": "Écriture",
+      "text": {
+        "headline": "Premières écritures",
+        "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id sem id justo vulputate iaculis.</p><p><i>dummy</i></p><p>dummy<b>dummy</b>dummy</p><p><a href='#note' data-note-id='showroom-01' style='color:#DAA520'>En savoir plus (ouvrir le bloc explicatif)</a></p>"
+      },
+      "background": { "color": "#111827" }
+    },
+    {
+      "unique_id": "evt-encadrement-20251010",
       "start_date": { "year": 2025, "month": 10, "day": 10 },
       "display_date": "10 oct. 2025",
+      "group": "Encadrement",
+      "text": {
+        "headline": "Encadrement — cadrage & rendez-vous",
+        "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus efficitur urna at libero pulvinar tempor.</p><p><i>dummy</i></p><p>dummy<b>dummy</b>dummy</p><p><a href='#note' data-note-id='showroom-01' style='color:#DAA520'>En savoir plus (ouvrir le bloc explicatif)</a></p>"
+      },
+      "background": { "color": "#0B3D3B" }
+    },
+    {
+      "unique_id": "evt-outils-20251011",
+      "start_date": { "year": 2025, "month": 10, "day": 11 },
+      "display_date": "11 oct. 2025",
       "group": "Outils/Infra",
       "text": {
-        "headline": "Pourquoi une frise ?",
-        "text": "<p><i>Avant toute germination, il y a la préparation du sol.</i></p><p>Cette frise n’est pas un journal linéaire : c’est un <b>écosystème narratif</b> qui rend perceptible la genèse d’une thèse-vie.</p><p><a href='#note' data-note-id='showroom-01'>En savoir plus (ouvrir le bloc explicatif)</a></p>"
+        "headline": "Outils/Infra — setup initial",
+        "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at leo in nibh tempus tincidunt.</p><p><i>dummy</i></p><p>dummy<b>dummy</b>dummy</p><p><a href='#note' data-note-id='showroom-01' style='color:#DAA520'>En savoir plus (ouvrir le bloc explicatif)</a></p>"
       },
-      "background": { "color": "#14532D" }
+      "background": { "color": "#312E81" }
+    },
+    {
+      "unique_id": "evt-publics-20251012",
+      "start_date": { "year": 2025, "month": 10, "day": 12 },
+      "display_date": "12 oct. 2025",
+      "group": "Publics/Événements",
+      "text": {
+        "headline": "Publics/Événements — jalon ouvert",
+        "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac nibh a nunc fermentum convallis.</p><p><i>dummy</i></p><p>dummy<b>dummy</b>dummy</p><p><a href='#note' data-note-id='showroom-01' style='color:#DAA520'>En savoir plus (ouvrir le bloc explicatif)</a></p>"
+      },
+      "background": { "color": "#3F1D2B" }
     }
   ]
 }
