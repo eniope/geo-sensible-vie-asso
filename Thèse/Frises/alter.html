@@ -10,48 +10,57 @@
   <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
 
   <style>
-    html, body { height:100%; margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif; color:#111; }
-    /* Timeline plus haute */
-    #timeline-embed { height:75vh; }
+  /* ---- base ---- */
+  html, body { margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif; color:#111; }
 
-    /* Group labels plus lisibles */
-    .tl-timegroup-message { opacity:1 !important; color:#111 !important; font-weight:600; }
+  /* ✅ override TimelineJS qui bloque le scroll de page */
+  html, body { height: auto; min-height: 100%; }
+  body { overflow-y: auto !important; }           /* <- permet le scroll de la page */
+  .tl-timeline { overflow: visible !important; }  /* <- évite les coupes internes */
 
-    /* Zone sous la frise (la page entière scroll, pas de scroll interne) */
-    #below-wrapper { max-width: 1000px; margin: 1.25rem auto 2.5rem; padding: 0 1rem; }
-    #below-content.hidden { display:none; }
-    #below-content .card {
-      border: 1px solid #e5e7eb; border-radius: 12px; background: #fff;
-      box-shadow: 0 2px 14px rgba(0,0,0,0.06);
-      overflow: visible; /* important: pas de scroll interne */
-    }
-    #below-header {
-      display:flex; align-items:center; gap:.75rem;
-      padding: .9rem 1rem; border-bottom:1px solid #eef2f7; background:#fafafa; border-radius:12px 12px 0 0;
-    }
-    #below-title { font-weight:700; font-size:1.05rem; margin:0; }
-    #below-actions { margin-left:auto; display:flex; gap:.5rem; }
-    .btn {
-      background:#eee; border:none; border-radius:8px; padding:.4rem .7rem; cursor:pointer; font-weight:600;
-    }
-    .btn:hover { background:#e2e2e2; }
-    #below-body { padding: 1rem 1.2rem 1.25rem; line-height: 1.6; }
+  /* Timeline plus haute */
+  #timeline-embed { height:75vh; }
 
-    /* Aperçu en quelques lignes (clamp) */
-    .clamp {
-      display: -webkit-box;
-      -webkit-line-clamp: 4;        /* ← nombre de lignes visibles en aperçu */
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
+  /* Group labels plus lisibles */
+  .tl-timegroup-message { opacity:1 !important; color:#111 !important; font-weight:600; }
 
-    /* Boutons dans les slides */
-    a[data-note-id], a[data-note-src] {
-      display:inline-block; background:#1F6F50; color:#fff; padding:.35rem .65rem;
-      border-radius:6px; text-decoration:none; font-size:.9rem; margin-top:.5rem; transition:background .2s;
-    }
-    a[data-note-id]:hover, a[data-note-src]:hover { background:#14532D; }
-  </style>
+  /* Zone sous la frise (la page entière scroll, pas de scroll interne) */
+  #below-wrapper { max-width: 1000px; margin: 1.25rem auto 2.5rem; padding: 0 1rem; }
+  #below-content.hidden { display:none; }
+  #below-content .card {
+    border: 1px solid #e5e7eb; border-radius: 12px; background: #fff;
+    box-shadow: 0 2px 14px rgba(0,0,0,0.06);
+    overflow: visible; /* important: pas de scroll interne */
+    cursor: default;
+  }
+  #below-header {
+    display:flex; align-items:center; gap:.75rem;
+    padding: .9rem 1rem; border-bottom:1px solid #eef2f7; background:#fafafa; border-radius:12px 12px 0 0;
+  }
+  #below-title { font-weight:700; font-size:1.05rem; margin:0; }
+  #below-actions { margin-left:auto; display:flex; gap:.5rem; }
+  .btn {
+    background:#eee; border:none; border-radius:8px; padding:.4rem .7rem; cursor:pointer; font-weight:600;
+  }
+  .btn:hover { background:#e2e2e2; }
+  #below-body { padding: 1rem 1.2rem 1.25rem; line-height: 1.6; }
+
+  /* Aperçu 4 lignes (clamp) */
+  .clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Boutons dans les slides */
+  a[data-note-id], a[data-note-src] {
+    display:inline-block; background:#1F6F50; color:#fff; padding:.35rem .65rem;
+    border-radius:6px; text-decoration:none; font-size:.9rem; margin-top:.5rem; transition:background .2s;
+  }
+  a[data-note-id]:hover, a[data-note-src]:hover { background:#14532D; }
+</style>
+
 </head>
 <body>
 
@@ -75,93 +84,103 @@
   </div>
 
   <script>
-    /* 1) Timeline */
-    const timeline = new TL.Timeline("timeline-embed", "data.json", {
-      language: "fr",
-      hash_bookmark: true,
-      start_at_slide: 0
-    });
+  /* 1) Timeline */
+  const timeline = new TL.Timeline("timeline-embed", "data.json", {
+    language: "fr",
+    hash_bookmark: true,
+    start_at_slide: 0
+  });
 
-    /* 2) Contenus “internes” (aperçu demandé) */
-    const longNotes = {
-      "showroom-01": `
-        <h2>Pourquoi une frise ? — La fabrique, par la pratique</h2>
-        <div class="meta">Bloc relié à la slide « Pourquoi une frise ? »</div>
-        <p><i>Avant toute germination, il y a la préparation du sol.</i>
-        Ici, la frise est conçue comme un <b>écosystème narratif</b> :
-        un artefact de recherche qui rend visibles les transitions et la maturation,
-        plutôt que d’aligner des preuves.</p> <p><i>Avant toute germination, il y a la préparation du sol.</i>
-        Ici, la frise est conçue comme un <b>écosystème narratif</b> :
-        un artefact de recherche qui rend visibles les transitions et la maturation,
-        plutôt que d’aligner des preuves.</p> <p><i>Avant toute germination, il y a la préparation du sol.</i>
-        Ici, la frise est conçue comme un <b>écosystème narratif</b> :
-        un artefact de recherche qui rend visibles les transitions et la maturation,
-        plutôt que d’aligner des preuves.</p> <p><i>Avant toute germination, il y a la préparation du sol.</i>
-        Ici, la frise est conçue comme un <b>écosystème narratif</b> :
-        un artefact de recherche qui rend visibles les transitions et la maturation,
-        plutôt que d’aligner des preuves.</p> <p><i>Avant toute germination, il y a la préparation du sol.</i>
-        Ici, la frise est conçue comme un <b>écosystème narratif</b> :
-        un artefact de recherche qui rend visibles les transitions et la maturation,
-        plutôt que d’aligner des preuves.</p>
-      `
-    };
+  /* 2) Contenus “internes” (aperçu demandé) */
+  const longNotes = {
+    "showroom-01": `
+      <h2>Pourquoi une frise ? — La fabrique, par la pratique</h2>
+      <div class="meta">Bloc relié à la slide « Pourquoi une frise ? »</div>
+      <p><i>Avant toute germination, il y a la préparation du sol.</i>
+      Ici, la frise est conçue comme un <b>écosystème narratif</b> :
+      un artefact de recherche qui rend visibles les transitions et la maturation,
+      plutôt que d’aligner des preuves.</p>
+      <p><i>Avant toute germination, il y a la préparation du sol.</i>
+      Ici, la frise est conçue comme un <b>écosystème narratif</b> :
+      un artefact de recherche qui rend visibles les transitions et la maturation,
+      plutôt que d’aligner des preuves.</p>
+      <p><i>Avant toute germination, il y a la préparation du sol.</i>
+      Ici, la frise est conçue comme un <b>écosystème narratif</b> :
+      un artefact de recherche qui rend visibles les transitions et la maturation,
+      plutôt que d’aligner des preuves.</p>
+      <p><i>Avant toute germination, il y a la préparation du sol.</i>
+      Ici, la frise est conçue comme un <b>écosystème narratif</b> :
+      un artefact de recherche qui rend visibles les transitions et la maturation,
+      plutôt que d’aligner des preuves.</p>
+      <p><i>Avant toute germination, il y a la préparation du sol.</i>
+      Ici, la frise est conçue comme un <b>écosystème narratif</b> :
+      un artefact de recherche qui rend visibles les transitions et la maturation,
+      plutôt que d’aligner des preuves.</p>
+    `
+  };
 
-    /* 3) Helpers UI (pas de scroll interne, la page scroll) */
-    const below = document.getElementById('below-content');
-    const bodyEl = document.getElementById('below-body');
-    const titleEl = document.getElementById('below-title');
-    const closeBtn = document.getElementById('below-close');
-    const toggleBtn = document.getElementById('below-toggle');
+  /* 3) Helpers UI (pas de scroll interne, la page scroll) */
+  const below = document.getElementById('below-content');
+  const bodyEl = document.getElementById('below-body');
+  const titleEl = document.getElementById('below-title');
+  const closeBtn = document.getElementById('below-close');
+  const toggleBtn = document.getElementById('below-toggle');
 
-    let isClamped = true; // état aperçu
+  let isClamped = true; // état aperçu
 
-    function applyClamp(state) {
-      isClamped = state;
-      bodyEl.classList.toggle('clamp', isClamped);
-      toggleBtn.textContent = isClamped ? 'Voir plus' : 'Voir moins';
-      toggleBtn.setAttribute('aria-expanded', String(!isClamped));
+  function applyClamp(state) {
+    isClamped = state;
+    bodyEl.classList.toggle('clamp', isClamped);
+    toggleBtn.textContent = isClamped ? 'Voir plus' : 'Voir moins';
+    toggleBtn.setAttribute('aria-expanded', String(!isClamped));
+  }
+
+  function openBelow(titleHTML, innerHTML) {
+    titleEl.innerHTML = titleHTML || 'Document';
+    bodyEl.innerHTML = innerHTML || '';
+    below.classList.remove('hidden');
+    // au démarrage: affichage en aperçu (quelques lignes)
+    applyClamp(true);
+    // remonter le bloc dans le viewport
+    below.scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+
+  function closeBelow() {
+    below.classList.add('hidden');
+    titleEl.textContent = 'Document';
+    bodyEl.innerHTML = '';
+  }
+
+  closeBtn.addEventListener('click', closeBelow);
+  toggleBtn.addEventListener('click', () => applyClamp(!isClamped));
+
+  /* 4) Gestion des clics dans les slides (liens “internes” ou “externes”) */
+  document.addEventListener('click', async (e) => {
+    const link = e.target.closest('a[data-note-id], a[data-note-src]');
+    if (!link) return;
+    e.preventDefault();
+
+    const id = link.getAttribute('data-note-id');
+    const src = link.getAttribute('data-note-src');
+    const label = link.getAttribute('data-note-title') || link.textContent || 'Document';
+
+    if (id && longNotes[id]) {
+      openBelow(label, longNotes[id]);
+    } else if (src) {
+      // Doc externe (HTML/MD/PDF) via iframe, la page reste scrollable
+      const html = `<iframe src="${src}" title="Document externe" style="width:100%; height:60vh; border:0;"></iframe>`;
+      openBelow(label, html);
+      // pas d'aperçu pour un iframe
+      applyClamp(false);
     }
+  });
 
-    function openBelow(titleHTML, innerHTML) {
-      titleEl.innerHTML = titleHTML || 'Document';
-      bodyEl.innerHTML = innerHTML || '';
-      below.classList.remove('hidden');
-      // au démarrage: affichage en aperçu (quelques lignes)
-      applyClamp(true);
-      // remonter le bloc dans le viewport
-      below.scrollIntoView({ behavior:'smooth', block:'start' });
-    }
+  // 5) Déplier si on clique dans le corps du document (hors boutons)
+  bodyEl.addEventListener('click', () => {
+    if (isClamped) applyClamp(false);
+  });
+</script>
 
-    function closeBelow() {
-      below.classList.add('hidden');
-      titleEl.textContent = 'Document';
-      bodyEl.innerHTML = '';
-    }
-
-    closeBtn.addEventListener('click', closeBelow);
-    toggleBtn.addEventListener('click', () => applyClamp(!isClamped));
-
-    /* 4) Gestion des clics dans les slides (liens “internes” ou “externes”) */
-    document.addEventListener('click', async (e) => {
-      const link = e.target.closest('a[data-note-id], a[data-note-src]');
-      if (!link) return;
-      e.preventDefault();
-
-      const id = link.getAttribute('data-note-id');
-      const src = link.getAttribute('data-note-src');
-      const label = link.getAttribute('data-note-title') || link.textContent || 'Document';
-
-      if (id && longNotes[id]) {
-        openBelow(label, longNotes[id]);
-      } else if (src) {
-        // Cas doc externe (HTML/MD/PDF) — ici simple iframe pour rester concis et laisser la page scroller
-        const html = `<iframe src="${src}" title="Document externe" style="width:100%; height:60vh; border:0;"></iframe>`;
-        openBelow(label, html);
-        // l'iframe s'affiche en aperçu clampé sur quelques lignes (inutile ici),
-        // on enlève l’aperçu si c’est un iframe pour éviter la coupe
-        applyClamp(false);
-      }
-    });
-  </script>
+  
 </body>
 </html>
