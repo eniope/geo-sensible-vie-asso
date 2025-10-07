@@ -8,68 +8,57 @@
   <!-- TimelineJS -->
   <link rel="stylesheet" href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css" />
   <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
+  <!-- (Optionnel) Markdown -> HTML si tu l’utilises plus tard -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/showdown@2.1.0/dist/showdown.min.js"></script> -->
 
   <style>
-  /* ---- base ---- */
-  html, body { margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif; color:#111; }
+    /* Base & typographie */
+    html, body { margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif; color:#111; }
 
-  /* ✅ override TimelineJS qui bloque le scroll de page */
-  html, body { height: auto; min-height: 100%; }
-  body { overflow-y: auto !important; }           /* <- permet le scroll de la page */
-  .tl-timeline { overflow: visible !important; }  /* <- évite les coupes internes */
+    /* ✅ Débloque le scroll global si Timeline le verrouille */
+    html, body { height:auto; min-height:100%; overflow-y:auto; }
+    .tl-timeline { overflow: visible !important; }
 
-  /* Timeline plus haute */
-  #timeline-embed { height:75vh; }
+    /* Timeline plus haute */
+    #timeline-embed { height:75vh; }
 
-  /* Group labels plus lisibles */
-  .tl-timegroup-message { opacity:1 !important; color:#111 !important; font-weight:600; }
+    /* Group labels plus lisibles */
+    .tl-timegroup-message { opacity:1 !important; color:#111 !important; font-weight:600; }
 
-  /* Zone sous la frise (la page entière scroll, pas de scroll interne) */
-  #below-wrapper { max-width: 1000px; margin: 1.25rem auto 2.5rem; padding: 0 1rem; }
-  #below-content.hidden { display:none; }
-  #below-content .card {
-    border: 1px solid #e5e7eb; border-radius: 12px; background: #fff;
-    box-shadow: 0 2px 14px rgba(0,0,0,0.06);
-    overflow: visible; /* important: pas de scroll interne */
-    cursor: default;
-  }
-  #below-header {
-    display:flex; align-items:center; gap:.75rem;
-    padding: .9rem 1rem; border-bottom:1px solid #eef2f7; background:#fafafa; border-radius:12px 12px 0 0;
-  }
-  #below-title { font-weight:700; font-size:1.05rem; margin:0; }
-  #below-actions { margin-left:auto; display:flex; gap:.5rem; }
-  .btn {
-    background:#eee; border:none; border-radius:8px; padding:.4rem .7rem; cursor:pointer; font-weight:600;
-  }
-  .btn:hover { background:#e2e2e2; }
-  #below-body { padding: 1rem 1.2rem 1.25rem; line-height: 1.6; }
+    /* Zone sous la frise : scroll global (pas de scroll interne) */
+    #below-wrapper { max-width: 1000px; margin: 1.25rem auto 2.5rem; padding: 0 1rem; }
+    #below-content.hidden { display:none; }
+    #below-content .card {
+      border: 1px solid #e5e7eb; border-radius: 12px; background: #fff;
+      box-shadow: 0 2px 14px rgba(0,0,0,0.06);
+      overflow: visible; /* pas de scroll interne */
+    }
+    #below-header {
+      display:flex; align-items:center; gap:.75rem;
+      padding: .9rem 1rem; border-bottom:1px solid #eef2f7; background:#fafafa; border-radius:12px 12px 0 0;
+    }
+    #below-title { font-weight:700; font-size:1.05rem; margin:0; }
+    #below-actions { margin-left:auto; display:flex; gap:.5rem; }
+    .btn {
+      background:#eee; border:none; border-radius:8px; padding:.4rem .7rem; cursor:pointer; font-weight:600;
+    }
+    .btn:hover { background:#e2e2e2; }
 
-  /* Aperçu 4 lignes (clamp) */
-  /* (remplace tout l'ancien bloc .clamp) */
-#below-body {
-  position: relative;
-}
+    #below-body { position: relative; padding: 1rem 1.2rem 1.25rem; line-height: 1.6; }
+    /* Aperçu : masque dégradé (le contenu complet est présent → la page peut scroller) */
+    #below-body.masked::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: 0;
+      height: 4.5rem; background: linear-gradient(to bottom, rgba(255,255,255,0), #fff);
+      pointer-events: none;
+    }
 
-/* état masqué (aperçu visuel, mais le contenu complet est là → la page peut scroller) */
-.masked::after {
-  content: "";
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  height: 4.5rem;                /* hauteur du dégradé */
-  background: linear-gradient(to bottom, rgba(255,255,255,0), #fff);
-  pointer-events: none;           /* pas de blocage clic */
-}
-
-
-  /* Boutons dans les slides */
-  a[data-note-id], a[data-note-src] {
-    display:inline-block; background:#1F6F50; color:#fff; padding:.35rem .65rem;
-    border-radius:6px; text-decoration:none; font-size:.9rem; margin-top:.5rem; transition:background .2s;
-  }
-  a[data-note-id]:hover, a[data-note-src]:hover { background:#14532D; }
-</style>
-
+    /* Boutons dans les slides (esthétique) */
+    a[data-note-id], a[data-note-src] {
+      display:inline-block; background:#1F6F50; color:#fff; padding:.35rem .65rem;
+      border-radius:6px; text-decoration:none; font-size:.9rem; margin-top:.5rem; transition:background .2s;
+    }
+    a[data-note-id]:hover, a[data-note-src]:hover { background:#14532D; }
+  </style>
 </head>
 <body>
 
@@ -93,103 +82,102 @@
   </div>
 
   <script>
-  /* 1) Timeline */
-  const timeline = new TL.Timeline("timeline-embed", "data.json", {
-    language: "fr",
-    hash_bookmark: true,
-    start_at_slide: 0
-  });
+    /* 1) Timeline */
+    const timeline = new TL.Timeline("timeline-embed", "data.json", {
+      language: "fr",
+      hash_bookmark: true,
+      start_at_slide: 0
+    });
 
-  /* 2) Contenus “internes” (aperçu demandé) */
-  const longNotes = {
-    "showroom-01": `
-      <h2>Pourquoi une frise ? — La fabrique, par la pratique</h2>
-      <div class="meta">Bloc relié à la slide « Pourquoi une frise ? »</div>
-      <p><i>Avant toute germination, il y a la préparation du sol.</i>
-      Ici, la frise est conçue comme un <b>écosystème narratif</b> :
-      un artefact de recherche qui rend visibles les transitions et la maturation,
-      plutôt que d’aligner des preuves.</p>
-      <p><i>Avant toute germination, il y a la préparation du sol.</i>
-      Ici, la frise est conçue comme un <b>écosystème narratif</b> :
-      un artefact de recherche qui rend visibles les transitions et la maturation,
-      plutôt que d’aligner des preuves.</p>
-      <p><i>Avant toute germination, il y a la préparation du sol.</i>
-      Ici, la frise est conçue comme un <b>écosystème narratif</b> :
-      un artefact de recherche qui rend visibles les transitions et la maturation,
-      plutôt que d’aligner des preuves.</p>
-      <p><i>Avant toute germination, il y a la préparation du sol.</i>
-      Ici, la frise est conçue comme un <b>écosystème narratif</b> :
-      un artefact de recherche qui rend visibles les transitions et la maturation,
-      plutôt que d’aligner des preuves.</p>
-      <p><i>Avant toute germination, il y a la préparation du sol.</i>
-      Ici, la frise est conçue comme un <b>écosystème narratif</b> :
-      un artefact de recherche qui rend visibles les transitions et la maturation,
-      plutôt que d’aligner des preuves.</p>
-    `
-  };
+    /* 2) Contenus “internes” (exemple) */
+    const longNotes = {
+      "showroom-01": `
+        <h2>Pourquoi une frise ? — La fabrique, par la pratique</h2>
+        <div class="meta">Bloc relié à la slide « Pourquoi une frise ? »</div>
+        <p><i>Avant toute germination, il y a la préparation du sol.</i>
+        Ici, la frise est conçue comme un <b>écosystème narratif</b> :
+        un artefact de recherche qui rend visibles les transitions et la maturation,
+        plutôt que d’aligner des preuves.</p>
+        <p><i>Avant toute germination, il y a la préparation du sol.</i>
+        Ici, la frise est conçue comme un <b>écosystème narratif</b> :
+        un artefact de recherche qui rend visibles les transitions et la maturation,
+        plutôt que d’aligner des preuves.</p>
+        <p><i>Avant toute germination, il y a la préparation du sol.</i>
+        Ici, la frise est conçue comme un <b>écosystème narratif</b> :
+        un artefact de recherche qui rend visibles les transitions et la maturation,
+        plutôt que d’aligner des preuves.</p>
+      `
+    };
 
-  /* 3) Helpers UI (pas de scroll interne, la page scroll) */
-  const below = document.getElementById('below-content');
-  const bodyEl = document.getElementById('below-body');
-  const titleEl = document.getElementById('below-title');
-  const closeBtn = document.getElementById('below-close');
-  const toggleBtn = document.getElementById('below-toggle');
+    /* 3) Helpers UI */
+    const below     = document.getElementById('below-content');
+    const bodyEl    = document.getElementById('below-body');
+    const titleEl   = document.getElementById('below-title');
+    const closeBtn  = document.getElementById('below-close');
+    const toggleBtn = document.getElementById('below-toggle');
 
-  let isClamped = true; // état aperçu
+    // --- système "masque" (aperçu visuel, pas de coupe du contenu) ---
+    let isMasked = true;
 
-  function applyClamp(state) {
-    isClamped = state;
-    bodyEl.classList.toggle('clamp', isClamped);
-    toggleBtn.textContent = isClamped ? 'Voir plus' : 'Voir moins';
-    toggleBtn.setAttribute('aria-expanded', String(!isClamped));
-  }
-
-  function openBelow(titleHTML, innerHTML) {
-    titleEl.innerHTML = titleHTML || 'Document';
-    bodyEl.innerHTML = innerHTML || '';
-    below.classList.remove('hidden');
-    // au démarrage: affichage en aperçu (quelques lignes)
-    applyClamp(true);
-    // remonter le bloc dans le viewport
-    below.scrollIntoView({ behavior:'smooth', block:'start' });
-  }
-
-  function closeBelow() {
-    below.classList.add('hidden');
-    titleEl.textContent = 'Document';
-    bodyEl.innerHTML = '';
-  }
-
-  closeBtn.addEventListener('click', closeBelow);
-  toggleBtn.addEventListener('click', () => applyClamp(!isClamped));
-
-  /* 4) Gestion des clics dans les slides (liens “internes” ou “externes”) */
-  document.addEventListener('click', async (e) => {
-    const link = e.target.closest('a[data-note-id], a[data-note-src]');
-    if (!link) return;
-    e.preventDefault();
-
-    const id = link.getAttribute('data-note-id');
-    const src = link.getAttribute('data-note-src');
-    const label = link.getAttribute('data-note-title') || link.textContent || 'Document';
-
-    if (id && longNotes[id]) {
-      openBelow(label, longNotes[id]);
-    } else if (src) {
-      // Doc externe (HTML/MD/PDF) via iframe, la page reste scrollable
-      const html = `<iframe src="${src}" title="Document externe" style="width:100%; height:60vh; border:0;"></iframe>`;
-      openBelow(label, html);
-      // pas d'aperçu pour un iframe
-      applyClamp(false);
+    function applyMask(state) {
+      isMasked = state;
+      bodyEl.classList.toggle('masked', isMasked);
+      toggleBtn.textContent = isMasked ? 'Voir plus' : 'Voir moins';
+      toggleBtn.setAttribute('aria-expanded', String(!isMasked));
     }
-  });
 
-  // 5) Déplier si on clique dans le corps du document (hors boutons)
-  bodyEl.addEventListener('click', () => {
-    if (isClamped) applyClamp(false);
-  });
-</script>
+    function openBelow(titleHTML, innerHTML) {
+      titleEl.innerHTML = titleHTML || 'Document';
+      bodyEl.innerHTML  = innerHTML || '';
+      below.classList.remove('hidden');
+      applyMask(true); // on démarre en aperçu
+      below.scrollIntoView({ behavior:'smooth', block:'start' });
+    }
 
-  
+    function closeBelow() {
+      below.classList.add('hidden');
+      titleEl.textContent = 'Document';
+      bodyEl.innerHTML = '';
+    }
+
+    closeBtn.addEventListener('click', closeBelow);
+    toggleBtn.addEventListener('click', () => applyMask(!isMasked));
+
+    // Déplier si clic dans le corps (hors liens/boutons)
+    bodyEl.addEventListener('click', (e) => {
+      if (e.target.closest('a,button')) return;
+      if (isMasked) applyMask(false);
+    });
+
+    /* 4) Clics dans les slides (liens internes/externes) */
+    document.addEventListener('click', async (e) => {
+      const link = e.target.closest('a[data-note-id], a[data-note-src]');
+      if (!link) return;
+      e.preventDefault();
+
+      const id    = link.getAttribute('data-note-id');
+      const src   = link.getAttribute('data-note-src');
+      const label = link.getAttribute('data-note-title') || link.textContent || 'Document';
+
+      if (id && longNotes[id]) {
+        openBelow(label, longNotes[id]);
+      } else if (src) {
+        // Doc externe via iframe (scroll global, pas d’aperçu)
+        const html = `<iframe src="${src}" title="Document externe" style="width:100%; height:60vh; border:0;"></iframe>`;
+        openBelow(label, html);
+        applyMask(false);
+      }
+    });
+
+    // 5) Sécurise le scroll global au cas où Timeline l’ait verrouillé
+    (function unlockPageScroll() {
+      const s = document.createElement('style');
+      s.textContent = `
+        html, body { height:auto !important; min-height:100% !important; overflow-y:auto !important; }
+        .tl-timeline { overflow: visible !important; }
+      `;
+      document.head.appendChild(s);
+    })();
+  </script>
 </body>
 </html>
