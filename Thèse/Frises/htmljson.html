@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Incubation d'une thèse — Journal transactionnel</title>
+
+  <!-- Styles & scripts Timeline KnightLab -->
+  <link rel="stylesheet" href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css" />
+  <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
+
+  <style>
+  body { background:#0b0f19; color:#e5e7eb; font-family:system-ui,sans-serif; margin:0; padding:0; }
+
+  /* --- INLINE --- */
+  #note-inline[hidden]{display:none;}
+  #note-inline{margin-top:1rem;}
+  .note-inline-card{background:#0b0f19;color:#e5e7eb;border:1px solid #1f2937;border-radius:12px;
+    padding:1rem 1.25rem;line-height:1.6;}
+  .note-inline-close{float:right;background:transparent;border:none;color:#e5e7eb;font-size:1.5rem;cursor:pointer;}
+  .note-inline-body a{color:#DAA520;text-decoration:underline;}
+
+  /* --- DRAWER --- */
+  #note-drawer[hidden]{display:none;}
+  #note-drawer{position:fixed;top:0;right:0;height:100vh;width:0;overflow:hidden;background:#0b0f19;
+    color:#e5e7eb;border-left:1px solid #1f2937;transition:width .35s ease;z-index:9999;}
+  #note-drawer.open{width:min(720px,80vw);}
+  .note-drawer-close{position:absolute;top:.5rem;right:.5rem;background:transparent;border:none;
+    color:#e5e7eb;font-size:1.5rem;cursor:pointer;}
+  .note-drawer-body{padding:1.25rem 1.5rem;line-height:1.6;}
+  .note-drawer-body a{color:#DAA520;text-decoration:underline;}
+
+  /* --- MODAL --- */
+  #note-modal[hidden]{display:none;}
+  #note-modal{position:fixed;inset:0;z-index:9999;}
+  .note-modal-overlay{position:absolute;inset:0;background:rgba(0,0,0,.6);}
+  .note-modal-card{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    width:min(780px,92vw);max-height:80vh;overflow:auto;background:#0b0f19;color:#e5e7eb;
+    border:1px solid #1f2937;border-radius:12px;}
+  .note-modal-close{position:absolute;top:.5rem;right:.5rem;background:transparent;border:none;
+    color:#e5e7eb;font-size:1.5rem;cursor:pointer;}
+  .note-modal-body{padding:1.25rem 1.5rem;line-height:1.6;}
+  .note-modal-body a{color:#DAA520;text-decoration:underline;}
+  </style>
+</head>
+
+<body>
+
+  <!-- Frise -->
+  <div id="timeline-embed" style="width:100%;height:600px"></div>
+
+  <!-- Conteneurs des trois modes -->
+  <div id="note-inline" hidden>
+    <article class="note-inline-card"><button class="note-inline-close">×</button>
+      <div class="note-inline-body"></div></article>
+  </div>
+
+  <div id="note-drawer" hidden>
+    <button class="note-drawer-close">×</button>
+    <div class="note-drawer-body"></div>
+  </div>
+
+  <div id="note-modal" hidden>
+    <div class="note-modal-overlay"></div>
+    <div class="note-modal-card"><button class="note-modal-close">×</button>
+      <div class="note-modal-body"></div></div>
+  </div>
+
+  <!-- JSON embarqué -->
+  <script id="timeline-data" type="application/json">
+  {
+    "title": {
+      "text": { "headline": "Incubation d'une thèse — Journal transactionnel",
+        "text": "Frise test — 5 ères + 6 événements factices." },
+      "media": { "url": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Moon.jpg",
+        "caption": "Image de couverture","credit": "CC BY-SA Wikimedia" }
+    },
+    "eras": [
+      { "unique_id":"era-preincubation","start_date":{"year":2025,"month":7},
+        "end_date":{"year":2025,"month":10,"day":7},"text":{"headline":"Prégermination / Préincubation"} },
+      { "unique_id":"era-germination","start_date":{"year":2025,"month":10,"day":8},
+        "end_date":{"year":2026,"month":2},"text":{"headline":"Germination"} },
+      { "unique_id":"era-divergence","start_date":{"year":2026,"month":3},
+        "end_date":{"year":2026,"month":9},"text":{"headline":"Divergence"} },
+      { "unique_id":"era-convergence","start_date":{"year":2026,"month":10},
+        "end_date":{"year":2027,"month":3},"text":{"headline":"Convergence"} },
+      { "unique_id":"era-stabilisation","start_date":{"year":2027,"month":4},
+        "end_date":{"year":2027,"month":9},"text":{"headline":"Stabilisation"} }
+    ],
+    "events": [
+      { "unique_id":"evt-idee","start_date":{"year":2025,"month":10,"day":7},
+        "display_date":"7 oct. 2025","group":"Idée",
+        "text":{"headline":"Idée en germination",
+          "text":"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p><p><a href='#note' data-note-id='showroom-01' style='color:#DAA520'>En savoir plus</a></p>"},
+        "background":{"color":"#0F172A"} },
+      { "unique_id":"evt-terrain","start_date":{"year":2025,"month":10,"day":8},
+        "display_date":"8 oct. 2025","group":"Terrain",
+        "text":{"headline":"Terrain exploratoire",
+          "text":"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p><p><a href='#note' data-note-id='showroom-01' style='color:#DAA520'>En savoir plus</a></p>"},
+        "background":{"color":"#1F2937"} },
+      { "unique_id":"evt-ecriture","start_date":{"year":2025,"month":10,"day":9},
+        "display_date":"9 oct. 2025","group":"Écriture",
+        "text":{"headline":"Premières écritures",
+          "text":"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p><p><a href='#note' data-note-id='showroom-01' style='color:#DAA520'>En savoir plus</a></p>"},
+        "background":{"color":"#111827"} },
+      { "unique_id":"evt-encadrement","start_date":{"year":2025,"month":10,"day":10},
+        "display_date":"10 oct. 2025","group":"Encadrement",
+        "text":{"headline":"Encadrement — cadrage & rendez-vous",
+          "text":"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p><p><a href='#note' data-note-id='showroom-01' style='color:#DAA520'>En savoir plus</a></p>"},
+        "background":{"color":"#0B3D3B"} },
+      { "unique_id":"evt-outils","start_date":{"year":2025,"month":10,"day":11},
+        "display_date":"11 oct. 2025","group":"Outils/Infra",
+        "text":{"headline":"Outils/Infra — setup initial",
+          "text":"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p><p><a href='#note' data-note-id='showroom-01' style='color:#DAA520'>En savoir plus</a></p>"},
+        "background":{"color":"#312E81"} },
+      { "unique_id":"evt-publics","start_date":{"year":2025,"month":10,"day":12},
+        "display_date":"12 oct. 2025","group":"Publics/Événements",
+        "text":{"headline":"Publics/Événements — jalon ouvert",
+          "text":"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p><p><a href='#note' data-note-id='showroom-01' style='color:#DAA520'>En savoir plus</a></p>"},
+        "background":{"color":"#3F1D2B"} }
+    ]
+  }
+  </script>
+
+  <script>
+  // ---- MODE À TESTER ----
+  const NOTE_MODE = "inline"; // "inline" | "drawer" | "modal"
+  // ------------------------
+
+  // Instanciation de la frise
+  const data = JSON.parse(document.getElementById("timeline-data").textContent);
+  const timeline = new TL.Timeline("timeline-embed", data, {language:"fr",initial_zoom:2});
+
+  // Gestion surcouche
+  (function(){
+    const $=sel=>document.querySelector(sel);
+    const openFile=id=>fetch(`notes/${id}.html`,{cache:'no-store'}).then(r=>r.ok?r.text():Promise.reject(new Error(`HTTP ${r.status}`)));
+
+    const inline={wrap:$('#note-inline'),body:$('#note-inline .note-inline-body'),closeBtn:$('#note-inline .note-inline-close'),
+      open(html){this.body.innerHTML=html;this.wrap.hidden=false;this.wrap.scrollIntoView({behavior:'smooth'});},
+      close(){this.wrap.hidden=true;this.body.innerHTML='';},
+      bind(){this.closeBtn.addEventListener('click',()=>this.close());}};
+
+    const drawer={wrap:$('#note-drawer'),body:$('#note-drawer .note-drawer-body'),closeBtn:$('#note-drawer .note-drawer-close'),
+      open(html){this.body.innerHTML=html;this.wrap.hidden=false;requestAnimationFrame(()=>this.wrap.classList.add('open'));},
+      close(){this.wrap.classList.remove('open');setTimeout(()=>{this.wrap.hidden=true;this.body.innerHTML='';},350);},
+      bind(){this.closeBtn.addEventListener('click',()=>this.close());
+             document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!this.wrap.hidden)this.close();});}};
+
+    const modal={wrap:$('#note-modal'),body:$('#note-modal .note-modal-body'),
+      closeBtn:$('#note-modal .note-modal-close'),overlay:$('#note-modal .note-modal-overlay'),
+      open(html){this.body.innerHTML=html;this.wrap.hidden=false;},
+      close(){this.wrap.hidden=true;this.body.innerHTML='';},
+      bind(){this.closeBtn.addEventListener('click',()=>this.close());
+             this.overlay.addEventListener('click',()=>this.close());
+             document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!this.wrap.hidden)this.close();});}};
+
+    const modes={inline,drawer,modal};
+    modes[NOTE_MODE].bind();
+
+    document.addEventListener('click',e=>{
+      const link=e.target.closest('a[data-note-id]');
+      if(!link)return;
+      e.preventDefault();
+      const id=link.getAttribute('data-note-id');
+      openFile(id)
+        .then(html=>modes[NOTE_MODE].open(html))
+        .catch(err=>modes[NOTE_MODE].open(`<p>Contenu introuvable : <code>notes/${id}.html</code> (${err.message}).</p>`));
+    });
+  })();
+  </script>
+
+</body>
+</html>
