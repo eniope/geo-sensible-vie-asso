@@ -46,12 +46,21 @@
   #below-body { padding: 1rem 1.2rem 1.25rem; line-height: 1.6; }
 
   /* Aperçu 4 lignes (clamp) */
-  .clamp {
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
+  /* (remplace tout l'ancien bloc .clamp) */
+#below-body {
+  position: relative;
+}
+
+/* état masqué (aperçu visuel, mais le contenu complet est là → la page peut scroller) */
+.masked::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 4.5rem;                /* hauteur du dégradé */
+  background: linear-gradient(to bottom, rgba(255,255,255,0), #fff);
+  pointer-events: none;           /* pas de blocage clic */
+}
+
 
   /* Boutons dans les slides */
   a[data-note-id], a[data-note-src] {
