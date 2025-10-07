@@ -34,7 +34,7 @@
       "background": { "color": "#14532D" }
     }
     {
-      "unique_id": "showroom-01-pourquoi-frise",
+      "unique_id": "showroom-01-comment-frise",
       "start_date": { "year": 2025, "month": 10, "day": 10 },
       "display_date": "10 oct. 2025",
       "group": "Outils/Infra",
