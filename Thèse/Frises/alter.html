@@ -5,131 +5,151 @@
   <title>Timeline – Écosystème narratif</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Styles Knight Lab -->
-  <link rel="stylesheet"
-        href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css" />
-
-  <!-- Librairie Knight Lab Timeline -->
+  <!-- TimelineJS -->
+  <link rel="stylesheet" href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css" />
   <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
 
   <style>
-    html, body { height:100%; margin:0; font-family: "Inter", sans-serif; color:#111; }
-    #timeline-embed { height:60vh; } /* 60% pour laisser la place au contenu long */
+    html, body { height:100%; margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif; color:#111; }
+    /* Timeline plus haute */
+    #timeline-embed { height:75vh; }
 
-    /* apparence des groupes */
-    .tl-timegroup-message { opacity: 1 !important; color:#111 !important; font-weight:600; }
+    /* Group labels plus lisibles */
+    .tl-timegroup-message { opacity:1 !important; color:#111 !important; font-weight:600; }
 
-    /* bloc de contenu long sous la frise */
-    #below-content {
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 1rem 1.25rem;
-      line-height: 1.6;
-    }
-    #below-content.hidden { display: none; }
+    /* Zone sous la frise (la page entière scroll, pas de scroll interne) */
+    #below-wrapper { max-width: 1000px; margin: 1.25rem auto 2.5rem; padding: 0 1rem; }
+    #below-content.hidden { display:none; }
     #below-content .card {
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      padding: 1.25rem;
+      border: 1px solid #e5e7eb; border-radius: 12px; background: #fff;
       box-shadow: 0 2px 14px rgba(0,0,0,0.06);
-      background: #fff;
+      overflow: visible; /* important: pas de scroll interne */
     }
-    #below-content h2 { margin: 0 0 .5rem 0; font-size: 1.25rem; }
-    #below-content .meta { color:#6b7280; font-size:.95rem; margin-bottom:.75rem; }
+    #below-header {
+      display:flex; align-items:center; gap:.75rem;
+      padding: .9rem 1rem; border-bottom:1px solid #eef2f7; background:#fafafa; border-radius:12px 12px 0 0;
+    }
+    #below-title { font-weight:700; font-size:1.05rem; margin:0; }
+    #below-actions { margin-left:auto; display:flex; gap:.5rem; }
+    .btn {
+      background:#eee; border:none; border-radius:8px; padding:.4rem .7rem; cursor:pointer; font-weight:600;
+    }
+    .btn:hover { background:#e2e2e2; }
+    #below-body { padding: 1rem 1.2rem 1.25rem; line-height: 1.6; }
 
-    /* style des liens interactifs */
-    a[data-note-id] {
-      display:inline-block;
-      background:#1F6F50;
-      color:#fff;
-      padding:.35rem .65rem;
-      border-radius:6px;
-      text-decoration:none;
-      font-size:.9rem;
-      margin-top:.5rem;
-      transition:background .2s;
+    /* Aperçu en quelques lignes (clamp) */
+    .clamp {
+      display: -webkit-box;
+      -webkit-line-clamp: 4;        /* ← nombre de lignes visibles en aperçu */
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
-    a[data-note-id]:hover {
-      background:#14532D;
+
+    /* Boutons dans les slides */
+    a[data-note-id], a[data-note-src] {
+      display:inline-block; background:#1F6F50; color:#fff; padding:.35rem .65rem;
+      border-radius:6px; text-decoration:none; font-size:.9rem; margin-top:.5rem; transition:background .2s;
     }
+    a[data-note-id]:hover, a[data-note-src]:hover { background:#14532D; }
   </style>
 </head>
-
 <body>
 
   <!-- Frise -->
   <div id="timeline-embed"></div>
 
-  <!-- Contenu long sous la frise -->
-  <div id="below-content" class="hidden">
-    <div class="card" id="below-card"></div>
+  <!-- Bloc sous la frise -->
+  <div id="below-wrapper">
+    <div id="below-content" class="hidden">
+      <div class="card">
+        <div id="below-header">
+          <div id="below-title">Document</div>
+          <div id="below-actions">
+            <button id="below-toggle" class="btn" aria-expanded="false">Voir plus</button>
+            <button id="below-close" class="btn" aria-label="Fermer">Fermer</button>
+          </div>
+        </div>
+        <div id="below-body"><!-- contenu injecté ici --></div>
+      </div>
+    </div>
   </div>
 
   <script>
-    /* ===============================
-       1. Chargement de la Timeline
-       =============================== */
-    const timelineDataUrl = "data.json"; // ton fichier JSON
-    const options = {
+    /* 1) Timeline */
+    const timeline = new TL.Timeline("timeline-embed", "data.json", {
       language: "fr",
       hash_bookmark: true,
       start_at_slide: 0
-    };
-    const timeline = new TL.Timeline("timeline-embed", timelineDataUrl, options);
+    });
 
-    /* ===============================
-       2. Dictionnaire des contenus longs
-       =============================== */
+    /* 2) Contenus “internes” (aperçu demandé) */
     const longNotes = {
       "showroom-01": `
         <h2>Pourquoi une frise ? — La fabrique, par la pratique</h2>
         <div class="meta">Bloc relié à la slide « Pourquoi une frise ? »</div>
-        <p><i>Avant toute germination, il y a la préparation du sol.</i> Ici, la frise est conçue comme un
-        <b>écosystème narratif</b> : un artefact de recherche qui rend visibles les transitions et la maturation,
+        <p><i>Avant toute germination, il y a la préparation du sol.</i>
+        Ici, la frise est conçue comme un <b>écosystème narratif</b> :
+        un artefact de recherche qui rend visibles les transitions et la maturation,
         plutôt que d’aligner des preuves.</p>
-        <p>Ce showroom explique comment sont choisis les groupes, les ères, les couleurs et
-        ce que ces décisions <b>rendent possible</b> pour le lecteur : orientation, soin de l’attention,
-        lisibilité, hospitalité cognitive.</p>
-        <p>Liens associés :<br>
-        <a href="https://passerelles.encommun.io/u/stephane_caillaud/" target="_blank">Profil Passerelles</a> ·
-        <a href="https://www.linkedin.com/in/st%C3%A9phane-caillaud-26a72648/" target="_blank">LinkedIn</a></p>
-      `,
-
-      "memo-passage": `
-        <h2>Mémo de passage — Ce qu’il reste à rendre possible</h2>
-        <div class="meta">Réflexion sur la présence, le soin et la vulnérabilité</div>
-        <p>Ce mémo ouvre une enquête sur la manière d’habiter lucidement et avec sagacité le temps qui reste.
-        Il trace les premiers gestes d’une écriture doctorale attentive au soin, à la vulnérabilité, à la présence au monde.</p>
-        <p><i>Ni commencement, ni conclusion : une respiration entre deux âges,
-        où la pensée se fait plus lente, plus hospitalière.</i></p>
       `
     };
 
-    /* ===============================
-       3. Fonction d’affichage
-       =============================== */
+    /* 3) Helpers UI (pas de scroll interne, la page scroll) */
     const below = document.getElementById('below-content');
-    const card  = document.getElementById('below-card');
+    const bodyEl = document.getElementById('below-body');
+    const titleEl = document.getElementById('below-title');
+    const closeBtn = document.getElementById('below-close');
+    const toggleBtn = document.getElementById('below-toggle');
 
-    function showNote(id) {
-      const html = longNotes[id];
-      if (!html) return;
-      card.innerHTML = html;
-      below.classList.remove('hidden');
-      below.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    let isClamped = true; // état aperçu
+
+    function applyClamp(state) {
+      isClamped = state;
+      bodyEl.classList.toggle('clamp', isClamped);
+      toggleBtn.textContent = isClamped ? 'Voir plus' : 'Voir moins';
+      toggleBtn.setAttribute('aria-expanded', String(!isClamped));
     }
 
-    /* ===============================
-       4. Écoute globale : clic sur lien
-       =============================== */
-    document.addEventListener('click', function(e) {
-      const a = e.target.closest('a[data-note-id]');
-      if (!a) return;
+    function openBelow(titleHTML, innerHTML) {
+      titleEl.innerHTML = titleHTML || 'Document';
+      bodyEl.innerHTML = innerHTML || '';
+      below.classList.remove('hidden');
+      // au démarrage: affichage en aperçu (quelques lignes)
+      applyClamp(true);
+      // remonter le bloc dans le viewport
+      below.scrollIntoView({ behavior:'smooth', block:'start' });
+    }
+
+    function closeBelow() {
+      below.classList.add('hidden');
+      titleEl.textContent = 'Document';
+      bodyEl.innerHTML = '';
+    }
+
+    closeBtn.addEventListener('click', closeBelow);
+    toggleBtn.addEventListener('click', () => applyClamp(!isClamped));
+
+    /* 4) Gestion des clics dans les slides (liens “internes” ou “externes”) */
+    document.addEventListener('click', async (e) => {
+      const link = e.target.closest('a[data-note-id], a[data-note-src]');
+      if (!link) return;
       e.preventDefault();
-      const id = a.getAttribute('data-note-id');
-      showNote(id);
+
+      const id = link.getAttribute('data-note-id');
+      const src = link.getAttribute('data-note-src');
+      const label = link.getAttribute('data-note-title') || link.textContent || 'Document';
+
+      if (id && longNotes[id]) {
+        openBelow(label, longNotes[id]);
+      } else if (src) {
+        // Cas doc externe (HTML/MD/PDF) — ici simple iframe pour rester concis et laisser la page scroller
+        const html = `<iframe src="${src}" title="Document externe" style="width:100%; height:60vh; border:0;"></iframe>`;
+        openBelow(label, html);
+        // l'iframe s'affiche en aperçu clampé sur quelques lignes (inutile ici),
+        // on enlève l’aperçu si c’est un iframe pour éviter la coupe
+        applyClamp(false);
+      }
     });
   </script>
-
 </body>
 </html>
