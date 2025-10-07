@@ -8,24 +8,24 @@
   <!-- TimelineJS -->
   <link rel="stylesheet" href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css" />
   <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
-  <!-- (Optionnel) Markdown -> HTML si tu l’utilises plus tard -->
+  <!-- (Optionnel) Markdown -> HTML si tu utilises des .md en iframe/convertisseur -->
   <!-- <script src="https://cdn.jsdelivr.net/npm/showdown@2.1.0/dist/showdown.min.js"></script> -->
 
   <style>
-    /* Base & typographie */
+    /* Base & typo */
     html, body { margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif; color:#111; }
 
-    /* ✅ Débloque le scroll global si Timeline le verrouille */
+    /* ✅ Débloque le scroll global au cas où Timeline le verrouille */
     html, body { height:auto; min-height:100%; overflow-y:auto; }
     .tl-timeline { overflow: visible !important; }
 
-    /* Timeline plus haute */
+    /* Timeline plus haute (respire) */
     #timeline-embed { height:75vh; }
 
-    /* Group labels plus lisibles */
+    /* Group labels lisibles */
     .tl-timegroup-message { opacity:1 !important; color:#111 !important; font-weight:600; }
 
-    /* Zone sous la frise : scroll global (pas de scroll interne) */
+    /* Zone sous la frise (scroll global, pas interne) */
     #below-wrapper { max-width: 1000px; margin: 1.25rem auto 2.5rem; padding: 0 1rem; }
     #below-content.hidden { display:none; }
     #below-content .card {
@@ -44,15 +44,15 @@
     }
     .btn:hover { background:#e2e2e2; }
 
+    /* Corps du document (aperçu via masque dégradé) */
     #below-body { position: relative; padding: 1rem 1.2rem 1.25rem; line-height: 1.6; }
-    /* Aperçu : masque dégradé (le contenu complet est présent → la page peut scroller) */
     #below-body.masked::after {
       content: ""; position: absolute; left: 0; right: 0; bottom: 0;
       height: 4.5rem; background: linear-gradient(to bottom, rgba(255,255,255,0), #fff);
       pointer-events: none;
     }
 
-    /* Boutons dans les slides (esthétique) */
+    /* Liens de déclenchement dans les slides (esthétique) */
     a[data-note-id], a[data-note-src] {
       display:inline-block; background:#1F6F50; color:#fff; padding:.35rem .65rem;
       border-radius:6px; text-decoration:none; font-size:.9rem; margin-top:.5rem; transition:background .2s;
@@ -82,14 +82,14 @@
   </div>
 
   <script>
-    /* 1) Timeline */
+    /* 1) Timeline — remplace "data.json" si besoin */
     const timeline = new TL.Timeline("timeline-embed", "data.json", {
       language: "fr",
       hash_bookmark: true,
       start_at_slide: 0
     });
 
-    /* 2) Contenus “internes” (exemple) */
+    /* 2) Contenus “internes” (exemples) */
     const longNotes = {
       "showroom-01": `
         <h2>Pourquoi une frise ? — La fabrique, par la pratique</h2>
@@ -107,6 +107,7 @@
         un artefact de recherche qui rend visibles les transitions et la maturation,
         plutôt que d’aligner des preuves.</p>
       `
+      // Tu peux ajouter d'autres clés : "memo-passage": `...`, etc.
     };
 
     /* 3) Helpers UI */
@@ -130,7 +131,7 @@
       titleEl.innerHTML = titleHTML || 'Document';
       bodyEl.innerHTML  = innerHTML || '';
       below.classList.remove('hidden');
-      applyMask(true); // on démarre en aperçu
+      applyMask(true); // aperçu au départ
       below.scrollIntoView({ behavior:'smooth', block:'start' });
     }
 
@@ -149,7 +150,7 @@
       if (isMasked) applyMask(false);
     });
 
-    /* 4) Clics dans les slides (liens internes/externes) */
+    /* 4) Clics dans les slides (liens "internes" ou "externes") */
     document.addEventListener('click', async (e) => {
       const link = e.target.closest('a[data-note-id], a[data-note-src]');
       if (!link) return;
@@ -169,7 +170,12 @@
       }
     });
 
-    // 5) Sécurise le scroll global au cas où Timeline l’ait verrouillé
+    /* 5) Fermer le bloc quand on change de slide (persistance OFF) */
+    timeline.on('change', () => {
+      closeBelow();
+    });
+
+    /* 6) Sécurise le scroll global (double filet) */
     (function unlockPageScroll() {
       const s = document.createElement('style');
       s.textContent = `
