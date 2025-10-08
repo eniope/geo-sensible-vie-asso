@@ -1,1 +1,127 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Présent qui avance, futur qui recule</title>
+<style>
+  :root { --bg:#0f1116; --fg:#e8eaed; --green:#39d353; --grey:#6b7280; }
+  html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font:16px/1.4 system-ui,sans-serif}
+  .wrap{max-width:1100px;margin:auto;padding:20px}
+  .bar{display:flex;gap:.75rem;align-items:center;margin:.75rem 0 1.25rem}
+  input[type="range"]{width:420px}
+  .stage{border-radius:12px;box-shadow:0 12px 28px rgba(0,0,0,.45);background:#0b0d12;padding:12px}
+  .legend{opacity:.85;font-size:.9rem;margin-top:.25rem}
+  /* petite pulsation du point présent */
+  @keyframes pulse{0%{r:7}50%{r:9}100%{r:7}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Trajectoire : le présent avance, le futur recule</h1>
+  <div class="bar">
+    <label for="t">Temps</label>
+    <input id="t" type="range" min="0" max="100" value="0" />
+    <span id="tlabel">t = 0%</span>
+  </div>
+
+  <div class="stage">
+    <!-- Vue 1000×420 -->
+    <svg id="viz" viewBox="0 0 1000 420" width="100%" height="auto" aria-label="présent, passé, futur">
+      <!-- repères -->
+      <g fill="none" stroke="#222831" stroke-width="1">
+        <line x1="20" y1="380" x2="980" y2="380"/>
+      </g>
+
+      <!-- CLIPS dynamiques : tout ce qui est à GAUCHE du présent = passé ; à DROITE = futur -->
+      <clipPath id="clipPast"><rect id="rectPast" x="0" y="0" width="220" height="420"/></clipPath>
+      <clipPath id="clipFuture"><rect id="rectFuture" x="220" y="0" width="780" height="420"/></clipPath>
+
+      <!-- BRANCHES (mêmes géométries, deux calques) -->
+      <!-- Futur (vert) -->
+      <g id="future" clip-path="url(#clipFuture)" fill="none" stroke="var(--green)" stroke-width="3" stroke-linecap="round" opacity="1">
+        <!-- quelques branches démo ; remplace par tes chemins réels si besoin -->
+        <path d="M220,210 C300,190 380,180 460,200 S610,240 700,220 S850,180 950,160"/>
+        <path d="M220,210 C310,220 380,250 470,260 S650,300 760,320 S880,350 960,360"/>
+        <path d="M220,210 C300,210 380,210 460,210 S640,210 740,190 S860,150 960,140"/>
+        <path d="M220,210 C310,200 390,220 470,210 S640,190 720,210 S860,260 960,300"/>
+        <path d="M220,210 C310,170 380,150 460,140 S620,130 710,150 S860,200 960,240"/>
+      </g>
+
+      <!-- Passé (branches fermées, grisées) -->
+      <g id="past" clip-path="url(#clipPast)" fill="none" stroke="var(--grey)" stroke-width="3" stroke-linecap="round" opacity=".85">
+        <use href="#future"/>
+      </g>
+
+      <!-- TRAJECTOIRE RÉALISÉE : se dessine au passage du présent -->
+      <path id="realized" d="M220,210 C300,205 380,208 460,212 S640,222 720,230 S860,245 960,255"
+            fill="none" stroke="var(--green)" stroke-width="4" stroke-linecap="round" />
+
+      <!-- Barre du présent + point -->
+      <g id="present">
+        <line id="presentLine" x1="220" y1="40" x2="220" y2="370" stroke="#94a3b8" stroke-width="2" stroke-dasharray="4 6"/>
+        <circle id="presentDot" cx="220" cy="210" r="7" fill="var(--green)">
+          <animate attributeName="r" values="7;9;7" dur="1.6s" repeatCount="indefinite"/>
+        </circle>
+        <text id="presentLabel" x="220" y="30" text-anchor="middle" font-size="12" fill="#cbd5e1">présent</text>
+      </g>
+
+      <!-- Légendes -->
+      <text x="40" y="400" fill="#9aa0a6" font-size="12">LE PASSÉ (chemins fermés)</text>
+      <text x="780" y="400" fill="#9aa0a6" font-size="12" text-anchor="end">LE FUTUR (possibles ouverts)</text>
+    </svg>
+    <div class="legend">Fais glisser le curseur : la <b>barre du présent</b> avance → la zone <b>futur</b> se réduit visuellement ; derrière elle, les branches deviennent <b>passé</b> (gris) tandis que la <b>trajectoire réalisée</b> s'écrit en vert.</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const t = document.getElementById('t');
+  const tlabel = document.getElementById('tlabel');
+  const rectPast = document.getElementById('rectPast');
+  const rectFuture = document.getElementById('rectFuture');
+  const presentLine = document.getElementById('presentLine');
+  const presentDot = document.getElementById('presentDot');
+  const presentLabel = document.getElementById('presentLabel');
+  const realized = document.getElementById('realized');
+
+  // paramètres
+  const xStart = 220;   // position initiale du présent (à gauche)
+  const xEnd   = 920;   // jusqu’où le présent peut aller
+  const W = 1000, H = 420;
+
+  // préparer le trait réalisé pour un "dessin progressif"
+  const L = realized.getTotalLength();
+  realized.style.strokeDasharray = L;
+  realized.style.strokeDashoffset = L;
+
+  function update(){
+    const p = +t.value / 100;                 // 0 → 1
+    const x = xStart + (xEnd - xStart)*p;     // position du présent
+
+    tlabel.textContent = `t = ${Math.round(p*100)}%`;
+
+    // clip passé / futur
+    rectPast.setAttribute('width', x);        // passé visible jusqu'à la barre
+    rectFuture.setAttribute('x', x);          // futur visible à droite de la barre
+    rectFuture.setAttribute('width', W - x);
+
+    // barre et point
+    presentLine.setAttribute('x1', x);
+    presentLine.setAttribute('x2', x);
+    presentDot.setAttribute('cx', x);
+    presentLabel.setAttribute('x', x);
+
+    // écriture de la trajectoire réalisée : de gauche vers la barre
+    // On calcule la fraction du trait à révéler en fonction de x
+    const frac = Math.min(1, (x - xStart) / (xEnd - xStart));
+    realized.style.strokeDashoffset = (1 - frac) * L;
+  }
+
+  t.addEventListener('input', update);
+  update();
+})();
+</script>
+</body>
+</html>
 
