@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ma vie en semaines — interactif</title>
+<style>
+  :root{
+    --bg:#0f1116; --fg:#e6e8eb; --muted:#64748b; --grid:#475569; --border:#1f2937;
+    --col-past:#94a3b8; --col-future:#1f2937;
+    --c-projet:#60a5fa;   --c-appr:#34d399;  --c-epreuve:#f87171;
+    --c-repos:#a78bfa;    --c-soin:#fbbf24;  --c-rencontre:#f472b6;
+  }
+  html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font:15px/1.5 system-ui, -apple-system, Segoe UI, Roboto, sans-serif}
+  header{max-width:1100px;margin:20px auto 10px;padding:0 16px}
+  h1{margin:.2rem 0 .6rem;font-size:1.35rem}
+  .bar{display:flex;flex-wrap:wrap;gap:.5rem 1rem;align-items:center}
+  .bar label{opacity:.9}
+  input,select,button{background:#0b1220;color:var(--fg);border:1px solid var(--border);border-radius:10px;padding:.45rem .6rem}
+  button{cursor:pointer}
+  button.primary{background:#0c1b2e;border-color:#18314f}
+  .legend{display:flex;flex-wrap:wrap;gap:.35rem .7rem;margin:.6rem 0;align-items:center}
+  .chip{display:inline-flex;align-items:center;gap:.4rem;padding:.2rem .5rem;border:1px solid var(--border);border-radius:999px;background:#0b1220;font-size:.85rem}
+  .dot{width:12px;height:12px;border-radius:3px;display:inline-block}
+  .wrap{max-width:1100px;margin:10px auto 30px;padding:0 16px}
+  .board{border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:0 12px 28px rgba(0,0,0,.35)}
+  .head{display:flex;justify-content:space-between;padding:.6rem .8rem;background:#0b1220;border-bottom:1px solid var(--border);font-size:.9rem;color:#cbd5e1}
+  .grid{display:grid;grid-template-columns:repeat(52, minmax(10px, 1fr));gap:2px;padding:8px;background:#0b1220}
+  .cell{
+    width:100%;aspect-ratio:1/1;border:1px solid var(--grid);border-radius:2px;
+    background:var(--col-future); position:relative; outline:none;
+  }
+  .cell.past{background:#0e1626}
+  .cell[data-color="projet"]{background:var(--c-projet)}
+  .cell[data-color="appr"]{background:var(--c-appr)}
+  .cell[data-color="epreuve"]{background:var(--c-epreuve)}
+  .cell[data-color="repos"]{background:var(--c-repos)}
+  .cell[data-color="soin"]{background:var(--c-soin)}
+  .cell[data-color="rencontre"]{background:var(--c-rencontre)}
+  .cell.note::after{
+    content:"✷"; position:absolute; right:1px; bottom:-2px; font-size:.7rem; opacity:.9;
+  }
+  .axis{display:flex;gap:6px;align-items:center}
+  .age{color:#fca5a5}
+  .small{color:#9aa4b2;font-size:.9rem}
+  .foot{display:flex;justify-content:space-between;align-items:center;padding:.6rem .8rem;background:#0b1220;border-top:1px solid var(--border);color:#cbd5e1}
+  .link{color:#9dd1ff;text-decoration:none}
+  .sr{position:absolute;left:-10000px}
+</style>
+</head>
+<body>
+<header>
+  <h1>Ma vie en semaines — conscientiser la ressource-temps</h1>
+  <div class="bar">
+    <label>Naissance
+      <input type="date" id="birth" aria-label="Date de naissance">
+    </label>
+    <label>Espérance (années)
+      <input type="number" id="span" value="90" min="40" max="120" step="1">
+    </label>
+    <label>Catégorie
+      <select id="cat">
+        <option value="">(aucune)</option>
+        <option value="projet">Projet</option>
+        <option value="appr">Apprentissage</option>
+        <option value="epreuve">Épreuve</option>
+        <option value="repos">Repos</option>
+        <option value="soin">Soin</option>
+        <option value="rencontre">Rencontre</option>
+      </select>
+    </label>
+    <button id="play" class="primary">Animer</button>
+    <button id="pause">Pause</button>
+    <button id="reset">Réinitialiser sélection</button>
+    <button id="export">Export JSON</button>
+    <input type="file" id="import" accept="application/json" style="display:none">
+    <button id="importBtn">Import JSON</button>
+  </div>
+
+  <div class="legend">
+    <span class="chip"><span class="dot" style="background:var(--c-projet)"></span>Projet</span>
+    <span class="chip"><span class="dot" style="background:var(--c-appr)"></span>Apprentissage</span>
+    <span class="chip"><span class="dot" style="background:var(--c-epreuve)"></span>Épreuve</span>
+    <span class="chip"><span class="dot" style="background:var(--c-repos)"></span>Repos</span>
+    <span class="chip"><span class="dot" style="background:var(--c-soin)"></span>Soin</span>
+    <span class="chip"><span class="dot" style="background:var(--c-rencontre)"></span>Rencontre</span>
+    <span class="small">Astuce : <b>Shift+clic</b> pour ajouter/éditer une note sur une case.</span>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="board" aria-label="Grille des semaines">
+    <div class="head">
+      <div class="axis"><span>Semaine de l’année → 1…52</span></div>
+      <div class="axis"><span class="age">Âge : <span id="age">–</span></span></div>
+    </div>
+    <div id="grid" class="grid" role="grid" aria-labelledby="title"></div>
+    <div class="foot">
+      <span>Passées : <span id="done">0</span> / <span id="total">0</span> semaines</span>
+      <span class="small">Données stockées localement (navigateur). • <a class="link" href="https://waitbutwhy.com/2014/05/life-weeks.html" target="_blank" rel="noreferrer">Inspiration Tim Urban</a></span>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ====== utilitaires temps ====== */
+const byId = id => document.getElementById(id);
+const birthEl = byId('birth'), spanEl = byId('span'), gridEl = byId('grid');
+const playBtn = byId('play'), pauseBtn = byId('pause'), resetBtn = byId('reset');
+const catEl = byId('cat'), doneEl = byId('done'), totalEl = byId('total'), ageEl = byId('age');
+const importInput = byId('import'), importBtn = byId('importBtn'), exportBtn = byId('export');
+
+const LS_KEY = 'life_weeks_v1';
+let cells = [], anim=null, currentPast = 0, totalWeeks = 0;
+
+function weeksBetween(a, b){
+  const ms = b - a;
+  return Math.floor(ms / (1000*60*60*24*7));
+}
+function addWeeks(date, w){
+  const d = new Date(date);
+  d.setDate(d.getDate() + w*7);
+  return d;
+}
+function calcAgeYears(birth){
+  const now = new Date();
+  let age = now.getFullYear() - birth.getFullYear();
+  const m = now.getMonth() - birth.getMonth();
+  if (m < 0 || (m===0 && now.getDate() < birth.getDate())) age--;
+  return age;
+}
+
+/* ====== construction grille ====== */
+function buildGrid(){
+  gridEl.innerHTML = '';
+  cells.length = 0;
+  const span = Number(spanEl.value||90);
+  const years = span;
+  totalWeeks = years * 52;
+  totalEl.textContent = totalWeeks.toLocaleString('fr-FR');
+
+  for(let i=0;i<totalWeeks;i++){
+    const cell = document.createElement('button');
+    cell.className = 'cell';
+    cell.setAttribute('role','gridcell');
+    cell.setAttribute('aria-label', `Semaine ${i+1}`);
+    cell.dataset.idx = i;
+    cell.addEventListener('click', e => onCellClick(e, cell));
+    cell.addEventListener('mouseenter', ()=> { if(cell.title && cell.title.length>0) cell.classList.add('hasNote') });
+    gridEl.appendChild(cell);
+    cells.push(cell);
+  }
+  restoreState();
+}
+
+/* ====== coloration & notes ====== */
+function onCellClick(e, cell){
+  // Shift+clic -> note
+  if(e.shiftKey){
+    const existing = cell.title || '';
+    const val = prompt('Note (laisser vide pour supprimer) :', existing);
+    if(val===null) return; // annulé
+    if(val.trim().length>0){
+      cell.title = val.trim();
+      cell.classList.add('note');
+    } else {
+      cell.title = '';
+      cell.classList.remove('note');
+    }
+    saveState();
+    return;
+  }
+  // clic simple -> colorer selon catégorie choisie
+  const cat = catEl.value;
+  cell.removeAttribute('data-color');
+  if(cat) cell.dataset.color = cat;
+  saveState();
+}
+
+/* ====== animation ====== */
+function animateToToday(){
+  const birthStr = birthEl.value;
+  if(!birthStr){ alert('Renseigne la date de naissance.'); return; }
+  const birth = new Date(birthStr);
+  const today = new Date();
+  const weeksLived = Math.min(weeksBetween(birth, today), totalWeeks);
+  ageEl.textContent = calcAgeYears(birth) + ' ans';
+  // animation progressive
+  cancelAnimationFrame(anim);
+  let i = 0;
+  const start = performance.now();
+  const speed = 1200; // ms pour remplir 1 année (~52 semaines)
+  function step(ts){
+    const t = (ts-start)/speed;
+    const target = Math.min(weeksLived, Math.floor(t*52));
+    if(target>i){
+      for(let k=i;k<target;k++){ cells[k]?.classList.add('past'); }
+      i = target;
+      currentPast = i;
+      doneEl.textContent = currentPast.toLocaleString('fr-FR');
+    }
+    if(i < weeksLived){ anim = requestAnimationFrame(step); }
+  }
+  anim = requestAnimationFrame(step);
+}
+
+function pauseAnim(){ cancelAnimationFrame(anim); anim = null; }
+function resetSelection(){
+  cells.forEach(c=>{ c.removeAttribute('data-color'); c.classList.remove('note'); c.title=''; });
+  saveState();
+}
+
+/* ====== sauvegarde ====== */
+function saveState(){
+  const data = {
+    birth: birthEl.value || null,
+    span: Number(spanEl.value||90),
+    colors: cells.map(c => c.dataset.color || ''),
+    notes:  cells.map(c => c.title || '')
+  };
+  localStorage.setItem(LS_KEY, JSON.stringify(data));
+}
+function restoreState(){
+  const raw = localStorage.getItem(LS_KEY);
+  if(!raw) return;
+  try{
+    const data = JSON.parse(raw);
+    if(data.birth) birthEl.value = data.birth;
+    if(data.span)  spanEl.value  = data.span;
+    (data.colors||[]).forEach((v,i)=>{ if(v) cells[i].dataset.color = v; });
+    (data.notes||[]).forEach((v,i)=>{ if(v){ cells[i].title=v; cells[i].classList.add('note'); } });
+  }catch(e){ console.warn('Restore error', e); }
+}
+
+/* ====== export / import ====== */
+exportBtn.addEventListener('click', ()=>{
+  const blob = new Blob([localStorage.getItem(LS_KEY)||'{}'], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'life_weeks.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
+});
+importBtn.addEventListener('click', ()=> importInput.click());
+importInput.addEventListener('change', async (e)=>{
+  const file = e.target.files[0]; if(!file) return;
+  const txt = await file.text();
+  localStorage.setItem(LS_KEY, txt);
+  buildGrid(); // recharge
+});
+
+/* ====== événements UI ====== */
+playBtn.addEventListener('click', ()=>{ saveState(); animateToToday(); });
+pauseBtn.addEventListener('click', pauseAnim);
+resetBtn.addEventListener('click', resetSelection);
+birthEl.addEventListener('change', ()=>{ saveState(); });
+spanEl.addEventListener('change', ()=>{ saveState(); buildGrid(); });
+
+/* init */
+buildGrid();
+</script>
+</body>
+</html>
