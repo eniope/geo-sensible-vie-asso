@@ -1,0 +1,113 @@
+{
+  "title": {
+    "text": {
+      "headline": "Incubation d'une thèse — Journal transactionnel",
+      "text": "Frise test — 5 ères + 6 événements factices."
+    },
+    "media": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Moon.jpg",
+      "caption": "Image de couverture",
+      "credit": "CC BY-SA Wikimedia"
+    }
+  },
+  "eras": [
+    {
+      "unique_id": "era-preincubation",
+      "start_date": {"year": 2025, "month": 7},
+      "end_date": {"year": 2025, "month": 10, "day": 7},
+      "text": {"headline": "Prégermination / Préincubation"}
+    },
+    {
+      "unique_id": "era-germination",
+      "start_date": {"year": 2025, "month": 10, "day": 8},
+      "end_date": {"year": 2026, "month": 2},
+      "text": {"headline": "Germination"}
+    },
+    {
+      "unique_id": "era-divergence",
+      "start_date": {"year": 2026, "month": 3},
+      "end_date": {"year": 2026, "month": 9},
+      "text": {"headline": "Divergence"}
+    },
+    {
+      "unique_id": "era-convergence",
+      "start_date": {"year": 2026, "month": 10},
+      "end_date": {"year": 2027, "month": 3},
+      "text": {"headline": "Convergence"}
+    },
+    {
+      "unique_id": "era-stabilisation",
+      "start_date": {"year": 2027, "month": 4},
+      "end_date": {"year": 2027, "month": 9},
+      "text": {"headline": "Stabilisation"}
+    }
+  ],
+  "events": [
+    {
+      "unique_id": "evt-idee",
+      "start_date": {"year": 2025, "month": 10, "day": 7},
+      "display_date": "7 oct. 2025",
+      "group": "Idée",
+      "text": {
+        "headline": "Idée en germination",
+        "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p><p><a href='#note' data-note-id='showroom-01' style='color:#DAA520'>En savoir plus</a></p>"
+      },
+      "background": {"color": "#0F172A"}
+    },
+    {
+      "unique_id": "evt-terrain",
+      "start_date": {"year": 2025, "month": 10, "day": 8},
+      "display_date": "8 oct. 2025",
+      "group": "Terrain",
+      "text": {
+        "headline": "Terrain exploratoire",
+        "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p><p><a href='#note' data-note-id='showroom-01' style='color:#DAA520'>En savoir plus</a></p>"
+      },
+      "background": {"color": "#1F2937"}
+    },
+    {
+      "unique_id": "evt-ecriture",
+      "start_date": {"year": 2025, "month": 10, "day": 9},
+      "display_date": "9 oct. 2025",
+      "group": "Écriture",
+      "text": {
+        "headline": "Premières écritures",
+        "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p><p><a href='#note' data-note-id='showroom-01' style='color:#DAA520'>En savoir plus</a></p>"
+      },
+      "background": {"color": "#111827"}
+    },
+    {
+      "unique_id": "evt-encadrement",
+      "start_date": {"year": 2025, "month": 10, "day": 10},
+      "display_date": "10 oct. 2025",
+      "group": "Encadrement",
+      "text": {
+        "headline": "Encadrement — cadrage & rendez-vous",
+        "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p><p><a href='#note' data-note-id='showroom-01' style='color:#DAA520'>En savoir plus</a></p>"
+      },
+      "background": {"color": "#0B3D3B"}
+    },
+    {
+      "unique_id": "evt-outils",
+      "start_date": {"year": 2025, "month": 10, "day": 11},
+      "display_date": "11 oct. 2025",
+      "group": "Outils/Infra",
+      "text": {
+        "headline": "Outils/Infra — setup initial",
+        "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p><p><a href='#note' data-note-id='showroom-01' style='color:#DAA520'>En savoir plus</a></p>"
+      },
+      "background": {"color": "#312E81"}
+    },
+    {
+      "unique_id": "evt-publics",
+      "start_date": {"year": 2025, "month": 10, "day": 12},
+      "display_date": "12 oct. 2025",
+      "group": "Publics/Événements",
+      "text": {
+        "headline": "Publics/Événements — jalon ouvert",
+        "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p><p><a href='#note' data-note-id='showroom-01' style='color:#DAA520'>En savoir plus</a></p>"
+      },
+      "background": {"color": "#3F1D2B"}
+    }
+  ]
+}
