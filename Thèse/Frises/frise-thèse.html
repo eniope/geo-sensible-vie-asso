@@ -72,7 +72,8 @@
   // ------------------------
 
   // Chargement JSON externe
-  fetch("data/timeline.json", {cache: "no-store"})
+  fetch("data.json", { cache: "no-store" }) 
+
     .then(r => r.json())
     .then(data => {
       const timeline = new TL.Timeline("timeline-embed", data, {language: "fr", initial_zoom: 2});
