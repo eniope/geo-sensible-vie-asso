@@ -1,189 +1,134 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
-  <title>Timeline – Écosystème narratif</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Incubation d'une thèse — Journal transactionnel</title>
 
-  <!-- TimelineJS -->
+  <!-- KnightLab Timeline -->
   <link rel="stylesheet" href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css" />
   <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
-  <!-- (Optionnel) Markdown -> HTML si tu utilises des .md en iframe/convertisseur -->
-  <!-- <script src="https://cdn.jsdelivr.net/npm/showdown@2.1.0/dist/showdown.min.js"></script> -->
 
   <style>
-    /* Base & typo */
-    html, body { margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif; color:#111; }
+    body { background:#0b0f19; color:#e5e7eb; font-family:system-ui,sans-serif; margin:0; padding:0; }
 
-    /* ✅ Débloque le scroll global au cas où Timeline le verrouille */
-    html, body { height:auto; min-height:100%; overflow-y:auto; }
-    .tl-timeline { overflow: visible !important; }
+    /* --- INLINE --- */
+    #note-inline[hidden]{display:none;}
+    #note-inline{margin-top:1rem;}
+    .note-inline-card{background:#0b0f19;color:#e5e7eb;border:1px solid #1f2937;border-radius:12px;
+      padding:1rem 1.25rem;line-height:1.6;}
+    .note-inline-close{float:right;background:transparent;border:none;color:#e5e7eb;font-size:1.5rem;cursor:pointer;}
+    .note-inline-body a{color:#DAA520;text-decoration:underline;}
 
-    /* Timeline plus haute (respire) */
-    #timeline-embed { height:75vh; }
+    /* --- DRAWER --- */
+    #note-drawer[hidden]{display:none;}
+    #note-drawer{position:fixed;top:0;right:0;height:100vh;width:0;overflow:hidden;background:#0b0f19;
+      color:#e5e7eb;border-left:1px solid #1f2937;transition:width .35s ease;z-index:9999;}
+    #note-drawer.open{width:min(720px,80vw);}
+    .note-drawer-close{position:absolute;top:.5rem;right:.5rem;background:transparent;border:none;
+      color:#e5e7eb;font-size:1.5rem;cursor:pointer;}
+    .note-drawer-body{padding:1.25rem 1.5rem;line-height:1.6;}
+    .note-drawer-body a{color:#DAA520;text-decoration:underline;}
 
-    /* Group labels lisibles */
-    .tl-timegroup-message { opacity:1 !important; color:#111 !important; font-weight:600; }
-
-    /* Zone sous la frise (scroll global, pas interne) */
-    #below-wrapper { max-width: 1000px; margin: 1.25rem auto 2.5rem; padding: 0 1rem; }
-    #below-content.hidden { display:none; }
-    #below-content .card {
-      border: 1px solid #e5e7eb; border-radius: 12px; background: #fff;
-      box-shadow: 0 2px 14px rgba(0,0,0,0.06);
-      overflow: visible; /* pas de scroll interne */
-    }
-    #below-header {
-      display:flex; align-items:center; gap:.75rem;
-      padding: .9rem 1rem; border-bottom:1px solid #eef2f7; background:#fafafa; border-radius:12px 12px 0 0;
-    }
-    #below-title { font-weight:700; font-size:1.05rem; margin:0; }
-    #below-actions { margin-left:auto; display:flex; gap:.5rem; }
-    .btn {
-      background:#eee; border:none; border-radius:8px; padding:.4rem .7rem; cursor:pointer; font-weight:600;
-    }
-    .btn:hover { background:#e2e2e2; }
-
-    /* Corps du document (aperçu via masque dégradé) */
-    #below-body { position: relative; padding: 1rem 1.2rem 1.25rem; line-height: 1.6; }
-    #below-body.masked::after {
-      content: ""; position: absolute; left: 0; right: 0; bottom: 0;
-      height: 4.5rem; background: linear-gradient(to bottom, rgba(255,255,255,0), #fff);
-      pointer-events: none;
-    }
-
-    /* Liens de déclenchement dans les slides (esthétique) */
-    a[data-note-id], a[data-note-src] {
-      display:inline-block; background:#1F6F50; color:#fff; padding:.35rem .65rem;
-      border-radius:6px; text-decoration:none; font-size:.9rem; margin-top:.5rem; transition:background .2s;
-    }
-    a[data-note-id]:hover, a[data-note-src]:hover { background:#14532D; }
+    /* --- MODAL --- */
+    #note-modal[hidden]{display:none;}
+    #note-modal{position:fixed;inset:0;z-index:9999;}
+    .note-modal-overlay{position:absolute;inset:0;background:rgba(0,0,0,.6);}
+    .note-modal-card{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+      width:min(780px,92vw);max-height:80vh;overflow:auto;background:#0b0f19;color:#e5e7eb;
+      border:1px solid #1f2937;border-radius:12px;}
+    .note-modal-close{position:absolute;top:.5rem;right:.5rem;background:transparent;border:none;
+      color:#e5e7eb;font-size:1.5rem;cursor:pointer;}
+    .note-modal-body{padding:1.25rem 1.5rem;line-height:1.6;}
+    .note-modal-body a{color:#DAA520;text-decoration:underline;}
   </style>
 </head>
+
 <body>
 
   <!-- Frise -->
-  <div id="timeline-embed"></div>
+  <div id="timeline-embed" style="width:100%;height:600px"></div>
 
-  <!-- Bloc sous la frise -->
-  <div id="below-wrapper">
-    <div id="below-content" class="hidden">
-      <div class="card">
-        <div id="below-header">
-          <div id="below-title">Document</div>
-          <div id="below-actions">
-            <button id="below-toggle" class="btn" aria-expanded="false">Voir plus</button>
-            <button id="below-close" class="btn" aria-label="Fermer">Fermer</button>
-          </div>
-        </div>
-        <div id="below-body"><!-- contenu injecté ici --></div>
-      </div>
-    </div>
+  <!-- Conteneurs des trois modes -->
+  <div id="note-inline" hidden>
+    <article class="note-inline-card"><button class="note-inline-close">×</button>
+      <div class="note-inline-body"></div></article>
+  </div>
+
+  <div id="note-drawer" hidden>
+    <button class="note-drawer-close">×</button>
+    <div class="note-drawer-body"></div>
+  </div>
+
+  <div id="note-modal" hidden>
+    <div class="note-modal-overlay"></div>
+    <div class="note-modal-card"><button class="note-modal-close">×</button>
+      <div class="note-modal-body"></div></div>
   </div>
 
   <script>
-    /* 1) Timeline — remplace "data.json" si besoin */
-    const timeline = new TL.Timeline("timeline-embed", "data.json", {
-      language: "fr",
-      hash_bookmark: true,
-      start_at_slide: 0
+  // ---- MODE À TESTER ----
+  const NOTE_MODE = "modal"; // "inline" | "drawer" | "modal"
+  // ------------------------
+
+  // Chargement JSON externe
+  fetch("data/timeline.json", {cache: "no-store"})
+    .then(r => r.json())
+    .then(data => {
+      const timeline = new TL.Timeline("timeline-embed", data, {language: "fr", initial_zoom: 2});
+      initNotesOverlay();
+    })
+    .catch(err => {
+      document.getElementById("timeline-embed").innerHTML = 
+        `<p style="color:#DAA520;padding:1rem;">Erreur de chargement du JSON (${err.message}).</p>`;
     });
 
-    /* 2) Contenus “internes” (exemples) */
-    const longNotes = {
-      "showroom-01": `
-        <h2>Pourquoi une frise ? — La fabrique, par la pratique</h2>
-        <div class="meta">Bloc relié à la slide « Pourquoi une frise ? »</div>
-        <p><i>Avant toute germination, il y a la préparation du sol.</i>
-        Ici, la frise est conçue comme un <b>écosystème narratif</b> :
-        un artefact de recherche qui rend visibles les transitions et la maturation,
-        plutôt que d’aligner des preuves.</p>
-        <p><i>Avant toute germination, il y a la préparation du sol.</i>
-        Ici, la frise est conçue comme un <b>écosystème narratif</b> :
-        un artefact de recherche qui rend visibles les transitions et la maturation,
-        plutôt que d’aligner des preuves.</p>
-        <p><i>Avant toute germination, il y a la préparation du sol.</i>
-        Ici, la frise est conçue comme un <b>écosystème narratif</b> :
-        un artefact de recherche qui rend visibles les transitions et la maturation,
-        plutôt que d’aligner des preuves.</p>
-      `
-      // Tu peux ajouter d'autres clés : "memo-passage": `...`, etc.
+  // Surcouche : inline / drawer / modal
+  function initNotesOverlay(){
+    const $ = sel => document.querySelector(sel);
+    const openFile = id => fetch(`notes/${id}.html`, {cache: "no-store"})
+      .then(r => r.ok ? r.text() : Promise.reject(new Error(`HTTP ${r.status}`)));
+
+    const inline = {
+      wrap: $('#note-inline'), body: $('#note-inline .note-inline-body'), closeBtn: $('#note-inline .note-inline-close'),
+      open(html){this.body.innerHTML = html; this.wrap.hidden = false; this.wrap.scrollIntoView({behavior:'smooth'});},
+      close(){this.wrap.hidden = true; this.body.innerHTML = '';},
+      bind(){this.closeBtn.addEventListener('click', () => this.close());}
     };
 
-    /* 3) Helpers UI */
-    const below     = document.getElementById('below-content');
-    const bodyEl    = document.getElementById('below-body');
-    const titleEl   = document.getElementById('below-title');
-    const closeBtn  = document.getElementById('below-close');
-    const toggleBtn = document.getElementById('below-toggle');
+    const drawer = {
+      wrap: $('#note-drawer'), body: $('#note-drawer .note-drawer-body'), closeBtn: $('#note-drawer .note-drawer-close'),
+      open(html){this.body.innerHTML = html; this.wrap.hidden = false; requestAnimationFrame(() => this.wrap.classList.add('open'));},
+      close(){this.wrap.classList.remove('open'); setTimeout(() => {this.wrap.hidden = true; this.body.innerHTML='';}, 350);},
+      bind(){this.closeBtn.addEventListener('click',()=>this.close());
+             document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!this.wrap.hidden)this.close();});}
+    };
 
-    // --- système "masque" (aperçu visuel, pas de coupe du contenu) ---
-    let isMasked = true;
+    const modal = {
+      wrap: $('#note-modal'), body: $('#note-modal .note-modal-body'),
+      closeBtn: $('#note-modal .note-modal-close'), overlay: $('#note-modal .note-modal-overlay'),
+      open(html){this.body.innerHTML = html; this.wrap.hidden = false;},
+      close(){this.wrap.hidden = true; this.body.innerHTML = '';},
+      bind(){this.closeBtn.addEventListener('click',()=>this.close());
+             this.overlay.addEventListener('click',()=>this.close());
+             document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!this.wrap.hidden)this.close();});}
+    };
 
-    function applyMask(state) {
-      isMasked = state;
-      bodyEl.classList.toggle('masked', isMasked);
-      toggleBtn.textContent = isMasked ? 'Voir plus' : 'Voir moins';
-      toggleBtn.setAttribute('aria-expanded', String(!isMasked));
-    }
+    const modes = {inline, drawer, modal};
+    modes[NOTE_MODE].bind();
 
-    function openBelow(titleHTML, innerHTML) {
-      titleEl.innerHTML = titleHTML || 'Document';
-      bodyEl.innerHTML  = innerHTML || '';
-      below.classList.remove('hidden');
-      applyMask(true); // aperçu au départ
-      below.scrollIntoView({ behavior:'smooth', block:'start' });
-    }
-
-    function closeBelow() {
-      below.classList.add('hidden');
-      titleEl.textContent = 'Document';
-      bodyEl.innerHTML = '';
-    }
-
-    closeBtn.addEventListener('click', closeBelow);
-    toggleBtn.addEventListener('click', () => applyMask(!isMasked));
-
-    // Déplier si clic dans le corps (hors liens/boutons)
-    bodyEl.addEventListener('click', (e) => {
-      if (e.target.closest('a,button')) return;
-      if (isMasked) applyMask(false);
-    });
-
-    /* 4) Clics dans les slides (liens "internes" ou "externes") */
-    document.addEventListener('click', async (e) => {
-      const link = e.target.closest('a[data-note-id], a[data-note-src]');
+    document.addEventListener('click', e => {
+      const link = e.target.closest('a[data-note-id]');
       if (!link) return;
       e.preventDefault();
-
-      const id    = link.getAttribute('data-note-id');
-      const src   = link.getAttribute('data-note-src');
-      const label = link.getAttribute('data-note-title') || link.textContent || 'Document';
-
-      if (id && longNotes[id]) {
-        openBelow(label, longNotes[id]);
-      } else if (src) {
-        // Doc externe via iframe (scroll global, pas d’aperçu)
-        const html = `<iframe src="${src}" title="Document externe" style="width:100%; height:60vh; border:0;"></iframe>`;
-        openBelow(label, html);
-        applyMask(false);
-      }
+      const id = link.getAttribute('data-note-id');
+      modes[NOTE_MODE].open(`<p>Chargement…</p>`);
+      openFile(id)
+        .then(html => modes[NOTE_MODE].open(html))
+        .catch(err => modes[NOTE_MODE].open(`<p>Contenu introuvable : <code>notes/${id}.html</code> (${err.message}).</p>`));
     });
-
-    /* 5) Fermer le bloc quand on change de slide (persistance OFF) */
-    timeline.on('change', () => {
-      closeBelow();
-    });
-
-    /* 6) Sécurise le scroll global (double filet) */
-    (function unlockPageScroll() {
-      const s = document.createElement('style');
-      s.textContent = `
-        html, body { height:auto !important; min-height:100% !important; overflow-y:auto !important; }
-        .tl-timeline { overflow: visible !important; }
-      `;
-      document.head.appendChild(s);
-    })();
+  }
   </script>
+
 </body>
 </html>
