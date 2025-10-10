@@ -1,214 +1,258 @@
 {
   "title": {
     "text": {
-      "headline": "Feuille de route recherche-action-participative",
-      "text": "Frise structurée par <b>pistes</b> (groups) et <b>ères</b> (Année 1, 2, 3+)."
+      "headline": "De l’IFMA aux territoires — Itinéraire d’une recherche-action participative",
+      "text": "Frise fusionnée : <b>cadre IFMA</b> (groupe de travail → AMI) × <b>RAP Creuse</b> (journaux de recherche, coordination, valorisation) — 2021 → 2026."
     }
   },
   "eras": [
     {
-      "unique_id": "era-a1",
-      "start_date": { "year": 2025, "month": 1, "day": 1 },
-      "end_date": { "year": 2025, "month": 12, "day": 31 },
-      "text": { "headline": "Année 1 · Lancer & cadrer" },
+      "start_date": { "year": 2021, "month": 10, "day": 1 },
+      "end_date":   { "year": 2023, "month": 12, "day": 31 },
+      "text": { "headline": "Préfigurer & amorcer" },
       "background": { "color": "#0B3C5D" }
     },
     {
-      "unique_id": "era-a2",
-      "start_date": { "year": 2026, "month": 1, "day": 1 },
-      "end_date": { "year": 2026, "month": 12, "day": 31 },
-      "text": { "headline": "Année 2 · Itérer & élargir" },
+      "start_date": { "year": 2024, "month": 1, "day": 1 },
+      "end_date":   { "year": 2025, "month": 12, "day": 31 },
+      "text": { "headline": "Rechercher & co-produire" },
       "background": { "color": "#6B2C91" }
     },
     {
-      "unique_id": "era-a3",
-      "start_date": { "year": 2027, "month": 1, "day": 1 },
-      "end_date": { "year": 2027, "month": 12, "day": 31 },
-      "text": { "headline": "Année 3+ · Consolider & partager" },
+      "start_date": { "year": 2026, "month": 1, "day": 1 },
+      "end_date":   { "year": 2026, "month": 12, "day": 31 },
+      "text": { "headline": "Valoriser & transmettre" },
       "background": { "color": "#14532D" }
     }
   ],
   "events": [
-    {
-      "start_date": { "year": 2025, "month": 1, "day": 15 },
+
+    { "start_date": { "year": 2021, "month": 10, "day": 1 },
       "group": "PROTOCOLE DE RECHERCHE",
       "text": {
-        "headline": "Lancement du protocole",
-        "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p><p><a href='#note' data-note-id='showroom-01' style='color:#DAA520'>En savoir plus</a></p>"
+        "headline": "IFMA — Démarrage du groupe « Fait associatif & territoires »",
+        "text": "<p>Constitution d’un collectif d’une vingtaine d’acteurs/chercheurs pour explorer la contribution du fait associatif aux territoires.</p><p><a href='#note' data-note-id='proto-2021' style='color:#DAA520'>En savoir plus</a></p>"
       },
       "background": { "color": "#0B3C5D" }
     },
-    {
-      "start_date": { "year": 2025, "month": 3, "day": 10 },
+    { "start_date": { "year": 2022, "month": 3, "day": 15 },
       "group": "PROTOCOLE DE RECHERCHE",
       "text": {
-        "headline": "Premières hypothèses",
-        "text": "Hypothèses H1–Hn & esquisse du protocole."
+        "headline": "IFMA — Note intermédiaire (axes & état de l’art)",
+        "text": "<p>Première synthèse : axes conceptuels, bibliographie consolidée, cadrage de l’AMI à venir.</p><p><a href='#note' data-note-id='proto-2022note' style='color:#DAA520'>En savoir plus</a></p>"
       },
       "background": { "color": "#0B3C5D" }
     },
-    {
-      "start_date": { "year": 2026, "month": 2, "day": 5 },
+    { "start_date": { "year": 2022, "month": 7, "day": 10 },
       "group": "PROTOCOLE DE RECHERCHE",
       "text": {
-        "headline": "Nouvelles hypothèses",
-        "text": "Affinement du protocole à partir des retours."
+        "headline": "Intuition fondatrice — Le Villard (Royère-de-Vassivière)",
+        "text": "<p>Un matin de juillet, Jérôme imagine une exploration des <i>archives des Plateaux Limousins</i> pour relier mémoire associative et recherche.</p><p><a href='#note' data-note-id='proto-jerome' style='color:#DAA520'>En savoir plus</a></p>"
       },
       "background": { "color": "#0B3C5D" }
     },
-    {
-      "start_date": { "year": 2027, "month": 5, "day": 15 },
+    { "start_date": { "year": 2023, "month": 5, "day": 23 },
       "group": "PROTOCOLE DE RECHERCHE",
       "text": {
-        "headline": "Analyse & rédaction des livrables",
-        "text": "Synthèses, rapports, articles."
+        "headline": "Publication de l’AMI IFMA",
+        "text": "<p>Appel « Quelle contribution du fait associatif aux territoires ? » ouvert aux recherches participatives et classiques.</p><p><a href='#note' data-note-id='proto-ami-launch' style='color:#DAA520'>En savoir plus</a></p>"
       },
       "background": { "color": "#0B3C5D" }
     },
-    {
-      "start_date": { "year": 2025, "month": 2, "day": 1 },
-      "group": "ÉVALUATION DE PROJETS",
-      "text": {
-        "headline": "Objets à évaluer & indicateurs",
-        "text": "Cadre d’évaluation (mesures + récits)."
-      },
-      "background": { "color": "#6B2C91" }
-    },
-    {
-      "start_date": { "year": 2025, "month": 6, "day": 1 },
-      "group": "ÉVALUATION DE PROJETS",
-      "text": {
-        "headline": "Évaluations itératives #1",
-        "text": "Boucle court terme (apprentissages)."
-      },
-      "background": { "color": "#6B2C91" }
-    },
-    {
-      "start_date": { "year": 2026, "month": 6, "day": 1 },
-      "group": "ÉVALUATION DE PROJETS",
-      "text": {
-        "headline": "Évaluations itératives #2",
-        "text": "Nouveaux indicateurs intégrés."
-      },
-      "background": { "color": "#6B2C91" }
-    },
-    {
-      "start_date": { "year": 2027, "month": 3, "day": 1 },
-      "group": "ÉVALUATION DE PROJETS",
-      "text": {
-        "headline": "Partage des résultats (éval.)",
-        "text": "Restitution dédiée évaluation."
-      },
-      "background": { "color": "#6B2C91" }
-    },
-    {
-      "start_date": { "year": 2025, "month": 1, "day": 25 },
-      "group": "CO-CONSTRUCTION",
-      "text": {
-        "headline": "État de l’art",
-        "text": "Revue des pratiques & références."
-      },
-      "background": { "color": "#9A3412" }
-    },
-    {
-      "start_date": { "year": 2025, "month": 4, "day": 5 },
-      "group": "CO-CONSTRUCTION",
-      "text": {
-        "headline": "Appel à participation",
-        "text": "Entrée des parties prenantes."
-      },
-      "background": { "color": "#9A3412" }
-    },
-    {
-      "start_date": { "year": 2025, "month": 9, "day": 20 },
-      "group": "CO-CONSTRUCTION",
-      "text": {
-        "headline": "Charte de valeurs & d’action",
-        "text": "Référentiel commun (droits/devoirs)."
-      },
-      "background": { "color": "#9A3412" }
-    },
-    {
-      "start_date": { "year": 2026, "month": 3, "day": 1 },
-      "group": "CO-CONSTRUCTION",
-      "text": {
-        "headline": "Ateliers de co-construction (série)",
-        "text": "Cycles d’ateliers & prototypages."
-      },
-      "background": { "color": "#9A3412" }
-    },
-    {
-      "start_date": { "year": 2027, "month": 6, "day": 15 },
-      "group": "CO-CONSTRUCTION",
-      "text": {
-        "headline": "Partage des résultats (co-construction)",
-        "text": "Synthèse commune & suites."
-      },
-      "background": { "color": "#9A3412" }
-    },
-    {
-      "start_date": { "year": 2025, "month": 2, "day": 15 },
+    { "start_date": { "year": 2023, "month": 6, "day": 8 },
       "group": "COORDINATION",
       "text": {
-        "headline": "Signature du consortium",
-        "text": "Accords, mandats, gouvernance."
+        "headline": "Webinaire national de présentation (IFMA)",
+        "text": "<p>Présentation de l’AMI et échanges méthodologiques avec les équipes candidates.</p><p><a href='#note' data-note-id='coord-webinaire-08juin23' style='color:#DAA520'>En savoir plus</a></p>"
       },
       "background": { "color": "#1F6F50" }
     },
-    {
-      "start_date": { "year": 2025, "month": 5, "day": 1 },
+    { "start_date": { "year": 2023, "month": 9, "day": 14 },
+      "group": "PROTOCOLE DE RECHERCHE",
+      "text": {
+        "headline": "Lettre d’intention déposée (Creuse)",
+        "text": "<p>Collectif local (RER / Plateaux / Café / Déclic) — proposition de recherche participative ancrée en milieu rural.</p><p><a href='#note' data-note-id='proto-loi-14sept23' style='color:#DAA520'>En savoir plus</a></p>"
+      },
+      "background": { "color": "#0B3C5D" }
+    },
+    { "start_date": { "year": 2023, "month": 11, "day": 9 },
       "group": "COORDINATION",
       "text": {
-        "headline": "Comité de pilotage (récurrent)",
-        "text": "Rituels de suivi trimestriels."
+        "headline": "Séminaire acteurs-chercheurs (Paris)",
+        "text": "<p>Cadrage des projets présélectionnés, mise en lien et points de vigilance méthodologique (tiers veillant, co-définition des livrables).</p><p><a href='#note' data-note-id='coord-seminaire-09nov23' style='color:#DAA520'>En savoir plus</a></p>"
       },
       "background": { "color": "#1F6F50" }
     },
-    {
-      "start_date": { "year": 2026, "month": 5, "day": 1 },
+    { "start_date": { "year": 2024, "month": 1, "day": 10 },
+      "group": "PROTOCOLE DE RECHERCHE",
+      "text": {
+        "headline": "Dossier complet déposé (recherche participative Creuse)",
+        "text": "<p>Soumission finale au jury IFMA : hypothèses, gouvernance, calendrier, livrables, tiers-veille.</p><p><a href='#note' data-note-id='proto-depot-10jan24' style='color:#DAA520'>En savoir plus</a></p>"
+      },
+      "background": { "color": "#0B3C5D" }
+    },
+
+    { "start_date": { "year": 2024, "month": 5, "day": 30 },
+      "group": "CO-CONSTRUCTION",
+      "text": {
+        "headline": "Réunion de cadrage — question de recherche",
+        "text": "<p>Formulation collective : « Comment la géographie sensible des associations évolue-t-elle… ? »</p><p><a href='#note' data-note-id='cocon-30mai24' style='color:#DAA520'>En savoir plus</a></p>"
+      },
+      "background": { "color": "#9A3412" }
+    },
+    { "start_date": { "year": 2024, "month": 7, "day": 23 },
+      "group": "CO-CONSTRUCTION",
+      "text": {
+        "headline": "Flayat — plan d’enquête & personnes ressources",
+        "text": "<p>Outils partagés, guides d’entretiens, premières listes de répondants.</p><p><a href='#note' data-note-id='cocon-23juil24' style='color:#DAA520'>En savoir plus</a></p>"
+      },
+      "background": { "color": "#9A3412" }
+    },
+    { "start_date": { "year": 2024, "month": 9, "day": 23 },
+      "group": "CO-CONSTRUCTION",
+      "text": {
+        "headline": "Consolidation des 4 axes",
+        "text": "<p>Territoire, trajectoires associatives, parcours des personnes, réseaux d’interconnaissance.</p><p><a href='#note' data-note-id='cocon-23sept24' style='color:#DAA520'>En savoir plus</a></p>"
+      },
+      "background": { "color": "#9A3412" }
+    },
+    { "start_date": { "year": 2024, "month": 11, "day": 18 },
+      "group": "CO-CONSTRUCTION",
+      "text": {
+        "headline": "Aubusson — premiers retours d’entretiens",
+        "text": "<p>Entretiens collectifs (Plateaux Limousins) ; préparation des approfondissements par association.</p><p><a href='#note' data-note-id='cocon-18nov24' style='color:#DAA520'>En savoir plus</a></p>"
+      },
+      "background": { "color": "#9A3412" }
+    },
+
+    { "start_date": { "year": 2025, "month": 2, "day": 10 },
+      "group": "ÉVALUATION DE PROJETS",
+      "text": {
+        "headline": "Réunion 10/02 — premières analyses",
+        "text": "<p>Thèmes émergents : « familles choisies », dynamiques rurales, liens aux institutions.</p><p><a href='#note' data-note-id='eval-10fev25' style='color:#DAA520'>En savoir plus</a></p>"
+      },
+      "background": { "color": "#6B2C91" }
+    },
+
+    { "start_date": { "year": 2025, "month": 3, "day": 17 },
       "group": "COORDINATION",
       "text": {
-        "headline": "Comité de pilotage (série)",
-        "text": "Points d’étape & arbitrages."
+        "headline": "Temps de partage — Aubusson",
+        "text": "<p>Mise en commun transverse des matériaux ; amorce d’hypothèses consolidées.</p><p><a href='#note' data-note-id='coord-17mars25' style='color:#DAA520'>En savoir plus</a></p>"
       },
       "background": { "color": "#1F6F50" }
     },
-    {
-      "start_date": { "year": 2025, "month": 3, "day": 20 },
+
+    { "start_date": { "year": 2025, "month": 4, "day": 14 },
+      "group": "COORDINATION",
+      "text": {
+        "headline": "Préparation de la journée d’octobre",
+        "text": "<p>Enjeux : articulation Aliso / IFMA / DLA ; formats de restitution ; publics cibles.</p><p><a href='#note' data-note-id='coord-14avr25' style='color:#DAA520'>En savoir plus</a></p>"
+      },
+      "background": { "color": "#1F6F50" }
+    },
+
+    { "start_date": { "year": 2025, "month": 6, "day": 3 },
+      "group": "ÉVALUATION DE PROJETS",
+      "text": {
+        "headline": "Projection des livrables & plan de lectures",
+        "text": "<p>Discussion formats (rapport, récits, modules, podcasts), plan de travail croisé biblio ↔ entretiens.</p><p><a href='#note' data-note-id='eval-03juin25' style='color:#DAA520'>En savoir plus</a></p>"
+      },
+      "background": { "color": "#6B2C91" }
+    },
+    { "start_date": { "year": 2025, "month": 6, "day": 4 },
+      "group": "COORDINATION",
+      "text": {
+        "headline": "Réunion inter-binômes — Aubusson",
+        "text": "<p>Alignement lectures ↔ données ; calage du calendrier d’ateliers vers l’automne.</p><p><a href='#note' data-note-id='coord-04juin25' style='color:#DAA520'>En savoir plus</a></p>"
+      },
+      "background": { "color": "#1F6F50" }
+    },
+
+    { "start_date": { "year": 2025, "month": 7, "day": 18 },
+      "group": "COORDINATION",
+      "text": {
+        "headline": "Séminaire d’été #1 — Le Villard (Royère-de-Vassivière)",
+        "text": "<p>Bilans méthodologiques, partage d’avancées, ajustements collectifs.</p><p><a href='#note' data-note-id='coord-18juil25' style='color:#DAA520'>En savoir plus</a></p>"
+      },
+      "background": { "color": "#1F6F50" }
+    },
+    { "start_date": { "year": 2025, "month": 7, "day": 19 },
+      "group": "COORDINATION",
+      "text": {
+        "headline": "Séminaire d’été #2 — Le Villard (Royère-de-Vassivière)",
+        "text": "<p>Mise en cohérence des plans de rédaction, articulation avec la programmation d’automne.</p><p><a href='#note' data-note-id='coord-19juil25' style='color:#DAA520'>En savoir plus</a></p>"
+      },
+      "background": { "color": "#1F6F50" }
+    },
+    { "start_date": { "year": 2025, "month": 7, "day": 20 },
+      "group": "COORDINATION",
+      "text": {
+        "headline": "Séminaire d’été #3 — Le Villard (Royère-de-Vassivière)",
+        "text": "<p>Clôture : validation des axes, planning des contributions, modalités de restitution.</p><p><a href='#note' data-note-id='coord-20juil25' style='color:#DAA520'>En savoir plus</a></p>"
+      },
+      "background": { "color": "#1F6F50" }
+    },
+
+    { "start_date": { "year": 2025, "month": 9, "day": 4 },
+      "group": "CO-CONSTRUCTION",
+      "text": {
+        "headline": "Conception des ateliers du 16/10",
+        "text": "<p>Atelier 1 (appartenance & mixité), Atelier 2 (stabilité associative), Atelier 3 (réseaux & dynamiques).</p><p><a href='#note' data-note-id='cocon-04sept25' style='color:#DAA520'>En savoir plus</a></p>"
+      },
+      "background": { "color": "#9A3412" }
+    },
+    { "start_date": { "year": 2025, "month": 10, "day": 2 },
+      "group": "COORDINATION",
+      "text": {
+        "headline": "Pilotage & budget — point d’étape",
+        "text": "<p>Validation calendrier final et enveloppes (IFMA, DLA) avant la journée publique.</p><p><a href='#note' data-note-id='coord-02oct25' style='color:#DAA520'>En savoir plus</a></p>"
+      },
+      "background": { "color": "#1F6F50" }
+    },
+
+    { "start_date": { "year": 2025, "month": 10, "day": 16 },
       "group": "VALORISATION",
       "text": {
-        "headline": "Comm. aux parties prenantes",
-        "text": "Newsletters, rendez-vous, site projet."
+        "headline": "Journée de recherche ouverte — Guéret",
+        "text": "<p>Restitution intermédiaire publique : ateliers, discussions, retours croisés (associations/chercheurs).</p><p><a href='#note' data-note-id='valo-16oct25' style='color:#DAA520'>En savoir plus</a></p>"
       },
       "background": { "color": "#14532D" }
     },
-    {
-      "start_date": { "year": 2025, "month": 7, "day": 1 },
-      "group": "VALORISATION",
+
+    { "start_date": { "year": 2025, "month": 12, "day": 15 },
+      "group": "ÉVALUATION DE PROJETS",
       "text": {
-        "headline": "Veille mensuelle (récurrente)",
-        "text": "Dispositif de veille & curation.",
-        "media": { "caption": "Rythme mensuel" }
+        "headline": "Synthèse intermédiaire — Aubusson",
+        "text": "<p>Lecture croisée des 3 axes ; préparation de la rédaction finale.</p><p><a href='#note' data-note-id='eval-15dec25' style='color:#DAA520'>En savoir plus</a></p>"
       },
-      "background": { "color": "#14532D" }
+      "background": { "color": "#6B2C91" }
     },
-    {
-      "start_date": { "year": 2026, "month": 10, "day": 15 },
-      "group": "VALORISATION",
+    { "start_date": { "year": 2026, "month": 1, "day": 15 },
+      "group": "ÉVALUATION DE PROJETS",
       "text": {
-        "headline": "Livrable intermédiaire",
-        "text": "Note de synthèse publique."
+        "headline": "Lecture globale des axes",
+        "text": "<p>Analyse transversale : cohérence, résultats, ouvertures.</p><p><a href='#note' data-note-id='eval-15jan26' style='color:#DAA520'>En savoir plus</a></p>"
       },
-      "background": { "color": "#14532D" }
+      "background": { "color": "#6B2C91" }
     },
-    {
-      "start_date": { "year": 2027, "month": 9, "day": 30 },
+    { "start_date": { "year": 2026, "month": 2, "day": 28 },
+      "group": "ÉVALUATION DE PROJETS",
+      "text": {
+        "headline": "Bouclage du rapport final",
+        "text": "<p>Finalisation : rapport scientifique, rapport financier, livrables de valorisation.</p><p><a href='#note' data-note-id='eval-28fev26' style='color:#DAA520'>En savoir plus</a></p>"
+      },
+      "background": { "color": "#6B2C91" }
+    },
+
+    { "start_date": { "year": 2026, "month": 3, "day": 23 },
       "group": "VALORISATION",
       "text": {
-        "headline": "Communications & publications",
-        "text": "Conf., articles, dossiers pédagogiques."
+        "headline": "Bilan partagé — Aubusson",
+        "text": "<p>Rencontre finale : restitution complète & perspectives (formation, publications, frises publiques).</p><p><a href='#note' data-note-id='valo-23mars26' style='color:#DAA520'>En savoir plus</a></p>"
       },
       "background": { "color": "#14532D" }
     }
+
   ]
 }
