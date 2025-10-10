@@ -32,121 +32,182 @@
     {
       "start_date": { "year": 2025, "month": 1, "day": 15 },
       "group": "PROTOCOLE DE RECHERCHE",
-      "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p><p><a href='#note' data-note-id='showroom-01' style='color:#DAA520'>En savoir plus</a></p>",
+      "text": {
+        "headline": "Lancement du protocole",
+        "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p><p><a href='#note' data-note-id='showroom-01' style='color:#DAA520'>En savoir plus</a></p>"
+      },
       "background": { "color": "#0B3C5D" }
     },
     {
       "start_date": { "year": 2025, "month": 3, "day": 10 },
       "group": "PROTOCOLE DE RECHERCHE",
-      "text": { "headline": "Premières hypothèses", "text": "Hypothèses H1–Hn & esquisse du protocole." },
+      "text": {
+        "headline": "Premières hypothèses",
+        "text": "Hypothèses H1–Hn & esquisse du protocole."
+      },
       "background": { "color": "#0B3C5D" }
     },
     {
       "start_date": { "year": 2026, "month": 2, "day": 5 },
       "group": "PROTOCOLE DE RECHERCHE",
-      "text": { "headline": "Nouvelles hypothèses", "text": "Affinement du protocole à partir des retours." },
+      "text": {
+        "headline": "Nouvelles hypothèses",
+        "text": "Affinement du protocole à partir des retours."
+      },
       "background": { "color": "#0B3C5D" }
     },
     {
       "start_date": { "year": 2027, "month": 5, "day": 15 },
       "group": "PROTOCOLE DE RECHERCHE",
-      "text": { "headline": "Analyse & rédaction des livrables", "text": "Synthèses, rapports, articles." },
+      "text": {
+        "headline": "Analyse & rédaction des livrables",
+        "text": "Synthèses, rapports, articles."
+      },
       "background": { "color": "#0B3C5D" }
     },
     {
       "start_date": { "year": 2025, "month": 2, "day": 1 },
       "group": "ÉVALUATION DE PROJETS",
-      "text": { "headline": "Objets à évaluer & indicateurs", "text": "Cadre d’évaluation (mesures + récits)." },
+      "text": {
+        "headline": "Objets à évaluer & indicateurs",
+        "text": "Cadre d’évaluation (mesures + récits)."
+      },
       "background": { "color": "#6B2C91" }
     },
     {
       "start_date": { "year": 2025, "month": 6, "day": 1 },
       "group": "ÉVALUATION DE PROJETS",
-      "text": { "headline": "Évaluations itératives #1", "text": "Boucle court terme (apprentissages)." },
+      "text": {
+        "headline": "Évaluations itératives #1",
+        "text": "Boucle court terme (apprentissages)."
+      },
       "background": { "color": "#6B2C91" }
     },
     {
       "start_date": { "year": 2026, "month": 6, "day": 1 },
       "group": "ÉVALUATION DE PROJETS",
-      "text": { "headline": "Évaluations itératives #2", "text": "Nouveaux indicateurs intégrés." },
+      "text": {
+        "headline": "Évaluations itératives #2",
+        "text": "Nouveaux indicateurs intégrés."
+      },
       "background": { "color": "#6B2C91" }
     },
     {
       "start_date": { "year": 2027, "month": 3, "day": 1 },
       "group": "ÉVALUATION DE PROJETS",
-      "text": { "headline": "Partage des résultats (éval.)", "text": "Restitution dédiée évaluation." },
+      "text": {
+        "headline": "Partage des résultats (éval.)",
+        "text": "Restitution dédiée évaluation."
+      },
       "background": { "color": "#6B2C91" }
     },
     {
       "start_date": { "year": 2025, "month": 1, "day": 25 },
       "group": "CO-CONSTRUCTION",
-      "text": { "headline": "État de l’art", "text": "Revue des pratiques & références." },
+      "text": {
+        "headline": "État de l’art",
+        "text": "Revue des pratiques & références."
+      },
       "background": { "color": "#9A3412" }
     },
     {
       "start_date": { "year": 2025, "month": 4, "day": 5 },
       "group": "CO-CONSTRUCTION",
-      "text": { "headline": "Appel à participation", "text": "Entrée des parties prenantes." },
+      "text": {
+        "headline": "Appel à participation",
+        "text": "Entrée des parties prenantes."
+      },
       "background": { "color": "#9A3412" }
     },
     {
       "start_date": { "year": 2025, "month": 9, "day": 20 },
       "group": "CO-CONSTRUCTION",
-      "text": { "headline": "Charte de valeurs & d’action", "text": "Référentiel commun (droits/devoirs)." },
+      "text": {
+        "headline": "Charte de valeurs & d’action",
+        "text": "Référentiel commun (droits/devoirs)."
+      },
       "background": { "color": "#9A3412" }
     },
     {
       "start_date": { "year": 2026, "month": 3, "day": 1 },
       "group": "CO-CONSTRUCTION",
-      "text": { "headline": "Ateliers de co-construction (série)", "text": "Cycles d’ateliers & prototypages." },
+      "text": {
+        "headline": "Ateliers de co-construction (série)",
+        "text": "Cycles d’ateliers & prototypages."
+      },
       "background": { "color": "#9A3412" }
     },
     {
       "start_date": { "year": 2027, "month": 6, "day": 15 },
       "group": "CO-CONSTRUCTION",
-      "text": { "headline": "Partage des résultats (co-construction)", "text": "Synthèse commune & suites." },
+      "text": {
+        "headline": "Partage des résultats (co-construction)",
+        "text": "Synthèse commune & suites."
+      },
       "background": { "color": "#9A3412" }
     },
     {
       "start_date": { "year": 2025, "month": 2, "day": 15 },
       "group": "COORDINATION",
-      "text": { "headline": "Signature du consortium", "text": "Accords, mandats, gouvernance." },
+      "text": {
+        "headline": "Signature du consortium",
+        "text": "Accords, mandats, gouvernance."
+      },
       "background": { "color": "#1F6F50" }
     },
     {
       "start_date": { "year": 2025, "month": 5, "day": 1 },
       "group": "COORDINATION",
-      "text": { "headline": "Comité de pilotage (récurrent)", "text": "Rituels de suivi trimestriels." },
+      "text": {
+        "headline": "Comité de pilotage (récurrent)",
+        "text": "Rituels de suivi trimestriels."
+      },
       "background": { "color": "#1F6F50" }
     },
     {
       "start_date": { "year": 2026, "month": 5, "day": 1 },
       "group": "COORDINATION",
-      "text": { "headline": "Comité de pilotage (série)", "text": "Points d’étape & arbitrages." },
+      "text": {
+        "headline": "Comité de pilotage (série)",
+        "text": "Points d’étape & arbitrages."
+      },
       "background": { "color": "#1F6F50" }
     },
     {
       "start_date": { "year": 2025, "month": 3, "day": 20 },
       "group": "VALORISATION",
-      "text": { "headline": "Comm. aux parties prenantes", "text": "Newsletters, rendez-vous, site projet." },
+      "text": {
+        "headline": "Comm. aux parties prenantes",
+        "text": "Newsletters, rendez-vous, site projet."
+      },
       "background": { "color": "#14532D" }
     },
     {
       "start_date": { "year": 2025, "month": 7, "day": 1 },
       "group": "VALORISATION",
-      "text": { "headline": "Veille mensuelle (récurrente)", "text": "Dispositif de veille & curation.", "media": { "caption": "Rythme mensuel" } },
+      "text": {
+        "headline": "Veille mensuelle (récurrente)",
+        "text": "Dispositif de veille & curation.",
+        "media": { "caption": "Rythme mensuel" }
+      },
       "background": { "color": "#14532D" }
     },
     {
       "start_date": { "year": 2026, "month": 10, "day": 15 },
       "group": "VALORISATION",
-      "text": { "headline": "Livrable intermédiaire", "text": "Note de synthèse publique." },
+      "text": {
+        "headline": "Livrable intermédiaire",
+        "text": "Note de synthèse publique."
+      },
       "background": { "color": "#14532D" }
     },
     {
       "start_date": { "year": 2027, "month": 9, "day": 30 },
       "group": "VALORISATION",
-      "text": { "headline": "Communications & publications", "text": "Conf., articles, dossiers pédagogiques." },
+      "text": {
+        "headline": "Communications & publications",
+        "text": "Conf., articles, dossiers pédagogiques."
+      },
       "background": { "color": "#14532D" }
     }
   ]
