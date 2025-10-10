@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Incubation d'une thèse — Journal transactionnel</title>
+
+  <!-- Styles & scripts Timeline KnightLab -->
+  <link rel="stylesheet" href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css" />
+  <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
+
+  <style>
+    body { background:#fff; color:#111; font-family:system-ui,sans-serif; margin:0; padding:0; }
+
+    /* --- INLINE --- */
+    #note-inline[hidden]{display:none;}
+    #note-inline{margin-top:1rem;}
+    .note-inline-card{background:#0b0f19;color:#e5e7eb;border:1px solid #1f2937;border-radius:12px;
+      padding:1rem 1.25rem;line-height:1.6;}
+    .note-inline-close{float:right;background:transparent;border:none;color:#e5e7eb;font-size:1.5rem;cursor:pointer;}
+    .note-inline-body a{color:#DAA520;text-decoration:underline;}
+
+    /* --- DRAWER --- */
+    #note-drawer[hidden]{display:none;}
+    #note-drawer{position:fixed;top:0;right:0;height:100vh;width:0;overflow:hidden;background:#0b0f19;
+      color:#e5e7eb;border-left:1px solid #1f2937;transition:width .35s ease;z-index:9999;}
+    #note-drawer.open{width:min(720px,80vw);}
+    .note-drawer-close{position:absolute;top:.5rem;right:.5rem;background:transparent;border:none;
+      color:#e5e7eb;font-size:1.5rem;cursor:pointer;}
+    .note-drawer-body{padding:1.25rem 1.5rem;line-height:1.6;}
+    .note-drawer-body a{color:#DAA520;text-decoration:underline;}
+
+    /* --- MODAL --- */
+    #note-modal[hidden]{display:none;}
+    #note-modal{position:fixed;inset:0;z-index:9999;}
+    .note-modal-overlay{position:absolute;inset:0;background:rgba(0,0,0,.6);}
+    .note-modal-card{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+      width:min(780px,92vw);max-height:80vh;overflow:auto;background:#0b0f19;color:#e5e7eb;
+      border:1px solid #1f2937;border-radius:12px;}
+    .note-modal-close{position:absolute;top:.5rem;right:.5rem;background:transparent;border:none;
+      color:#e5e7eb;font-size:1.5rem;cursor:pointer;}
+    .note-modal-body{padding:1.25rem 1.5rem;line-height:1.6;}
+    .note-modal-body a{color:#DAA520;text-decoration:underline;}
+
+    /* Libellés de groupe sur l’axe */
+    .tl-timegroup-message {
+      opacity: 1 !important;
+      color: #111 !important;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Frise -->
+  <div id="timeline-embed" style="width:100%;height:600px"></div>
+
+  <!-- Conteneurs des trois modes -->
+  <div id="note-inline" hidden>
+    <article class="note-inline-card"><button class="note-inline-close" aria-label="Fermer">×</button>
+      <div class="note-inline-body"></div></article>
+  </div>
+
+  <div id="note-drawer" hidden>
+    <button class="note-drawer-close" aria-label="Fermer">×</button>
+    <div class="note-drawer-body"></div>
+  </div>
+
+  <div id="note-modal" hidden>
+    <div class="note-modal-overlay"></div>
+    <div class="note-modal-card"><button class="note-modal-close" aria-label="Fermer">×</button>
+      <div class="note-modal-body"></div></div>
+  </div>
+
+  <script>
+    // ---- MODE À TESTER ----
+    const NOTE_MODE = "modal"; // "inline" | "drawer" | "modal"
+    // ------------------------
+
+    // Instanciation de la frise après chargement du JSON externe
+    const mountTimeline = (data) => {
+      new TL.Timeline("timeline-embed", data, { language: "fr", initial_zoom: 2 });
+    };
+
+    // État simple de chargement
+    const showLoading = (msg = "Chargement…") => {
+      const el = document.getElementById("timeline-embed");
+      el.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:1rem;color:#e5e7eb">${msg}</div>`;
+    };
+
+    // Charger data.json (même niveau que index.html)
+    showLoading();
+    fetch("./ftidata.json", { cache: "no-store" })
+      .then(r => r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`)))
+      .then(json => mountTimeline(json))
+      .catch(err => {
+        const el = document.getElementById("timeline-embed");
+        el.innerHTML = `<div style="padding:1rem">Impossible de charger <code>data.json</code> (${err.message}).</div>`;
+      });
+
+    // Gestion surcouche notes externes
+    (function(){
+      const $ = sel => document.querySelector(sel);
+      const openFile = id => fetch(`notes/${id}.html`, { cache:'no-store' })
+        .then(r => r.ok ? r.text() : Promise.reject(new Error(`HTTP ${r.status}`)));
+
+      const inline = {
+        wrap: $('#note-inline'),
+        body: $('#note-inline .note-inline-body'),
+        closeBtn: $('#note-inline .note-inline-close'),
+        open(html){ this.body.innerHTML = html; this.wrap.hidden = false; this.wrap.scrollIntoView({behavior:'smooth'}); },
+        close(){ this.wrap.hidden = true; this.body.innerHTML=''; },
+        bind(){ this.closeBtn.addEventListener('click', () => this.close()); }
+      };
+
+      const drawer = {
+        wrap: $('#note-drawer'),
+        body: $('#note-drawer .note-drawer-body'),
+        closeBtn: $('#note-drawer .note-drawer-close'),
+        open(html){ this.body.innerHTML = html; this.wrap.hidden = false; requestAnimationFrame(() => this.wrap.classList.add('open')); },
+        close(){ this.wrap.classList.remove('open'); setTimeout(() => { this.wrap.hidden = true; this.body.innerHTML=''; }, 350); },
+        bind(){
+          this.closeBtn.addEventListener('click', () => this.close());
+          document.addEventListener('keydown', e => { if(e.key === 'Escape' && !this.wrap.hidden) this.close(); });
+        }
+      };
+
+      const modal = {
+        wrap: $('#note-modal'),
+        body: $('#note-modal .note-modal-body'),
+        closeBtn: $('#note-modal .note-modal-close'),
+        overlay: $('#note-modal .note-modal-overlay'),
+        open(html){ this.body.innerHTML = html; this.wrap.hidden = false; },
+        close(){ this.wrap.hidden = true; this.body.innerHTML=''; },
+        bind(){
+          this.closeBtn.addEventListener('click', () => this.close());
+          this.overlay.addEventListener('click', () => this.close());
+          document.addEventListener('keydown', e => { if(e.key === 'Escape' && !this.wrap.hidden) this.close(); });
+        }
+      };
+
+      const modes = { inline, drawer, modal };
+      modes[NOTE_MODE].bind();
+
+      document.addEventListener('click', e => {
+        const link = e.target.closest('a[data-note-id]');
+        if(!link) return;
+        e.preventDefault();
+        const id = link.getAttribute('data-note-id');
+        // petit état de chargement dans le conteneur actif
+        modes[NOTE_MODE].open('<p>Chargement…</p>');
+        openFile(id)
+          .then(html => modes[NOTE_MODE].open(html))
+          .catch(err => modes[NOTE_MODE].open(`<p>Contenu introuvable : <code>notes/${id}.html</code> (${err.message}).</p>`));
+      });
+    })();
+  </script>
+
+</body>
+</html>
