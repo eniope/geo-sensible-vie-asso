@@ -32,8 +32,10 @@
     {
       "start_date": { "year": 2025, "month": 1, "day": 15 },
       "group": "PROTOCOLE DE RECHERCHE",
-      "text": { "headline": "Définition de l’objet de recherche", "text": "Questions, besoins, demandes → cadrage initial." },
+       "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p><p><a href='#note' data-note-id='showroom-01' style='color:#DAA520'>En savoir plus</a></p>"
+      },
       "background": { "color": "#0B3C5D" }
+    },
     },
     {
       "start_date": { "year": 2025, "month": 3, "day": 10 },
