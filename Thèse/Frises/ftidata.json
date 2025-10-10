@@ -33,7 +33,6 @@
       "start_date": { "year": 2025, "month": 1, "day": 15 },
       "group": "PROTOCOLE DE RECHERCHE",
        "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p><p><a href='#note' data-note-id='showroom-01' style='color:#DAA520'>En savoir plus</a></p>"
-      },
       "background": { "color": "#0B3C5D" }
     },
     {
