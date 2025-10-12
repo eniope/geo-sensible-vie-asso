@@ -30,17 +30,55 @@
     .note-drawer-body{padding:1.25rem 1.5rem;line-height:1.6;}
     .note-drawer-body a{color:#DAA520;text-decoration:underline;}
 
-    /* --- MODAL --- */
-    #note-modal[hidden]{display:none;}
-    #note-modal{position:fixed;inset:0;z-index:9999;}
-    .note-modal-overlay{position:absolute;inset:0;background:rgba(0,0,0,.6);}
-    .note-modal-card{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
-      width:min(780px,92vw);max-height:80vh;overflow:auto;background:#0b0f19;color:#e5e7eb;
-      border:1px solid #1f2937;border-radius:12px;}
-    .note-modal-close{position:absolute;top:.5rem;right:.5rem;background:transparent;border:none;
-      color:#e5e7eb;font-size:1.5rem;cursor:pointer;}
-    .note-modal-body{padding:1.25rem 1.5rem;line-height:1.6;}
-    .note-modal-body a{color:#DAA520;text-decoration:underline;}
+    /* --- MODAL (thème clair “bibliothèque”) --- */
+#note-modal[hidden]{display:none;}
+#note-modal{position:fixed;inset:0;z-index:9999;}
+/* voile plus léger pour éviter l'effet triste */
+.note-modal-overlay{
+  position:absolute;inset:0;background:rgba(0,0,0,.35);
+}
+.note-modal-card{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:min(780px,92vw);max-height:80vh;overflow:auto;
+  /* fond clair + texte sombre */
+  background:#fffef8;              /* ivoire doux */
+  color:#1b1b1b;
+  border:1px solid #d9cbb3;        /* bordure chaude, discrète */
+  border-radius:12px;
+  box-shadow:0 12px 28px rgba(0,0,0,.18), 0 2px 6px rgba(0,0,0,.06);
+}
+.note-modal-close{
+  position:absolute;top:.5rem;right:.5rem;
+  background:transparent;border:none;
+  color:#6b5630;                   /* proche des liens dorés mais plus sombre */
+  font-size:1.5rem;cursor:pointer;
+}
+.note-modal-close:hover,
+.note-modal-close:focus{
+  outline:none;
+  color:#3f321a;
+  text-shadow:0 0 1px rgba(0,0,0,.15);
+}
+.note-modal-body{
+  padding:1.25rem 1.5rem;line-height:1.65;
+}
+.note-modal-body a{
+  color:#8a6b19;                   /* doré doux lisible sur fond clair */
+  text-decoration:underline;
+}
+.note-modal-body a:hover,
+.note-modal-body a:focus{
+  color:#5e4c12;
+  outline:none;
+}
+.note-modal-body h2, .note-modal-body h3{
+  color:#2a2a2a;
+}
+.note-modal-body blockquote{
+  margin:0 0 1rem 0;padding:.75rem 1rem;
+  border-left:4px solid #d9cbb3;background:#fff9ee;border-radius:8px;
+}
+
 
     /* Libellés de groupe sur l’axe */
     .tl-timegroup-message {
