@@ -149,4 +149,26 @@
         bind(){
           this.closeBtn.addEventListener('click', () => this.close());
           this.overlay.addEventListener('click', () => this.close());
-          document.addEventListener('
+          document.addEventListener('keydown', e => { if(e.key === 'Escape' && !this.wrap.hidden) this.close(); });
+        }
+      };
+
+      const modes = { inline, drawer, modal };
+      modes[NOTE_MODE].bind();
+
+      document.addEventListener('click', e => {
+        const link = e.target.closest('a[data-note-id]');
+        if(!link) return;
+        e.preventDefault();
+        const id = link.getAttribute('data-note-id');
+        // petit état de chargement dans le conteneur actif
+        modes[NOTE_MODE].open('<p>Chargement…</p>');
+        openFile(id)
+          .then(html => modes[NOTE_MODE].open(html))
+          .catch(err => modes[NOTE_MODE].open(`<p>Contenu introuvable : <code>notes/${id}.html</code> (${err.message}).</p>`));
+      });
+    })();
+  </script>
+
+</body>
+</html>
