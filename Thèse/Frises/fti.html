@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Planning Recherche Action Participative</title>
 
-  <!-- Styles & scripts Timeline KnightLab -->
+  <!-- Timeline KnightLab -->
   <link rel="stylesheet" href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css" />
   <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
 
@@ -83,36 +83,80 @@
   </div>
 
   <script>
-    // ---- MODE À TESTER ----
+    // ---- MODE NOTE À TESTER ----
     const NOTE_MODE = "modal"; // "inline" | "drawer" | "modal"
-    // ------------------------
 
-    // Instanciation de la frise après chargement du JSON externe
-    const mountTimeline = (data) => {
+    // ---------- Robustesse URL locales ----------
+    const isFileProtocol = location.protocol === "file:";
+    function showLoading(msg = "Chargement…") {
+      const el = document.getElementById("timeline-embed");
+      el.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:1rem;color:#555">${msg}</div>`;
+    }
+    function showError(msg) {
+      const el = document.getElementById("timeline-embed");
+      el.innerHTML = `<div style="padding:1rem">${msg}</div>`;
+    }
+
+    // ---------- Injection d'IDs stables ----------
+    function addUniqueIds(data){
+      if(!data || !Array.isArray(data.events)) return data;
+      const seen = new Set();
+      const slug = (s="") => s.toLowerCase().normalize("NFKD")
+        .replace(/[\u0300-\u036f]/g,"")
+        .replace(/[^a-z0-9]+/g,"-")
+        .replace(/^-+|-+$/g,"") || "evt";
+
+      const makeId = (ev) => {
+        if (ev.unique_id) return ev.unique_id;
+        const g = slug(ev.group || "event");
+        const sd = ev.start_date || {};
+        const hasDate = Number.isInteger(sd.year) && Number.isInteger(sd.month) && Number.isInteger(sd.day);
+        let base = hasDate
+          ? `${String(sd.year).padStart(4,"0")}${String(sd.month).padStart(2,"0")}${String(sd.day).padStart(2,"0")}`
+          : "undated";
+        if (Number.isInteger(sd.hour) && Number.isInteger(sd.minute)){
+          base += `${String(sd.hour).padStart(2,"0")}${String(sd.minute).padStart(2,"0")}`;
+        }
+        let uid = `${g}-${base}`;
+        if (uid === "event-undated"){
+          const head = (ev.text && ev.text.headline) || "event";
+          uid = `${slug(head)}-${Date.now()}`;
+        }
+        const baseUid = uid; let n = 2;
+        while (seen.has(uid)) uid = `${baseUid}-${n++}`;
+        seen.add(uid);
+        return uid;
+      };
+
+      data.events.forEach(ev => ev.unique_id = makeId(ev));
+      return data;
+    }
+
+    // ---------- Instanciation Timeline ----------
+    function mountTimeline(data) {
       new TL.Timeline("timeline-embed", data, {
         language: "fr",
         initial_zoom: 2,
-        hash_bookmark: true // ← active #... dans l’URL pour chaque slide
+        hash_bookmark: true,        // permaliens par slide
+        timenav_height_percentage: 35, // confort navigation (adapter 30–45)
+        marker_height_min: 30,         // densité marqueurs
+        marker_padding: 6
       });
-    };
+    }
 
-    // État simple de chargement
-    const showLoading = (msg = "Chargement…") => {
-      const el = document.getElementById("timeline-embed");
-      el.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:1rem;color:#555">${msg}</div>`;
-    };
-
-    // Charger ftidata.json (même niveau que index.html)
+    // ---------- Chargement JSON ----------
     showLoading();
-    fetch("./ftidata.json", { cache: "no-store" })
-      .then(r => r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`)))
-      .then(json => mountTimeline(json))
-      .catch(err => {
-        const el = document.getElementById("timeline-embed");
-        el.innerHTML = `<div style="padding:1rem">Impossible de charger <code>ftidata.json</code> (${err.message}).</div>`;
-      });
+    if (isFileProtocol) {
+      showError(`Ouverture locale détectée (<code>file://</code>). <br>Pour charger <code>ftidata.json</code>, lance un petit serveur local.<br>
+        Exemple : <code>python -m http.server</code> puis ouvre <code>http://localhost:8000/</code>`);
+    } else {
+      fetch("./ftidata.json", { cache: "no-store" })
+        .then(r => r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`)))
+        .then(json => mountTimeline(addUniqueIds(json))) // ← injection des IDs
+        .catch(err => showError(`Impossible de charger <code>ftidata.json</code> (${err.message}).`));
+    }
 
-    // Gestion surcouche notes externes
+    // ---------- Surcouche notes externes ----------
     (function(){
       const $ = sel => document.querySelector(sel);
       const openFile = id => fetch(`notes/${id}.html`, { cache:'no-store' })
@@ -161,7 +205,6 @@
         if(!link) return;
         e.preventDefault();
         const id = link.getAttribute('data-note-id');
-        // petit état de chargement dans le conteneur actif
         modes[NOTE_MODE].open('<p>Chargement…</p>');
         openFile(id)
           .then(html => modes[NOTE_MODE].open(html))
