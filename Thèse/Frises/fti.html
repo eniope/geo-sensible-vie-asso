@@ -31,79 +31,31 @@
     .note-drawer-body a{color:#DAA520;text-decoration:underline;}
 
     /* --- MODAL (thème clair “bibliothèque”) --- */
-#note-modal[hidden]{display:none;}
-#note-modal{position:fixed;inset:0;z-index:9999;}
-/* voile plus léger pour éviter l'effet triste */
-.note-modal-overlay{
-  position:absolute;inset:0;background:rgba(0,0,0,.35);
-}
-.note-modal-card{
-  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
-  width:min(780px,92vw);max-height:80vh;overflow:auto;
-  /* fond clair + texte sombre */
-  background:#fffef8;              /* ivoire doux */
-  color:#1b1b1b;
-  border:1px solid #d9cbb3;        /* bordure chaude, discrète */
-  border-radius:12px;
-  box-shadow:0 12px 28px rgba(0,0,0,.18), 0 2px 6px rgba(0,0,0,.06);
-}
-.note-modal-close{
-  position:absolute;top:.5rem;right:.5rem;
-  background:transparent;border:none;
-  color:#6b5630;                   /* proche des liens dorés mais plus sombre */
-  font-size:1.5rem;cursor:pointer;
-}
-.note-modal-close:hover,
-.note-modal-close:focus{
-  outline:none;
-  color:#3f321a;
-  text-shadow:0 0 1px rgba(0,0,0,.15);
-}
-.note-modal-body{
-  padding:1.25rem 1.5rem;line-height:1.65;
-}
-.note-modal-body a{
-  color:#8a6b19;                   /* doré doux lisible sur fond clair */
-  text-decoration:underline;
-}
-.note-modal-body a:hover,
-.note-modal-body a:focus{
-  color:#5e4c12;
-  outline:none;
-}
-.note-modal-body h2, .note-modal-body h3{
-  color:#2a2a2a;
-}
-.note-modal-body blockquote{
-  margin:0 0 1rem 0;padding:.75rem 1rem;
-  border-left:4px solid #d9cbb3;background:#fff9ee;border-radius:8px;
-}
+    #note-modal[hidden]{display:none;}
+    #note-modal{position:fixed;inset:0;z-index:9999;}
+    .note-modal-overlay{position:absolute;inset:0;background:rgba(0,0,0,.35);}
+    .note-modal-card{
+      position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+      width:min(780px,92vw);max-height:80vh;overflow:auto;
+      background:#fffef8;color:#1b1b1b;border:1px solid #d9cbb3;border-radius:12px;
+      box-shadow:0 12px 28px rgba(0,0,0,.18), 0 2px 6px rgba(0,0,0,.06);
+    }
+    .note-modal-close{position:absolute;top:.5rem;right:.5rem;background:transparent;border:none;color:#6b5630;font-size:1.5rem;cursor:pointer;}
+    .note-modal-close:hover,.note-modal-close:focus{outline:none;color:#3f321a;text-shadow:0 0 1px rgba(0,0,0,.15);}
+    .note-modal-body{padding:1.25rem 1.5rem;line-height:1.65;}
+    .note-modal-body a{color:#8a6b19;text-decoration:underline;}
+    .note-modal-body a:hover,.note-modal-body a:focus{color:#5e4c12;outline:none;}
+    .note-modal-body h2, .note-modal-body h3{color:#2a2a2a;}
+    .note-modal-body blockquote{margin:0 0 1rem 0;padding:.75rem 1rem;border-left:4px solid #d9cbb3;background:#fff9ee;border-radius:8px;}
 
-/* --- HIGHLIGHT BLOCS : Palette 3 “Soleil sur papier” --- */
-.highlight {
-  border-left: 4px solid goldenrod;
-  background-color: cornsilk;
-  color: dimgray;
-  padding: 1rem 1.25rem;
-  border-radius: 10px;
-  font-style: italic;
-  margin: 1.2rem 0;
-}
-.highlight strong {
-  color: darkgoldenrod;
-  font-weight: 600;
-}
-
+    /* --- HIGHLIGHT BLOCS --- */
+    .highlight{border-left:4px solid goldenrod;background-color:cornsilk;color:dimgray;padding:1rem 1.25rem;border-radius:10px;font-style:italic;margin:1.2rem 0;}
+    .highlight strong{color:darkgoldenrod;font-weight:600;}
 
     /* Libellés de groupe sur l’axe */
-    .tl-timegroup-message {
-      opacity: 1 !important;
-      color: #111 !important;
-      font-weight: 600;
-    }
+    .tl-timegroup-message{opacity:1 !important;color:#111 !important;font-weight:600;}
   </style>
 </head>
-
 <body>
 
   <!-- Frise -->
@@ -111,8 +63,10 @@
 
   <!-- Conteneurs des trois modes -->
   <div id="note-inline" hidden>
-    <article class="note-inline-card"><button class="note-inline-close" aria-label="Fermer">×</button>
-      <div class="note-inline-body"></div></article>
+    <article class="note-inline-card">
+      <button class="note-inline-close" aria-label="Fermer">×</button>
+      <div class="note-inline-body"></div>
+    </article>
   </div>
 
   <div id="note-drawer" hidden>
@@ -122,8 +76,10 @@
 
   <div id="note-modal" hidden>
     <div class="note-modal-overlay"></div>
-    <div class="note-modal-card"><button class="note-modal-close" aria-label="Fermer">×</button>
-      <div class="note-modal-body"></div></div>
+    <div class="note-modal-card">
+      <button class="note-modal-close" aria-label="Fermer">×</button>
+      <div class="note-modal-body"></div>
+    </div>
   </div>
 
   <script>
@@ -132,28 +88,28 @@
     // ------------------------
 
     // Instanciation de la frise après chargement du JSON externe
-<script>
-  const mountTimeline = (data) => {
-    new TL.Timeline("timeline-embed", data, {
-      language: "fr",
-      initial_zoom: 2,
-      hash_bookmark: true        // ← active #... dans l’URL pour chaque slide
-    });
-  };
+    const mountTimeline = (data) => {
+      new TL.Timeline("timeline-embed", data, {
+        language: "fr",
+        initial_zoom: 2,
+        hash_bookmark: true // ← active #... dans l’URL pour chaque slide
+      });
+    };
+
     // État simple de chargement
     const showLoading = (msg = "Chargement…") => {
       const el = document.getElementById("timeline-embed");
-      el.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:1rem;color:#e5e7eb">${msg}</div>`;
+      el.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:1rem;color:#555">${msg}</div>`;
     };
 
-    // Charger data.json (même niveau que index.html)
+    // Charger ftidata.json (même niveau que index.html)
     showLoading();
     fetch("./ftidata.json", { cache: "no-store" })
       .then(r => r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`)))
       .then(json => mountTimeline(json))
       .catch(err => {
         const el = document.getElementById("timeline-embed");
-        el.innerHTML = `<div style="padding:1rem">Impossible de charger <code>data.json</code> (${err.message}).</div>`;
+        el.innerHTML = `<div style="padding:1rem">Impossible de charger <code>ftidata.json</code> (${err.message}).</div>`;
       });
 
     // Gestion surcouche notes externes
@@ -193,26 +149,4 @@
         bind(){
           this.closeBtn.addEventListener('click', () => this.close());
           this.overlay.addEventListener('click', () => this.close());
-          document.addEventListener('keydown', e => { if(e.key === 'Escape' && !this.wrap.hidden) this.close(); });
-        }
-      };
-
-      const modes = { inline, drawer, modal };
-      modes[NOTE_MODE].bind();
-
-      document.addEventListener('click', e => {
-        const link = e.target.closest('a[data-note-id]');
-        if(!link) return;
-        e.preventDefault();
-        const id = link.getAttribute('data-note-id');
-        // petit état de chargement dans le conteneur actif
-        modes[NOTE_MODE].open('<p>Chargement…</p>');
-        openFile(id)
-          .then(html => modes[NOTE_MODE].open(html))
-          .catch(err => modes[NOTE_MODE].open(`<p>Contenu introuvable : <code>notes/${id}.html</code> (${err.message}).</p>`));
-      });
-    })();
-  </script>
-
-</body>
-</html>
+          document.addEventListener('
