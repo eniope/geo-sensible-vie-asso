@@ -132,9 +132,15 @@
     // ------------------------
 
     // Instanciation de la frise après chargement du JSON externe
-    const mountTimeline = (data) => {
-      new TL.Timeline("timeline-embed", data, { language: "fr", initial_zoom: 2 });
-    };
+<script>
+  const mountTimeline = (data) => {
+    new TL.Timeline("timeline-embed", data, {
+      language: "fr",
+      initial_zoom: 2,
+      hash_bookmark: true        // ← active #... dans l’URL pour chaque slide
+    });
+  };
+</script>
 
     // État simple de chargement
     const showLoading = (msg = "Chargement…") => {
